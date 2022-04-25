@@ -20,6 +20,18 @@
     ],
     "minimunCoreVersion": "9",
     "compatibleCoreVersion": "9",
+    "license": "./LICENSE",
+    "url": "https://github.com/ZotyDev/objects-interactions-fx",
+    "bugs": "https://github.com/ZotyDev/objects-interactions-fx/issues",
+
+    "manifest":  "https://github.com/ZotyDev/objects-interactions-fx/releases/latest/download/manifest.json",
+    "download": "https://github.com/ZotyDev/objects-interactions-fx/releases/latest/download/module.zip",
+    "readme": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/README.md",
+    "changelog": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/CHANGELOG.md",
+
+    "system": [
+        "dnd5e"
+    ],
 
     "dependencies": [
         {
@@ -27,6 +39,9 @@
         },
         {
             "name": "jb2a_patreon"
+        },
+        {
+            "name": "midi-qol"
         }
     ],
 
