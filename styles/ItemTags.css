@@ -1,0 +1,32 @@
+.item-tags-list {
+  gap: 1em;
+  margin-top: 0;
+  padding: 0;
+}
+
+.item-tags-list > li {
+  align-items: center;
+  gap: 0.5em;
+}
+
+.item-tags-list input[type="checkbox"] {
+  margin: 0;
+}
+
+.item-tags-list-icon-button {
+  align-self: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  line-height: normal;
+  padding: 0;
+}
+
+.item-tags-list-icon-button > i {
+  margin-right: 0;
+}
+
+.item-tags-list-icon-button:hover, .item-tags-list-icon-button:focus {
+  box-shadow: none;
+  text-shadow: 0 0 5px red;
+}

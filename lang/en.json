@@ -1,0 +1,46 @@
+{
+    "OIF": {
+        "Attack": {
+            "Melee": {
+                "Error": {
+                    "1": "You have no more of this item!"
+                }
+            },
+            "Ranged": {
+                "Error": {
+                    "1": "You have no ammunition selected!"
+                }
+            }
+        },
+        "ItemTags": {
+            "Text": "Tags:",
+            "Save": "Save"
+        },
+        "Settings": {
+            "RemoveThrowableItem": {
+                "Title": "Remove Throwable Item",
+                "Hint": "Whether or not throwable items get removed from the inventory when thrown"
+            },
+            "AddThrowableToTargetInventory": {
+                "Title": "Add Throwable Item to Target Inventory",
+                "Hint": "Whether or not throwable items get added to the target inventory when hit"
+            },
+            "AddAmmunitionToTargetInventory": {
+                "Title": "Add Ammunition Item to Target Inventory",
+                "Hint": "Whether or not ammunition items get adedd to the target inventory when hit"
+            },
+            "CreateItemPilesOnMiss": {
+                "Title": "Create Item Piles on Miss",
+                "Hint": "Whether or not Item Piles will be created when a projectile misses the target"
+            },
+            "PowerfulImpactShakeEffect": {
+                "Title": "Powerful Impact Shake Effect",
+                "Hint": "Whether or not powerful impacts will have a screen shake effect"
+            },
+            "SetElevationOfItemPiles": {
+                "Title": "Set Elevation of Item Piles",
+                "Hint": "Whether or not Item Piles created by this module should have elevation set based on target's elevation"
+            }
+        }
+    }
+}

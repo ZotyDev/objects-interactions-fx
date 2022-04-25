@@ -1,0 +1,42 @@
+{
+    "name": "objects-interactions-fx",
+    "title": "Automated Objects, Interactions and Effects",
+    "description": "This module provides automation and effects for many items and spells.",
+    "version": "0.1",
+    "author": "ZotyDev",
+    "authors": [
+        {
+            "name": "ZotyDev",
+            "email": "official@zoty.dev",
+            "url": "https://www.zoty.dev"
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "minimunCoreVersion": "9",
+    "compatibleCoreVersion": "9",
+
+    "dependencies": [
+        {
+            "name": "sequencer"
+        },
+        {
+            "name": "jb2a_patreon"
+        }
+    ],
+
+    "esmodules": [
+        "./scripts/Main.js",
+        "./scripts/weapons/Melee.js",
+        "./scripts/weapons/Ranged.js"
+    ],
+
+    "styles": [
+        "./styles/ItemTags.css"
+    ]
+}
