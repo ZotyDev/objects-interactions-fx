@@ -1,4 +1,6 @@
-import { ObjectsInteractionsFX } from "../ObjectsInteractionsFX.js";
+import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
+import { ItemDropper} from "../library/ItemDropper.js";
+import { InventoryManipulator } from "../library/InventoryManipulator.js";
 
 export class ItemAnimator 
 {
@@ -17,23 +19,12 @@ export class ItemAnimator
         if (item.data.data.properties.thr == true && Distance >= 3.0)
         {
             // Check if item should be removed
-            if (game.settings.get(ObjectsInteractionsFX.ID, "removeThrowableItem"))
+            if (game.settings.get(OIF.ID, "removeThrowableItem"))
             {
-                // Check if this is the last item
-                if (item.data.data.quantity == 1) {
-                    // Remove the item from the inventory
-                    await author.actor.deleteEmbeddedDocuments("Item", [item.id]);
-                } 
-                // More than 1 unit
-                else if (item.data.data.quantity > 1) {
-                    // Remove 1 unit of the item
-                    item.update({ "data.quantity": item.data.data.quantity - 1 });
-                }
-                // 0 or less units
-                else
+                // Remove item from author inventory
+                if (!InventoryManipulator.RemoveItem(author, item, 1)) 
                 {
-                    ui.notifications.error(game.i18n.localize("OIF.Attack.Melee.Error.1"));
-                    console.error("Could not find any unit of the item!");
+                    ui.notifications.error(game.i18n.localize("OIF.Attack.Melee.Error.NotEnough"));
                     return;
                 }
             }
@@ -59,34 +50,20 @@ export class ItemAnimator
             ItemCopy.data.quantity = 1;
 
             // Check if the attack missed and if a item pile should be created
-            if (options.miss && ObjectsInteractionsFX.SETTINGS.LOADED_MODULES.ITEM_PILES && game.settings.get(ObjectsInteractionsFX.ID, "createItemPilesOnMiss")) {
-                // Create array containing the item
-                let ItemPileInventoryContainer = [ItemCopy];
-
+            if (options.miss && OIF.SETTINGS.LOADED_MODULES.ITEM_PILES && game.settings.get(OIF.ID, "createItemPilesOnMiss")) {
                 // Get the position where the item landed
                 let ItemPilePosition = {
                     x: Effect.targetPosition.x - 50,
                     y: Effect.targetPosition.y - 50
                 }
 
-                // Create a ItemPile and get token reference
-                let ItemPileOptions = {
-                    items: ItemPileInventoryContainer,
-                    pileActorName: false
-                }
-                let ItemPileTokenUuid = await ItemPiles.API.createItemPile(ItemPilePosition, ItemPileOptions);
-                let ItemPileToken = await fromUuid(ItemPileTokenUuid);
-
-                // Set ItemPile elevation if needed
-                if (ObjectsInteractionsFX.SETTINGS.LOADED_MODULES.LEVELS && game.settings.get(ObjectsInteractionsFX.ID, "setElevationOfItemPiles"))
-                {
-                    ItemPileToken.update({ elevation: target.data.elevation });
-                }
+                // Drop item
+                ItemDropper.DropAt(item, 1, ItemPilePosition, target.data.elevation);
             }
-            else if (game.settings.get(ObjectsInteractionsFX.ID, "addThrowableToTargetInventory"))
+            else if (game.settings.get(OIF.ID, "addThrowableToTargetInventory"))
             {
                 // Add the item to Target's inventory
-                await target.actor.createEmbeddedDocuments("Item", [ItemCopy]);
+                InventoryManipulator.AddItem(target, item, 1);
             }
         }
         else
@@ -104,7 +81,7 @@ export class ItemAnimator
             // Play melee sequence
             await SequencerEffect.play();
             // Check if impact effect should be played
-            if (options.powerful == true && game.settings.get(ObjectsInteractionsFX.ID, "powerfulImpactShakeEffect")) {
+            if (options.powerful == true && game.settings.get(OIF.ID, "powerfulImpactShakeEffect")) {
                 KFC.executeForEveryone("earthquake", 1, 500, 1)
             }
         }
@@ -147,41 +124,24 @@ export class ItemAnimator
                 let [Effect] = Sequencer.EffectManager.getEffects({ name: SequencerHelper });
 
                 // Create a copy of the ammunition item
-                let AmmunitionID = item.data.data.consume.target;
-                let AmmunitionRef = await author.actor.getEmbeddedDocument("Item", AmmunitionID);
-                let Ammunition = JSON.parse(JSON.stringify(AmmunitionRef));
-                Ammunition.data.quantity = 1;
+                let Ammunition = await author.actor.getEmbeddedDocument("Item", item.data.data.consume.target);
 
                 // Check if Item Pile should be created
-                if (options.miss && ObjectsInteractionsFX.SETTINGS.LOADED_MODULES.ITEM_PILES && game.settings.get(ObjectsInteractionsFX.ID, "createItemPilesOnMiss"))
+                if (options.miss && OIF.SETTINGS.LOADED_MODULES.ITEM_PILES && game.settings.get(OIF.ID, "createItemPilesOnMiss"))
                 {
-                    // Create array containing the item
-                    let ItemPileInventoryContainer = [Ammunition];
-
                     // Get the position where the item landed
                     let ItemPilePosition = {
                         x: Effect.targetPosition.x - 50,
                         y: Effect.targetPosition.y - 50
                     }
 
-                    // Create a ItemPile and get token reference
-                    let ItemPileOptions = {
-                        items: ItemPileInventoryContainer,
-                        pileActorName: false
-                    }
-                    let ItemPileTokenUuid = await ItemPiles.API.createItemPile(ItemPilePosition, ItemPileOptions);
-                    let ItemPileToken = await fromUuid(ItemPileTokenUuid);
-
-                    // Set ItemPile elevation if needed
-                    if (ObjectsInteractionsFX.SETTINGS.LOADED_MODULES.LEVELS && game.settings.get(ObjectsInteractionsFX.ID, "setElevationOfItemPiles"))
-                    {
-                        ItemPileToken.update({ elevation: target.data.elevation });
-                    }
+                    // Drop item
+                    ItemDropper.DropAt(Ammunition, 1, ItemPilePosition, target.data.elevation)
                 }
-                else if (game.settings.get(ObjectsInteractionsFX.ID, "addAmmunitionToTargetInventory"))
+                else if (game.settings.get(OIF.ID, "addAmmunitionToTargetInventory"))
                 {
                     // Add the ammunition to Target's inventory
-                    await target.actor.createEmbeddedDocuments("Item", [Ammunition]);
+                    InventoryManipulator.AddItem(target, Ammunition, 1);
                 }
             }
         }

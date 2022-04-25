@@ -3,7 +3,7 @@
         "Attack": {
             "Melee": {
                 "Error": {
-                    "1": "You have no more of this item!"
+                    "NotEnough": "You have no more of this item!"
                 }
             },
             "Ranged": {
