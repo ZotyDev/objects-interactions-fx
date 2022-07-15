@@ -3,19 +3,29 @@ import { ObjectsInteractionsFXData } from "../data/ObjectsInteractionsFXData.js"
 
 const RangedWeapons = {
     shortbow: {
-        rangedAnimation: "jb2a.arrow.physical.white.01",
+        rangedAnimation: {
+            effect: "jb2a.arrow.physical.white.01",
+        }
     },
     longbow: {
-        rangedAnimation: "jb2a.arrow.physical.white.01",
+        rangedAnimation: {
+            effect: "jb2a.arrow.physical.white.01",
+        },
     },
     handcrossbow: {
-        rangedAnimation: "jb2a.bolt.physical.white02",
+        rangedAnimation: {
+            effect: "jb2a.bolt.physical.white02",
+        },
     },
     lightcrossbow: {
-        rangedAnimation: "jb2a.bolt.physical.white02",
+        rangedAnimation: {
+            effect: "jb2a.bolt.physical.white02",
+        },
     },
     heavycrossbow: {
-        rangedAnimation: "jb2a.bolt.physical.white02",
+        rangedAnimation: {
+            effect: "jb2a.bolt.physical.white02",
+        },
     }
 }
 

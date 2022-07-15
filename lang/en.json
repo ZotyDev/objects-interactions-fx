@@ -1,5 +1,9 @@
 {
     "OIF": {
+        "ItemTags": {
+            "Text": "Tags:",
+            "Save": "Save"
+        },
         "Attack": {
             "Melee": {
                 "Error": {
@@ -12,9 +16,14 @@
                 }
             }
         },
-        "ItemTags": {
-            "Text": "Tags:",
-            "Save": "Save"
+        "Item": {
+            "Lighting": {
+                "Error": {
+                    "AlreadySource": "There is another item already providing light",
+                    "NotSource": "There is no item providing light",
+                    "NotRightSource": "This item is not the one currently providing light"
+                }
+            }
         },
         "Settings": {
             "RemoveThrowableItem": {

@@ -45,10 +45,13 @@
         }
     ],
 
+    "socket": true,
+
     "esmodules": [
         "./scripts/Main.js",
         "./scripts/weapons/Melee.js",
-        "./scripts/weapons/Ranged.js"
+        "./scripts/weapons/Ranged.js",
+        "./scripts/items/Lighting.js"
     ],
 
     "styles": [
