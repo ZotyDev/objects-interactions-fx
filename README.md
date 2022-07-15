@@ -22,7 +22,7 @@ Currently, only single hit melee and ranged animations are supported. You also n
 - Item Piles custom images support (arrow with transparent background)
 - More default animations
 - Death effect
-- ~~Lighting tags (torch, lamp, etc)~~
+- ~~Lighting tags (torch, lamp, etc)~~ ***Done***
 - Option to configure percentage of ranged and thrown items that get destroyed on impact
 - Sounds
 - Unique magical items
