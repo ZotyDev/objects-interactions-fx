@@ -1,5 +1,10 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 0.1.1.1
+
+
+---
+
 ### Version 0.1.1
 - *Intern* - Abstracted Item Pile creation and Actor inventory manipulation
 - *Intern* - Polished code

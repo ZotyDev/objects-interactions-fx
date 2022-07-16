@@ -31,6 +31,10 @@ export class ItemTags extends FormApplication {
         }
     }
 
+    async _handleEnter(event) {
+        console.log(event);
+    }
+
     activateListeners(html) {
         super.activateListeners(html);
 

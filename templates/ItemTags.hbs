@@ -1,5 +1,23 @@
 <form>
-    <p>{{localize "OIF.ItemTags.Text"}}</p>
-    <input type="text" value="{{itemTags}}" name="itemTags" data-type="String"/>
+    <fieldset style="margin: 3px;">        
+        <legend>
+            {{localize "OIF.ItemTags.Text"}}
+        </legend>
+
+        <div class="oif-tag-container">
+            <div class="oif-tag">
+                <span>
+                    {{itemTags}}
+                </span>
+                <a style="margin-left: 5px; margin-right: 5px;">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+            <input class="oif-tag-input"/>
+        </div>
+
+        <input type="text" value="{{itemTags}}" name="itemTags" data-type="String"/>
+    </fieldset>
     <button type="button" data-action="save"><i class="fas fa-check"></i> {{localize "OIF.ItemTags.Save"}}</button>
+
 </form>

@@ -47,7 +47,7 @@ export class ItemAnimator
                     .stretchTo(target)
                     .name(SequencerHelper)
                     .missed(options.miss)
-                    .waitUntilFinished(-600)
+                    .waitUntilFinished(-550)
             
             // Play throw sequence
             await SequencerEffect.play();

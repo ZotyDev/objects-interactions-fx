@@ -30,3 +30,33 @@
   box-shadow: none;
   text-shadow: 0 0 5px red;
 }
+
+.oif-tag-container {
+  display: flex;
+  padding: 5px;
+  background-color: #FFFFFF33;
+  border-width: 1px;
+  border-color: #00000033;
+  border-style: solid;
+  border-radius: 1pt;
+}
+
+.oif-tag {
+  margin: 5px;
+  border-width: 1px;
+  border-color: #585858;
+  border-style: solid;
+  padding: 3px;
+  background-color: rgb(181, 235, 181);
+  border-top-left-radius: 5pt;
+  border-bottom-left-radius: 5pt;
+  border-top-right-radius: 1pt;
+  border-bottom-right-radius: 1pt;
+  align-items: center;
+}
+
+.oif-tag-input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+}
