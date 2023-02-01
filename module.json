@@ -2,7 +2,7 @@
     "id": "objects-interactions-fx",
     "title": "Automated Objects, Interactions and Effects",
     "description": "This module provides automation and effects for many items and spells.",
-    "version": "0.2.2",
+    "version": "0.2.1",
     "author": "ZotyDev",
     "authors": [
         {
