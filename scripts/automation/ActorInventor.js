@@ -2,14 +2,14 @@ import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { ObjectsInteractionsFXData } from "../data/ObjectsInteractionsFXData.js";
 import { ActorInventorSettings } from "../interface/ActorInventorSettings.js";
 
-Hooks.on("ready", () => {
+Hooks.on("oifReady", () => {
     Hooks.on("createToken", async (actor) => {
         if (actor != null && actor != undefined && actor.actor.type == "npc") 
         {
             actor = actor.actor;
             let Tags = ObjectsInteractionsFXData.GetData(actor);
 
-            if (Tags.indexOf("generateCurrency") > -1 && ActorInventorSettings.Get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR))
+            if (Tags.indexOf("generateCurrency") > -1 && ActorInventorSettings.Get(OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR))
             {
                 let CpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.CP_LOCATION);
                 let SpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.SP_LOCATION);

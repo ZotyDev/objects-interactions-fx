@@ -246,10 +246,10 @@ export class GeneralSettings extends FormApplication {
 
     static UpdateSettings()
     {
-        for (const key in this.Settings) 
+        for (const key in GeneralSettings.Settings) 
         {
             // Check if current element has a dependecy
-            let CurrentSetting = this.Settings[key];
+            let CurrentSetting = GeneralSettings.Settings[key];
             let CurrentDependecy = CurrentSetting['dependsOn'];
 
             // Check if setting requires a module to be used
@@ -269,16 +269,16 @@ export class GeneralSettings extends FormApplication {
             if (CurrentDependecy != null && CurrentDependecy != undefined) 
             {
                 // Dependencies can only be Boolean
-                if (this.Settings[CurrentDependecy]['type'] != 'checkbox') 
+                if (GeneralSettings.Settings[CurrentDependecy]['type'] != 'checkbox') 
                 {
                     continue;
                 }
 
                 // Check if the dependecy exist
-                let CurrentRequirement = this.Settings[CurrentDependecy];
+                let CurrentRequirement = GeneralSettings.Settings[CurrentDependecy];
                 if (CurrentRequirement != null && CurrentRequirement != undefined) 
                 {
-                    CurrentSetting['disabled'] = CurrentRequirement['disabled'] || !this.Get(CurrentDependecy);
+                    CurrentSetting['disabled'] = CurrentRequirement['disabled'] || !GeneralSettings.Get(CurrentDependecy);
                     if (CurrentSetting['disabled']) 
                     {
                         CurrentSetting['disabledMessage'] = game.i18n.localize('OIF.Settings.OptionRequired').replace("${option}", `"${game.i18n.localize(CurrentRequirement['name'])}"`);

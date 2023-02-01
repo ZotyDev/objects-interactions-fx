@@ -70,6 +70,18 @@ export class ActorInventorSettings extends FormApplication {
         // Set the ID to be used as reference later
         options['referenceID'] = name;
 
+        if (options['type'] == 'dropdown')
+        {
+            options['choices'].forEach(function(element) 
+            {
+                element['selected'] = false;
+                if (element.value == options['value'])
+                {
+                    element['selected'] = true;
+                }
+            });
+        }
+
         // Check if required module is active
         let RequiredModule = options['requiredModule']
         if (RequiredModule != null && RequiredModule != undefined)
@@ -87,8 +99,8 @@ export class ActorInventorSettings extends FormApplication {
 
     static Get(name)
     {
-        let CurrentSettings = this.Settings[name];
-        switch (this.Settings[name]['type']) {
+        let CurrentSettings = ActorInventorSettings.Settings[name];
+        switch (ActorInventorSettings.Settings[name]['type']) {
             case 'checkbox':
                 return CurrentSettings['value'] && !CurrentSettings['disabled'];
                 break;
@@ -97,9 +109,27 @@ export class ActorInventorSettings extends FormApplication {
                 return CurrentSettings['disabled'] ? CurrentSettings['default'] : CurrentSettings['value'];
                 break;
 
+            case 'string':
+                return CurrentSettings['disabled'] ? CurrentSettings['default'] : CurrentSettings['value'];
+                break;
+
+            case 'dropdown':
+                return CurrentSettings['disabled'] ? CurrentSettings['default'] : CurrentSettings['value'];
+                break;
+
             default:
                 return CurrentSettings['value'];
                 break;
+        }
+    }
+
+    // Check for restart
+    static _checkForRestart(id)
+    {
+        if (this.Settings[id]['restart'] != null && this.Settings[id]['restart'] != undefined && this.Settings[id]['restart'])
+        {
+            this.Settings[id]['requiresRestart'] = true;
+            this.Settings[id]['restartMessage'] = 'OIF.Settings.RestartRequired';
         }
     }
 
@@ -110,6 +140,7 @@ export class ActorInventorSettings extends FormApplication {
         game.settings.set(OIF.ID, ClickedElement.id, ClickedElement.checked);
         ActorInventorSettings.Settings[ClickedElement.id]['value'] = ClickedElement.checked;
 
+        ActorInventorSettings._checkForRestart(ClickedElement.id);
         ActorInventorSettings.UpdateSettings();
         this.render();
     }
@@ -133,6 +164,7 @@ export class ActorInventorSettings extends FormApplication {
 
         ActorInventorSettings.Settings[ClickedElement.id]['value'] = CurrentValue;
 
+        ActorInventorSettings._checkForRestart(ClickedElement.id);
         ActorInventorSettings.UpdateSettings();
         this.render();
     }
@@ -145,6 +177,30 @@ export class ActorInventorSettings extends FormApplication {
         game.settings.set(OIF.ID, ClickedElement.id, ClickedElement.value);
         ActorInventorSettings.Settings[ClickedElement.id]['value'] = ClickedElement.value;
 
+        ActorInventorSettings._checkForRestart(ClickedElement.id);
+        ActorInventorSettings.UpdateSettings();
+        this.render();
+    }
+
+    // Update dropdown setting
+    async _handleDropdownUpdate(event)
+    {
+        let ClickedElement = $(event.currentTarget)[0];
+        console.log(ActorInventorSettings.Settings[ClickedElement.id]['value']);
+        console.log(ClickedElement.value);
+        game.settings.set(OIF.ID, ClickedElement.id, ClickedElement.value);
+        ActorInventorSettings.Settings[ClickedElement.id]['value'] = ClickedElement.value;
+
+        ActorInventorSettings.Settings[ClickedElement.id]['choices'].forEach(function(element) 
+        {
+            element['selected'] = false;
+            if (element.value == ClickedElement.value)
+            {
+                element['selected'] = true;
+            }
+        });
+
+        ActorInventorSettings._checkForRestart(ClickedElement.id);
         ActorInventorSettings.UpdateSettings();
         this.render();
     }
@@ -156,6 +212,7 @@ export class ActorInventorSettings extends FormApplication {
         html.on('change', 'input[type=checkbox]', this._handleCheckboxUpdate.bind(this));
         html.on('change', 'input[type=range], input[type=number]', this._handleSliderUpdate.bind(this));
         html.on('change', 'input[type=text]', this._handleTextUpdate.bind(this));
+        html.on('change', 'select', this._handleDropdownUpdate.bind(this));
     }
 
     getData(options)
@@ -189,10 +246,10 @@ export class ActorInventorSettings extends FormApplication {
 
     static UpdateSettings()
     {
-        for (const key in this.Settings) 
+        for (const key in ActorInventorSettings.Settings) 
         {
             // Check if current element has a dependecy
-            let CurrentSetting = this.Settings[key];
+            let CurrentSetting = ActorInventorSettings.Settings[key];
             let CurrentDependecy = CurrentSetting['dependsOn'];
 
             // Check if setting requires a module to be used
@@ -212,16 +269,16 @@ export class ActorInventorSettings extends FormApplication {
             if (CurrentDependecy != null && CurrentDependecy != undefined) 
             {
                 // Dependencies can only be Boolean
-                if (this.Settings[CurrentDependecy]['type'] != 'checkbox') 
+                if (ActorInventorSettings.Settings[CurrentDependecy]['type'] != 'checkbox') 
                 {
                     continue;
                 }
 
                 // Check if the dependecy exist
-                let CurrentRequirement = this.Settings[CurrentDependecy];
+                let CurrentRequirement = ActorInventorSettings.Settings[CurrentDependecy];
                 if (CurrentRequirement != null && CurrentRequirement != undefined) 
                 {
-                    CurrentSetting['disabled'] = CurrentRequirement['disabled'] || !this.Get(CurrentDependecy);
+                    CurrentSetting['disabled'] = CurrentRequirement['disabled'] || !ActorInventorSettings.Get(CurrentDependecy);
                     if (CurrentSetting['disabled']) 
                     {
                         CurrentSetting['disabledMessage'] = game.i18n.localize('OIF.Settings.OptionRequired').replace("${option}", `"${game.i18n.localize(CurrentRequirement['name'])}"`);
