@@ -18,8 +18,8 @@ export class TokenLightingManipulator
 
             // Set token light properties
             await author.document.update({ 
-                "light.bright": item.data.data.range.value,
-                "light.dim": item.data.data.range.long,
+                "light.bright": item.system.range.value,
+                "light.dim": item.system.range.long,
                 "light.animation.type": options.light.animationType,
                 "light.color": options.light.color,
                 "light.alpha": options.light.alpha,

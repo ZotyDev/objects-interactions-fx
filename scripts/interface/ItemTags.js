@@ -1,5 +1,5 @@
 import { ObjectsInteractionsFX } from '../ObjectsInteractionsFX.js';
-import { ObjectsInteractionsFXData } from '../data/ObjectsInteractionsFXData.js';
+import { ObjectsInteractionsFXData as OIFD } from '../data/ObjectsInteractionsFXData.js';
 
 export class ItemTags extends FormApplication {
     static get defaultOptions() {
@@ -11,7 +11,7 @@ export class ItemTags extends FormApplication {
             id: 'item-tags',
             submitOnChange: true,
             template: ObjectsInteractionsFX.TEMPLATES.ITEM_TAGS,
-            title: "Item Tags",
+            title: "Tags",
             item: '',
         };
 
@@ -20,36 +20,37 @@ export class ItemTags extends FormApplication {
         return mergedOptions;
     }
 
-    async _handleButtonClick(event) {
-        const ClickedElement = $(event.currentTarget);
-        const Action = ClickedElement.data().action;
-        let CurrentTags = ClickedElement.parent().find('input[name="itemTags"]').val();
-
-        if (Action == 'save') {
-            await ObjectsInteractionsFXData.UpdateData(this.options.item, CurrentTags);
-            await this.close();
+    async _handleEnterKeypress(event) {
+        if (event.key == "Enter") {
+            let CurrentTags = await OIFD.GetData(this.options.item, event.target.value);
+            CurrentTags.push(event.target.value);
+            await OIFD.UpdateData(this.options.item, CurrentTags);
+            event.target.value = "";
+            this.render({ focus: true });
         }
     }
 
-    async _handleEnter(event) {
-        console.log(event);
+    async _handleLinkClick(event) {
+        let ClickedElement = $(event.currentTarget);
+        let CurrentTags = await OIFD.GetData(this.options.item, event.target.value);
+        CurrentTags.splice(ClickedElement[0].id, 1);
+        await OIFD.UpdateData(this.options.item, CurrentTags);
+        this.render();
     }
 
     activateListeners(html) {
         super.activateListeners(html);
 
-        html.on('click', "[data-action]", this._handleButtonClick.bind(this));
+        html.on('keypress', null, this._handleEnterKeypress.bind(this));
+        html.on('click', 'i', this._handleLinkClick.bind(this));
     }
 
     getData(options) {
         return {
-            itemTags: ObjectsInteractionsFXData.GetData(options.item)
+            itemTags: OIFD.GetData(options.item)
         }
     }
 
     async _updateObject(event, formData) {
-        let CurrentTags = foundry.utils.expandObject(formData).itemTags;
-
-        await ObjectsInteractionsFXData.UpdateData(this.options.item, CurrentTags);
     }
 }

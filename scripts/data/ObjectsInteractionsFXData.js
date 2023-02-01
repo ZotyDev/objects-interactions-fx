@@ -4,12 +4,19 @@ export class ObjectsInteractionsFXData
 {
     static GetData(item)
     {
-        return item.getFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS);
+        if (!this.CheckData(item)) 
+        {
+            return this.CreateData(item);   
+        }
+        else
+        {
+            return this._Migrate(item.getFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS));
+        }
     }
 
     static CheckData(item)
     {
-        let ReturnedData = this.GetData(item);
+        let ReturnedData = item.getFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS);
         if (ReturnedData == null || ReturnedData == undefined) 
         {
             return false;
@@ -22,6 +29,15 @@ export class ObjectsInteractionsFXData
 
     static CreateData(item, tags)
     {
+        if (tags != null && tags != undefined) 
+        {
+            tags = [tags];
+        }
+        else
+        {
+            tags = [];
+        }
+
         if (this.CheckData(item)) 
         {
             return null;
@@ -47,5 +63,17 @@ export class ObjectsInteractionsFXData
     static DeleteData(item)
     {
         return item.unsetFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS);
+    }
+
+    static _Migrate(text)
+    {
+        if (!Array.isArray(text)) 
+        {
+            return [text];
+        }
+        else
+        {
+            return text;
+        }
     }
 }

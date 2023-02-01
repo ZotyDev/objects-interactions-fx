@@ -18,8 +18,10 @@
             "path": "lang/en.json"
         }
     ],
-    "minimunCoreVersion": "9",
-    "compatibleCoreVersion": "9",
+    "compatibility": {
+        "minimun": 10,
+        "verified": "10.291"
+    },
     "license": "./LICENSE",
     "url": "https://github.com/ZotyDev/objects-interactions-fx",
     "bugs": "https://github.com/ZotyDev/objects-interactions-fx/issues",
@@ -33,17 +35,27 @@
         "dnd5e"
     ],
 
-    "dependencies": [
-        {
-            "name": "sequencer"
-        },
-        {
-            "name": "jb2a_patreon"
-        },
-        {
-            "name": "midi-qol"
-        }
-    ],
+    "relationships": {
+        "systems": [
+            {
+                "id": "dnd5e"
+            }
+        ],
+        "requires": [
+            {
+                "id": "sequencer",
+                "title": "Sequencer"
+            },
+            {
+                "id": "jb2a_patreon",
+                "title": "JB2A Patreon"
+            },
+            {
+                "id": "midi-qol",
+                "title": "MidiQOL"
+            }
+        ]
+    },
 
     "socket": true,
 
@@ -51,10 +63,12 @@
         "./scripts/Main.js",
         "./scripts/weapons/Melee.js",
         "./scripts/weapons/Ranged.js",
-        "./scripts/items/Lighting.js"
+        "./scripts/items/Lighting.js",
+        "./scripts/automation/ActorInventor.js"
     ],
 
     "styles": [
-        "./styles/ItemTags.css"
+        "./styles/ItemTags.css",
+        "./styles/Settings.css"
     ]
 }

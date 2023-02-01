@@ -5,23 +5,23 @@ export class InventoryManipulator
     static async RemoveItem(owner, item, quantity)
     {
         // Check if the quantity is exact, if so delete the item from the inventory
-        if (item.data.data.quantity == quantity)
+        if (item.system.quantity == quantity)
         {
             // Remove the item from the inventory
             await owner.actor.deleteEmbeddedDocuments("Item", [item.id]);
             return true;
         }
         // More than "quantity" units of the item remaining
-        else if (item.data.data.quantity > quantity)
+        else if (item.system.quantity > quantity)
         {
             // Remove "quantity" units from the item
-            item.update({ "data.quantity": item.data.data.quantity - quantity });
+            item.update({ "system.quantity": item.system.quantity - quantity });
             return true;
         }
         // Not enough items to be removed
         else 
         {
-            console.error(`Could not remove item! Tried to remove ${quantity} while having only ${item.data.data.quantity}`)
+            console.error(`Could not remove item! Tried to remove ${quantity} while having only ${item.system.quantity}`)
             return false;
         }
     }
@@ -36,7 +36,7 @@ export class InventoryManipulator
         else
         {
             let ItemCopy = item.toObject();
-            ItemCopy.data.quantity = quantity;
+            ItemCopy.system.quantity = quantity;
             await target.actor.createEmbeddedDocuments("Item", [ItemCopy]);
             return true;
         }

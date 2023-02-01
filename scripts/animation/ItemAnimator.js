@@ -1,6 +1,7 @@
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { ItemDropper} from "../library/ItemDropper.js";
 import { InventoryManipulator } from "../library/InventoryManipulator.js";
+import { GeneralSettings } from "../interface/GeneralSettings.js";
 
 export class ItemAnimator 
 {
@@ -17,15 +18,15 @@ export class ItemAnimator
 
         // Caculate the melee attack distance of the item
         let WeaponMeleeDistance = canvas.dimensions.distance;
-        if (item.data.data.properties.rch) {
+        if (item.system.properties.rch) {
             WeaponMeleeDistance += WeaponMeleeDistance;
         }
 
         // Is the Item a throwable and outside of melee range?
-        if (item.data.data.properties.thr == true && Distance >= WeaponMeleeDistance + canvas.dimensions.distance)
+        if (item.system.properties.thr == true && Distance >= WeaponMeleeDistance + canvas.dimensions.distance)
         {
             // Check if item should be removed
-            if (game.settings.get(OIF.ID, "removeThrowableItem"))
+            if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM))
             {
                 // Remove item from author inventory
                 if (!InventoryManipulator.RemoveItem(author, item, 1)) 
@@ -39,7 +40,7 @@ export class ItemAnimator
             Hooks.call(OIF.HOOKS.WEAPON.MELEE.THROW.PRE, options);
 
             // Define throw sequence to be played
-            let SequencerHelper = `${options.name}-throw-${author.data._id}`;
+            let SequencerHelper = `${options.name}-throw-${author.document._id}`;
             let SequencerEffect = new Sequence()
                 .effect()
                     .file(options.throwAnimation.effect)
@@ -62,23 +63,29 @@ export class ItemAnimator
 
             // Create a copy of the item
             let ItemCopy = item.toObject();
-            ItemCopy.data.quantity = 1;
+            ItemCopy.system.quantity = 1;
 
-            // Check if the attack missed and if a item pile should be created
-            if (options.miss && OIF.SETTINGS.LOADED_MODULES.ITEM_PILES && game.settings.get(OIF.ID, "createItemPilesOnMiss")) {
-                // Get the position where the item landed
-                let ItemPilePosition = {
-                    x: options.landedPosX,
-                    y: options.landedPosY,
-                }
-
-                // Drop item
-                ItemDropper.DropAt(item, 1, ItemPilePosition, target.data.elevation);
-            }
-            else if (game.settings.get(OIF.ID, "addThrowableToTargetInventory"))
+            // Check if item should or not break
+            if (!(Math.floor(Math.random() * 101) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE)))
             {
-                // Add the item to Target's inventory
-                InventoryManipulator.AddItem(target, item, 1);
+                // Check if the attack missed and if a item pile should be created
+                if (options.miss && OIF.OPTIONAL_MODULES.ITEM_PILES.active && GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS)) 
+                {
+                    // Get the position where the item landed
+                    let ItemPilePosition = {
+                        x: options.landedPosX,
+                        y: options.landedPosY,
+                    }
+
+                    // Drop item
+                    console.log(target);
+                    ItemDropper.DropAt(item, 1, ItemPilePosition, target.document.elevation);
+                }
+                else if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.ADD_THROWABLE_TO_TARGET_INVENTORY))
+                {
+                    // Add the item to Target's inventory
+                    InventoryManipulator.AddItem(target, item, 1);
+                }
             }
         }
         else
@@ -87,7 +94,7 @@ export class ItemAnimator
             Hooks.call(OIF.HOOKS.WEAPON.MELEE.HIT.PRE, options);
 
             // Define melee sequence to be played
-            let SequencerHelper = `${options.name}-melee-${author.data._id}`;
+            let SequencerHelper = `${options.name}-melee-${author.document._id}`;
             let SequencerEffect = new Sequence()
                 .effect()
                     .file(options.meleeAnimation.effect)
@@ -103,7 +110,7 @@ export class ItemAnimator
             Hooks.call(OIF.HOOKS.WEAPON.MELEE.HIT.POS, options);
 
             // Check if impact effect should be played
-            if (options.meleeAnimation.powerful == true && game.settings.get(OIF.ID, "powerfulImpactShakeEffect")) {
+            if (options.meleeAnimation.powerful == true && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT)) {
                 KFC.executeForEveryone("earthquake", 1, 500, 1)
             }
         }
@@ -118,10 +125,10 @@ export class ItemAnimator
         }
 
         // Check if item has ammunition property
-        if (item.data.data.properties.amm == true) 
+        if (item.system.properties.amm == true) 
         {
             // Check if item has ammunition set
-            if (item.data.data.consume.target == "") 
+            if (item.system.consume.target == "") 
             {
                 ui.notifications.error(game.i18n.localize("OIF.Attack.Ranged.Error.1"));
                 console.error("Could not find the ammunition item!");
@@ -130,13 +137,13 @@ export class ItemAnimator
             else
             {
                 // Create a copy of the ammunition item
-                options.ammunitionItem = await author.actor.getEmbeddedDocument("Item", item.data.data.consume.target);
+                options.ammunitionItem = await author.actor.getEmbeddedDocument("Item", item.system.consume.target);
 
                 // Call hook
                 Hooks.call(OIF.HOOKS.WEAPON.RANGED.HIT.PRE, options);
 
                 // Define ranged sequence to be played
-                let SequencerHelper = `${options.name}-ranged-${author.data._id}`;
+                let SequencerHelper = `${options.name}-ranged-${author.document._id}`;
                 let SequencerEffect = new Sequence()
                     .effect()
                         .file(options.rangedAnimation.effect)
@@ -170,29 +177,33 @@ export class ItemAnimator
                 // Call hook
                 Hooks.call(OIF.HOOKS.WEAPON.RANGED.HIT.POS, options);
 
-                // Check if Item Pile should be created
-                if (options.miss && OIF.SETTINGS.LOADED_MODULES.ITEM_PILES && game.settings.get(OIF.ID, "createItemPilesOnMiss"))
+                // Check if item should or not break
+                if (!(Math.floor(Math.random() * 101) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_AMMUNITION_DESTRUCTION_CHANCE)))
                 {
-                    // Get the position where the item landed
-                    let ItemPilePosition = {
-                        x: options.landedPosX,
-                        y: options.landedPosY,
-                    }
+                    // Check if Item Pile should be created
+                    if (options.miss && OIF.OPTIONAL_MODULES.ITEM_PILES.active && GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS))
+                    {
+                        // Get the position where the item landed
+                        let ItemPilePosition = {
+                            x: options.landedPosX,
+                            y: options.landedPosY,
+                        }
 
-                    // Drop item
-                    ItemDropper.DropAt(options.ammunitionItem, 1, ItemPilePosition, target.data.elevation)
-                }
-                else if (game.settings.get(OIF.ID, "addAmmunitionToTargetInventory"))
-                {
-                    // Add the ammunition to Target's inventory
-                    InventoryManipulator.AddItem(target, options.ammunitionItem, 1);
+                        // Drop item
+                        ItemDropper.DropAt(options.ammunitionItem, 1, ItemPilePosition, target.document.elevation)
+                    }
+                    else if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.ADD_AMMUNITION_TO_TARGET_INVENTORY))
+                    {
+                        // Add the ammunition to Target's inventory
+                        InventoryManipulator.AddItem(target, options.ammunitionItem, 1);
+                    }
                 }
             }
         }
         else 
         {
             // Define ranged sequence to be played
-            let SequencerHelper = `${options.name}-ranged-${author.data._id}`;
+            let SequencerHelper = `${options.name}-ranged-${author.document._id}`;
             let SequencerEffect = new Sequence()
                 .effect()
                     .file(options.rangedAnimation.effect)

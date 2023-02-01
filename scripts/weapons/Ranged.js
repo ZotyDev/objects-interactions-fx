@@ -1,5 +1,7 @@
 import { ItemAnimator } from "../animation/ItemAnimator.js";
 import { ObjectsInteractionsFXData } from "../data/ObjectsInteractionsFXData.js";
+import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
+import { GeneralSettings } from "../interface/GeneralSettings.js";
 
 const RangedWeapons = {
     shortbow: {
@@ -29,19 +31,26 @@ const RangedWeapons = {
     }
 }
 
-Hooks.on("ready", () => {
-    Hooks.on("midi-qol.RollComplete", async (workflow) => {
+Hooks.on("oifReady", () => {
+    Hooks.on(GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_ATTACK_HOOK), async (workflow) => {
         let Item = workflow.item;
         let Author = canvas.tokens.get(workflow.tokenId);
         let Targets = Array.from(game.user.targets);
     
-        let Tags = ObjectsInteractionsFXData.GetData(Item);
-        let Options = RangedWeapons[Tags];
-        if (Options != null && Options != undefined) {
-            Options.name = Tags;
-            Options.miss = workflow.hitTargets.size === 0;
-    
-            ItemAnimator.RangedSingleAttack(Item, Author, Targets[0], Options);
+        let Tags = await ObjectsInteractionsFXData.GetData(Item);
+
+        // May god forbid me for this sin
+        for (let i = 0; i < Tags.length; i++) 
+        {
+            let Options = RangedWeapons[Tags[i]];
+            if (Options != null && Options != undefined) 
+            {
+                Options.name = Tags[i];
+                Options.miss = workflow.hitTargets.size === 0;
+
+                ItemAnimator.RangedSingleAttack(Item, Author, Targets[0], Options);
+                return;
+            }
         }
     });
 });

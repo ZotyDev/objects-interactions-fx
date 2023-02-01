@@ -1,3 +1,4 @@
+import { GeneralSettings } from "../interface/GeneralSettings.js";
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 
 export class ItemDropper
@@ -13,18 +14,26 @@ export class ItemDropper
 
         // Copy the item
         let ItemCopy = item.toObject();
-        ItemCopy.data.quantity = quantity;
+        ItemCopy.system.quantity = quantity;
 
         // Create a ItemPile and get token reference
         let ItemPileOptions = {
             items: [ItemCopy],
-            pileActorName: false
+            pileActorName: false,
+            position: position
         }
-        let ItemPileTokenUuid = await ItemPiles.API.createItemPile(position, ItemPileOptions)
-        let ItemPileToken = await fromUuid(ItemPileTokenUuid);
+        
+        let ItemPileTokenUuid = await game.itempiles.API.createItemPile(ItemPileOptions);
+        let ItemPileToken = await fromUuid(ItemPileTokenUuid.tokenUuid);
+
+        // Minify the name of dropped items
+        if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.MINIFY_ITEM_PILES_NAMES))
+        {
+            ItemPileToken.update({ "name": "▲" });
+        }
 
         // Set ItemPile elevation if needed
-        if (OIF.SETTINGS.LOADED_MODULES.LEVELS && game.settings.get(OIF.ID, "setElevationOfItemPiles"))
+        if (OIF.OPTIONAL_MODULES.LEVELS.active && GeneralSettings.Get(OIF.SETTINGS.GENERAL.SET_ELEVATION_OF_ITEM_PILES))
         {
             ItemPileToken.update({
                 elevation: elevation ?? 0

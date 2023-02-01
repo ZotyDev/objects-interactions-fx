@@ -1,8 +1,11 @@
 import { ObjectsInteractionsFXData } from "../data/ObjectsInteractionsFXData.js";
 import { TokenLightingManipulator } from "../library/TokenLightingManipulator.js";
+import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
+import { GeneralSettings } from "../interface/GeneralSettings.js";
 
 const LightingItems = {
     torch: {
+        name: "torch",
         light: {
             animationType: "torch",
             color: "#ffae00",
@@ -14,6 +17,7 @@ const LightingItems = {
         }
     },
     lamp: {
+        name: "lamp",
         light: {
             animationType: "torch",
             color: "#ffa500",
@@ -26,18 +30,19 @@ const LightingItems = {
     }
 }
 
-Hooks.on("ready", () => {
-    Hooks.on("midi-qol.RollComplete", async (workflow) => {
-        let Item = workflow.item;
-        let Author = canvas.tokens.get(workflow.tokenId);
-
-        let Tags = ObjectsInteractionsFXData.GetData(Item);
-        let Options = LightingItems[Tags];
-        if (Options != null && Options != undefined) 
+Hooks.on("oifReady", () => {
+    Hooks.on(GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_ATTACK_HOOK), async (workflow) => {
+        if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.LIGHTING_ITEMS_AUTOMATION))
         {
-            Options.name = Tags;
-
-            TokenLightingManipulator.ToggleItemLighting(Item, Author, Options);
+            let Item = workflow.item;
+            let Author = canvas.tokens.get(workflow.tokenId);
+    
+            let Tags = await ObjectsInteractionsFXData.GetData(Item);
+            let Options = LightingItems[Tags];
+            if (Options != null && Options != undefined) 
+            {
+                TokenLightingManipulator.ToggleItemLighting(Item, Author, Options);
+            }
         }
     });
 });

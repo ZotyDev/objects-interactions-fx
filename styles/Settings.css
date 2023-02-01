@@ -1,0 +1,42 @@
+.oif-settings-container {
+    padding: 5px;
+}
+
+.oif-checkbox-container {
+    display: inline-flex;
+}
+
+.oif-slider-container {
+    display: inline-flex;
+    margin-left: 30px;
+}
+
+.oif-text-container {
+    display: inline-flex;
+}
+
+.oif-dropdown-container {
+    display: inline-flex;
+}
+
+.oif-option-text-container {
+    margin-top: 4px;
+}
+
+.oif-option-title {
+    font-size: 14px;
+}
+
+.oif-option-hint {
+    font-size: 12px;
+}
+
+.oif-option-slider-container {
+    display: flex;
+    width: auto;
+}
+
+.oif-option-dropdown-container {
+    display: flex;
+    width: auto;
+}

@@ -1,7 +1,22 @@
 # Automated Objects, Interactions and Effects Changelog
 
-### Version 0.1.1.1
-
+### Version 0.2
+- *Fixed #2* - Now the delay for throwable items should be correct.
+- *Fixed #3* - Added a option to select the hook that will trigger the effects and automations.
+- *Item Dropper* - Items "dropped" by the module now have a minified name (▲) (Can be toggled).
+- *Actor Inventor* - Added currency generator feature and `generateCurrency` tag, when a actor has this tag, its currency will be randomly generated using the set values as the max (Requires Tidy5e Sheet).
+- *Actor Inventor* - The actor inventor is a new system designed to make NPC creation easier.
+- *Tags* - Actors now have Tags too.
+- *Tags* - Renamed Item Tags to just Tags.
+- *Fixed Internal* - Updated module.json to v10.
+- *Fixed Internal* - Removed Foundry deprecated functionality use.
+- *Intern* - Optional module checking and warning is now more clever.
+- *Intern* - Removed unused optional modules warning.
+- *Tags* - Improved Item Tags implementation and visualization, multiple tags can now be attached to a object, they are also easier to create, read and delete.
+- *Item Animator* - Multiple tags can be used in a single item, the first one found inside the hard coded array will be used, the others will be ignored. This will change since other interactions yet to come will use these tags as references.
+- *Settings Helper* - Created a new settings system that uses a dependecy concept.
+- *Settings Helper* - Some settings have a dependency on another setting or module, when a dependecy is disabled the settings that rely on it will be disabled.
+- *Settings Helper* - **NOTE:** I might also make this helper into a module if someone asks for it.
 
 ---
 

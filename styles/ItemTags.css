@@ -33,16 +33,19 @@
 
 .oif-tag-container {
   display: flex;
-  padding: 5px;
+  padding: 4px;
   background-color: #FFFFFF33;
   border-width: 1px;
   border-color: #00000033;
   border-style: solid;
   border-radius: 1pt;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-x: scroll;
 }
 
 .oif-tag {
-  margin: 5px;
+  margin: 1px;
   border-width: 1px;
   border-color: #585858;
   border-style: solid;
@@ -53,10 +56,13 @@
   border-top-right-radius: 1pt;
   border-bottom-right-radius: 1pt;
   align-items: center;
+  display: inline;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 1px 1px #fff;
 }
 
 .oif-tag-input {
-  flex: 1;
   background-color: transparent;
   border: none;
+  width: 120px;
+  flex-grow: 1;
 }
