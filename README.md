@@ -29,7 +29,10 @@ Other design choice of the module is making it very _gamefied_, taking a little 
 ## Showcase
 
 <p align="center">
-    <img src="images/thrown_miss.gif" alt="Throwable item miss">
+    <img src="images/dagger_throw.gif" alt="Throwable item miss">
+</p>
+<p align="center">
+    <img src="images/arrow_fire.gif" alt="Arrow miss">
     <p align="center">Projectile becomes a Item Pile on miss</p>
 </p>
 </br>
@@ -39,8 +42,13 @@ Other design choice of the module is making it very _gamefied_, taking a little 
 </p>
 </br>
 <p align="center">
-    <img src="images/lighting_items.gif" alt="Lighting Items">
+    <img src="images/lighting.gif" alt="Lighting Items">
     <p align="center">Lighting automation using items</p>
+</p>
+</br>
+<p align="center">
+    <img src="images/generate_currency.gif" alt="Generate Currency">
+    <p align="center">Generating random currency</p>
 </p>
 </br>
 
