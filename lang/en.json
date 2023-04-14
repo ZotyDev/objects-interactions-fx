@@ -7,12 +7,14 @@
         "Attack": {
             "Melee": {
                 "Error": {
-                    "NotEnough": "You have no more of this item!"
+                    "NotEnough": "You have no more of this item!",
+                    "TooFar": "Attack outside of maximun range!"
                 }
             },
             "Ranged": {
                 "Error": {
-                    "1": "You have no ammunition selected!"
+                    "NoAmmo": "You have no ammunition selected!",
+                    "TooFar": "Attack outside of maximum range!"
                 }
             }
         },
@@ -25,11 +27,106 @@
                 }
             }
         },
+        "Tooltips": {
+            "MasterTags": {
+                "Title": "Master Tags"
+            },
+            "ClearLighting": {
+                "Title": "Clear Lighting"
+            }
+        },
         "Settings": {
-            "ItemTagsSettings": {
-                "Title": "Item Tags Settings",
-                "Hint": "Edit defined tags alongside the interactions related to them.",
-                "Label": "Item Tags"
+            "MasterTagsSettings": {
+                "Title": "Master Tags Settings",
+                "Hint": "Edit Master Tags and the interactions related to them.",
+                "Label": "Master Tags",
+                "Load": {
+                    "Error": {
+                        "NotFound": "The ${pack} pack was not found"
+                    }
+                },
+                "Creation": {
+                    "Error": {
+                        "Duplicated": "This tag is already defined"
+                    }
+                },
+                "Deletion": {
+                    "Title": "Delete \"${tag}\" tag?",
+                    "Description": "There is no way to recover a deleted tag, if you delete it by accident you only chance of getting it back is by accessing the JSON file before saving the modifications",
+                    "PendingChanges": "You have pending changes, please save or discard them before deleting a new pack"
+                },
+                "Pack": {
+                    "Title": "Tag Pack",
+                    "Select": "Select Tag Pack:",
+                    "DisabledMessage": "- Requires \"${modules}\"",
+                    "Delete": {
+                        "Label": "Delete",
+                        "Description": "Are you sure you want to delete this pack? This action cannot be undone",
+                        "Title": "Delete ${pack}?",
+                        "Confirm": "Ok",
+                        "Cancel": "Ok"
+                    },
+                    "PendingChanges": "You have pending changes, do you want to discard them?",
+                    "Rename": {
+                        "Label": "Rename",
+                        "Title": "Rename Pack",
+                        "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
+                        "Name": "New Pack Name",
+                        "Error": {
+                            "EmptyValues": "The new pack id and name cannot be empty",
+                            "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
+                            "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
+                            "NameAlreadyExist": "The pack \"${pack}\" already exists"
+                        }
+                    },
+                    "Export": "Export",
+                    "Import": {
+                        "Title": "Import",
+                        "Error": {
+                            "DuplicatedID": "The ID \"${id}\" is already in use",
+                            "DuplicatedName": "The name \"${name}\" is already in use"
+                        },
+                        "Duplicated": {
+                            "Title": "Duplicated Pack",
+                            "Description": "The pack \"${pack}\" already exists. Do you want to replace it?"
+                        }
+                    },
+                    "Copy": "Copy",
+                    "Create": "Create",
+                    "Save": "Save"
+                },
+                "NewPackCopy": {
+                    "Title": "New Pack",
+                    "Description": "You cannot save changes at default packs, but you can create a new one containing the changes you just made.",
+                    "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
+                    "Name": "New Pack Name",
+                    "Create": "Create",
+                    "Copy": "Copy \"${pack}\"",
+                    "Error": {
+                        "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
+                        "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
+                        "NameAlreadyExist": "The pack \"${pack}\" already exists"
+                    }
+                },
+                "NewPack": {
+                    "Title": "New Pack",
+                    "Description": "Create a new pack from scratch with no Tags.",
+                    "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
+                    "Name": "New Pack Name",
+                    "Create": "Create",
+                    "Copy": "Copy",
+                    "Error": {
+                        "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
+                        "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
+                        "NameAlreadyExist": "The pack \"${pack}\" already exists"
+                    }
+                },
+                "Discard": {
+                    "Title": "Discard changes?",
+                    "Description": "Do you want to discard your changes? This action cannot be undone"
+                },
+                "SaveChanges": "Save Changes",
+                "DiscardChanges": "Discard Changes"
             },
             "GeneralSettings": {
                 "Title": "Module General Settings",
@@ -49,6 +146,141 @@
                     "AfterDamageRoll": "After JUST Damage Roll (MidiQOL)",
                     "AfterCompleteRoll": "After Complete Roll (MidiQOL)"
                 }
+            },
+            "MasterTagConfiguration": {
+                "Title": "Master Tag Configuration:",
+                "Tag": {
+                    "MeleeSingleAttackAnimation": "Melee Single Attack Animation",
+                    "ThrowSingleAttackAnimation": "Throw Single Attack Animation",
+                    "ReturnSingleAttackAnimation": "Return Single Attack Animation",
+                    "RangedSingleAttackAnimation": "Ranged Single Attack Animation"
+                },
+                "Options": {
+                    "Enabled": {
+                        "Title": "Enabled"
+                    },
+                    "Type": {
+                        "Title": "Tag Type",
+                        "Choices": {
+                            "None": "None",
+                            "MeleeAttack": "Melee Attack",
+                            "RangedAttack": "Ranged Attack",
+                            "Lighting": "Lighting"
+                        }
+                    },
+                    "Weapon": {
+                        "MeleeAnimation": {
+                            "Source": {
+                                "Title": "Melee Animation Source"
+                            },
+                            "Delay": {
+                                "Title": "Melee Animation Delay"
+                            }
+                        },
+                        "ThrowAnimation": {
+                            "Source": {
+                                "Title": "Throw Animation Source"
+                            },
+                            "Delay": {
+                                "Title": "Throw Animation Delay"
+                            }
+                        },
+                        "ReturnAnimation": {
+                            "Source": {
+                                "Title": "Return Animation Source"
+                            },
+                            "Delay": {
+                                "Title": "Return Animation Delay"
+                            }
+                        },
+                        "RangedAnimation": {
+                            "Source": {
+                                "Title": "Ranged Animation Source"
+                            },
+                            "Delay": {
+                                "Title": "Ranged Animation Delay"
+                            }
+                        }
+                    },
+                    "Lighting": {
+                        "Animation": {
+                            "Type": {
+                                "Title": "Type",
+                                "Hint": "The type of the light animation",
+                                "Choices": {
+                                    "None": "None",
+                                    "Torch": "Torch",
+                                    "Pulse": "Pulse",
+                                    "Chroma": "Chroma",
+                                    "PulsingWave": "Pulsing Wave",
+                                    "SwirlingFog": "Swirling Fog",
+                                    "Sunburst": "Sunburst",
+                                    "LightDome": "Fire",
+                                    "MysteriousEmanation": "Mysterious Emanation",
+                                    "HexaDome": "Hexa Dome",
+                                    "GhostlyLight": "Ghostly Light",
+                                    "EnergyField": "Energy Field",
+                                    "RoilingMass": "Roiling Mass",
+                                    "BlackHole": "Black Hole",
+                                    "Vortex": "Vortex",
+                                    "BewitchingWave": "Bewitching Wave",
+                                    "SwirlingRainbow": "Swirling Rainbow",
+                                    "RadialRainbow": "Radial Rainbow",
+                                    "FairyLight": "Fairy Light",
+                                    "ForceGrid": "Force Grid",
+                                    "StarLight": "Start Light",
+                                    "SmokePatch": "Smoke Patch"
+                                }
+                            },
+                            "Speed": {
+                                "Title": "Animation Speed",
+                                "Hint": "The speed of the light animation"
+                            },
+                            "Intensity": {
+                                "Title": "Animation Intensity",
+                                "Hint": "The intensity of the light animation"
+                            },
+                            "Reverse": {
+                                "Title": "Reverse Animation",
+                                "Hint": "Whether or not the light animation should be reversed"
+                            }
+                        },
+                        "Color": {
+                            "Title": "Lighting Color",
+                            "Hint": "The color of the light"
+                        },
+                        "Intensity": {
+                            "Title": "Lighting Intensity",
+                            "Hint": "The intensity of the light"
+                        },
+                        "Angle": {
+                            "Title": "Lighting Angle",
+                            "Hint": "The angle of the light"
+                        },
+                        "Icons": {
+                            "Unlit": {
+                                "Title": "Unlit Icon",
+                                "Hint": "The icon to be used when the light is unlit"
+                            },
+                            "Lit": {
+                                "Title": "Lit Icon",
+                                "Hint": "The icon to be used when the light is lit"
+                            }
+                        }
+                    }
+                }
+            },
+            "UseAnimations": {
+                "Title": "Use Animations",
+                "Hint": "When disabled, OIF will only handle interactions and automations"
+            },
+            "MeleeAnimationDelay": {
+                "Title": "Fake Delay Before Melee Animation",
+                "Hint": "The delay before melee automations and interactions)"
+            },
+            "RangedAnimationDelay": {
+                "Title": "Fake Delay Before Ranged Animation",
+                "Hint": "The delay before ranged automations and interactions"
             },
             "CpLocation": {
                 "Title": "Copper Pieces Location",
@@ -94,6 +326,14 @@
                 "Title": "Create Item Piles on Miss",
                 "Hint": "Whether or not Item Piles will be created when a projectile misses the target"
             },
+            "CreateItemPilesOnHit": {
+                "Title": "Create Item Piles on Hit",
+                "Hint": "Whether or not Item Piles will be created when a projectile hits the target"
+            },
+            "SnapCreatedItemPilesToGrid": {
+                "Title": "Snap Created Item Piles to Grid",
+                "Hint": "Whether or not Item Piles created by this module should snap to grid"
+            },
             "MinifyItemPilesNames": {
                 "Title": "Minify Item Piles Names",
                 "Hint": "Whether or not Item Piles generated by the module will have a minified name"
@@ -116,6 +356,7 @@
             },
             "ModuleRequired": "Module ${module} is required",
             "OptionRequired": "Requires ${option} to be enabled",
+            "OptionUnrequired": "Requires ${option} to be disabled",
             "RestartRequired": "Requires Foundry to be restarted!!"
         }
     }

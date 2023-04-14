@@ -1,4 +1,4 @@
-import { ObjectsInteractionsFX } from "../ObjectsInteractionsFX.js"
+import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js"
 
 export class ObjectsInteractionsFXData 
 {
@@ -10,13 +10,13 @@ export class ObjectsInteractionsFXData
         }
         else
         {
-            return this._Migrate(item.getFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS));
+            return this._Migrate(item.getFlag(OIF.ID, OIF.FLAGS.ITEM_TAGS));
         }
     }
 
     static CheckData(item)
     {
-        let ReturnedData = item.getFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS);
+        let ReturnedData = item.getFlag(OIF.ID, OIF.FLAGS.ITEM_TAGS);
         if (ReturnedData == null || ReturnedData == undefined) 
         {
             return false;
@@ -44,7 +44,7 @@ export class ObjectsInteractionsFXData
         }
         else
         {
-            return item.setFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS, tags);
+            return item.setFlag(OIF.ID, OIF.FLAGS.ITEM_TAGS, tags);
         }
     }
 
@@ -52,7 +52,7 @@ export class ObjectsInteractionsFXData
     {
         if (this.CheckData(item)) 
         {
-            return item.setFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS, tags);
+            return item.setFlag(OIF.ID, OIF.FLAGS.ITEM_TAGS, tags);
         }
         else
         {
@@ -62,7 +62,7 @@ export class ObjectsInteractionsFXData
 
     static DeleteData(item)
     {
-        return item.unsetFlag(ObjectsInteractionsFX.ID, ObjectsInteractionsFX.FLAGS.ITEM_TAGS);
+        return item.unsetFlag(OIF.ID, OIF.FLAGS.ITEM_TAGS);
     }
 
     static _Migrate(text)
@@ -75,5 +75,35 @@ export class ObjectsInteractionsFXData
         {
             return text;
         }
+    }
+
+    
+    static async SaveMasterTags(data, name, path)
+    {
+        const NewFile = new File([JSON.stringify(data)], name, { type: 'application/json' });
+        await FilePicker.upload(OIF.FILES.ORIGIN, path, NewFile, {});
+    }
+
+    static async LoadJSON(path)
+    {
+        return await foundry.utils.fetchJsonWithTimeout(path);
+    }
+    
+    static async SaveJSON(data, name, path)
+    {
+        const NewFile = new File([JSON.stringify(data)], name, { type: 'application/json' });
+        await FilePicker.upload(OIF.FILES.ORIGIN, path, NewFile, {});
+    }
+
+    static async FileExists(path)
+    {
+        let FileList = await FilePicker.browse(OIF.FILES.ORIGIN, path).then((result) => result.files);
+        return FileList.includes(path);
+    }
+
+    static async GetUserMasterTags(pack)
+    {
+        let UserPacks = await ObjectsInteractionsFXData.LoadJSON(`${OIF.FILES.DATA_FOLDERS.ROOT}/TagPacks.json`);
+        return UserPacks[pack];
     }
 }

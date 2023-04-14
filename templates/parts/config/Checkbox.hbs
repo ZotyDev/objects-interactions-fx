@@ -1,0 +1,7 @@
+<div class="oif-checkbox-container {{#if disabled}} oif-disabled {{/if}}">
+    <input name="{{name}}" type="checkbox" {{#if disabled}} disabled {{else}} {{#if value}} checked {{/if}} {{/if}}>
+    <div class="oif-option-text-container">
+        {{> "oif.config.name"}}
+        <p class="oif-option-hint"> {{localize hint}} </p>
+    </div>
+</div>

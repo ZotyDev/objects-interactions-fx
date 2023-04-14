@@ -1,0 +1,35 @@
+name: System Support
+description: Want the module to support the system you use? Please, file this system support request!
+title: "[SYSTEM]: "
+labels: ["system", "triage"]
+assignees:
+  - ZotyDev
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this system support request! Please, take your time and make this system request as complete as possible, more details make it easier for us to  support your desired system, please fill all the required fields with caution to the details and include everything that could be relevant, even the small little details.
+
+        Please note that system support depends on that system having some features or not and not all systems are capable of having the complete features of OIF, but we will implement everything possible!
+  - type: input
+    id: discord
+    attributes:
+      label: Discord Username
+      description: Your discord username in case we need to contact you for more info
+      placeholder: discord username
+    validations:
+      required: false
+  - type: input
+    id: system
+    attributes:
+      label: System
+      description: A link to the system's repository
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes on the Support
+      description: Do you know useful information that would be relevant? Please tell us everything that could be useful
+    validations:
+      required: false

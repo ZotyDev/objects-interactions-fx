@@ -9,21 +9,25 @@ Hooks.on("oifReady", () => {
             actor = actor.actor;
             let Tags = ObjectsInteractionsFXData.GetData(actor);
 
-            if (Tags.indexOf("generateCurrency") > -1 && ActorInventorSettings.Get(OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR))
+            // Make sure we are checking for tags, not strange promises..
+            if ((typeof Tags) == Array)
             {
-                let CpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.CP_LOCATION);
-                let SpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.SP_LOCATION);
-                let GpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.GP_LOCATION);
-                let PpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.PP_LOCATION);
-                let EpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.EP_LOCATION);
-
-                actor.update({ 
-                    [CpLocation]: Math.floor(Math.random() * (getProperty(actor, CpLocation) + 1)),
-                    [SpLocation]: Math.floor(Math.random() * (getProperty(actor, SpLocation) + 1)),
-                    [GpLocation]: Math.floor(Math.random() * (getProperty(actor, GpLocation) + 1)),
-                    [PpLocation]: Math.floor(Math.random() * (getProperty(actor, PpLocation) + 1)),
-                    [EpLocation]: Math.floor(Math.random() * (getProperty(actor, EpLocation) + 1))
-                })
+                if (Tags.indexOf("generateCurrency") > -1 && ActorInventorSettings.Get(OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR))
+                {
+                    let CpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.CP_LOCATION);
+                    let SpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.SP_LOCATION);
+                    let GpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.GP_LOCATION);
+                    let PpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.PP_LOCATION);
+                    let EpLocation = game.settings.get(OIF.ID, OIF.SETTINGS.ACTOR_INVENTOR.EP_LOCATION);
+    
+                    actor.update({ 
+                        [CpLocation]: Math.floor(Math.random() * (getProperty(actor, CpLocation) + 1)),
+                        [SpLocation]: Math.floor(Math.random() * (getProperty(actor, SpLocation) + 1)),
+                        [GpLocation]: Math.floor(Math.random() * (getProperty(actor, GpLocation) + 1)),
+                        [PpLocation]: Math.floor(Math.random() * (getProperty(actor, PpLocation) + 1)),
+                        [EpLocation]: Math.floor(Math.random() * (getProperty(actor, EpLocation) + 1))
+                    })
+                }
             }
         }
     });

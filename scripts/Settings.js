@@ -1,22 +1,24 @@
 import { GeneralSettings } from "./interface/GeneralSettings.js";
-import { ItemTagsSettings } from "./interface/ItemTagsSettings.js";
+import { MasterTagsSettings } from "./interface/MasterTagsSettings.js";
 import { ActorInventorSettings } from "./interface/ActorInventorSettings.js";
 import { ObjectsInteractionsFX as OIF } from "./ObjectsInteractionsFX.js";
+import { SettingsSkeleton } from "./library/skeletons/SettingsSkeleton.js";
 
 export class Settings
 {
     static Initialize()
     {
         //////////////////////////////////////////////////
-        // Register Item Tags menu
-        game.settings.registerMenu(OIF.ID, OIF.SETTINGS.GENERAL.ITEM_TAGS_SETTINGS, {
-            name: 'OIF.Settings.ItemTagsSettings.Title',
-            hint: 'OIF.Settings.ItemTagsSettings.Hint',
-            label: 'OIF.Settings.ItemTagsSettings.Label',
+        // Register Master Tags menu
+        game.settings.registerMenu(OIF.ID, OIF.SETTINGS.GENERAL.MASTER_TAGS_SETTINGS, {
+            name: 'OIF.Settings.MasterTagsSettings.Title',
+            hint: 'OIF.Settings.MasterTagsSettings.Hint',
+            label: 'OIF.Settings.MasterTagsSettings.Label',
             icon: 'fas fa-tags',
-            type: ItemTagsSettings,
+            type: MasterTagsSettings,
             restricted: true,
         });
+        MasterTagsSettings.Register();
 
         //////////////////////////////////////////////////
         // Register General Settings menu
@@ -51,6 +53,39 @@ export class Settings
             ],
             restart: 'true',
         });
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.USE_ANIMATIONS, {
+            name: 'OIF.Settings.UseAnimations.Title',
+            hint: 'OIF.Settings.UseAnimations.Hint',
+            scope: 'world',
+            type: 'checkbox',
+            default: true,
+        });
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.MELEE_ANIMATION_DELAY, {
+            name: 'OIF.Settings.MeleeAnimationDelay.Title',
+            hint: 'OIF.Settings.MeleeAnimationDelay.Hint',
+            scope: 'world',
+            type: 'slider',
+            range: {
+                min: 0,
+                max: 3000,
+                step: 1,
+            },
+            default: 1950,
+            excludesOn: [OIF.SETTINGS.GENERAL.USE_ANIMATIONS],
+        });
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.RANGED_ANIMATION_DELAY, {
+            name: 'OIF.Settings.RangedAnimationDelay.Title',
+            hint: 'OIF.Settings.RangedAnimationDelay.Hint',
+            scope: 'world',
+            type: 'slider',
+            range: {
+                min: 0,
+                max: 3000,
+                step: 1,
+            },
+            default: 850,
+            excludesOn: [OIF.SETTINGS.GENERAL.USE_ANIMATIONS],
+        });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM, {
             name: 'OIF.Settings.RemoveThrowableItem.Title',
             hint: 'OIF.Settings.RemoveThrowableItem.Hint',
@@ -64,7 +99,7 @@ export class Settings
             scope: 'world',
             type: 'checkbox',
             default: false,
-            dependsOn: OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM,
+            dependsOn: [OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.ADD_AMMUNITION_TO_TARGET_INVENTORY, {
             name: 'OIF.Settings.AddAmmunitionToTargetInventory.Title',
@@ -72,7 +107,7 @@ export class Settings
             scope: 'world',
             type: 'checkbox',
             default: false,
-            dependsOn: OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM,
+            dependsOn: [OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS, {
             name: 'OIF.Settings.CreateItemPilesOnMiss.Title',
@@ -81,7 +116,26 @@ export class Settings
             type: 'checkbox',
             requiredModule: OIF.OPTIONAL_MODULES.ITEM_PILES,
             default: OIF.OPTIONAL_MODULES.ITEM_PILES.active,
-            dependsOn: OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM,
+            dependsOn: [OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM],
+        });
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT, {
+            name: 'OIF.Settings.CreateItemPilesOnHit.Title',
+            hint: 'OIF.Settings.CreateItemPilesOnHit.Hint',
+            scope: 'world',
+            type: 'checkbox',
+            requiredModule: OIF.OPTIONAL_MODULES.ITEM_PILES,
+            default: false,
+            dependsOn: [OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM],
+            excludesOn: [OIF.SETTINGS.GENERAL.ADD_THROWABLE_TO_TARGET_INVENTORY, OIF.SETTINGS.GENERAL.ADD_AMMUNITION_TO_TARGET_INVENTORY],
+        });
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.SNAP_CREATED_ITEM_PILES_TO_GRID, {
+            name: 'OIF.Settings.SnapCreatedItemPilesToGrid.Title',
+            hint: 'OIF.Settings.SnapCreatedItemPilesToGrid.Hint',
+            scope: 'world',
+            type: 'checkbox',
+            requiredModule: OIF.OPTIONAL_MODULES.ITEM_PILES,
+            default: OIF.OPTIONAL_MODULES.ITEM_PILES.active,
+            dependsOn: [OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.MINIFY_ITEM_PILES_NAMES, {
             name: 'OIF.Settings.MinifyItemPilesNames.Title',
@@ -90,7 +144,7 @@ export class Settings
             type: 'checkbox',
             requiredModule: OIF.OPTIONAL_MODULES.ITEM_PILES,
             default: OIF.OPTIONAL_MODULES.ITEM_PILES.active,
-            dependsOn: OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS,
+            dependsOn: [OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE, {
             name: 'OIF.Settings.DefaultThrowableDestructionChance.Title',
@@ -103,7 +157,7 @@ export class Settings
                 step: 1,
             },
             default: 0,
-            dependsOn: OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS,
+            dependsOn: [OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.DEFAULT_AMMUNITION_DESTRUCTION_CHANCE, {
             name: 'OIF.Settings.DefaultAmmunitionDestructionChance.Title',
@@ -116,7 +170,7 @@ export class Settings
                 step: 1,
             },
             default: 50,
-            dependsOn: OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS,
+            dependsOn: [OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.SET_ELEVATION_OF_ITEM_PILES, {
             name: 'OIF.Settings.SetElevationOfItemPiles.Title',
@@ -125,16 +179,14 @@ export class Settings
             type: 'checkbox',
             disabled: !(OIF.OPTIONAL_MODULES.LEVELS.active && OIF.OPTIONAL_MODULES.ITEM_PILES.active),
             default: OIF.OPTIONAL_MODULES.LEVELS.active && OIF.OPTIONAL_MODULES.ITEM_PILES.active,
-            dependsOn: OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS,
+            dependsOn: [OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS],
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT, {
             name: 'OIF.Settings.PowerfulImpactShakeEffect.Title',
             hint: 'OIF.Settings.PowerfulImpactShakeEffect.Hint',
             scope: 'client',
             type: 'checkbox',
-            requiredModule: OIF.OPTIONAL_MODULES.KFC,
-            disabled: !OIF.OPTIONAL_MODULES.KFC.active,
-            default: OIF.OPTIONAL_MODULES.KFC.active,
+            default: true,
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.LIGHTING_ITEMS_AUTOMATION, {
             name: 'OIF.Settings.LightingItemsAutomation.Title',
@@ -173,7 +225,7 @@ export class Settings
             requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
             disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
             default: "system.currency.cp",
-            dependsOn: OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR,
+            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
         });
         ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.SP_LOCATION, {
             name: 'OIF.Settings.SpLocation.Title',
@@ -183,7 +235,7 @@ export class Settings
             requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
             disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
             default: "system.currency.sp",
-            dependsOn: OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR,
+            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
         });
         ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.GP_LOCATION, {
             name: 'OIF.Settings.GpLocation.Title',
@@ -193,7 +245,7 @@ export class Settings
             requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
             disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
             default: "system.currency.gp",
-            dependsOn: OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR,
+            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
         });
         ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.PP_LOCATION, {
             name: 'OIF.Settings.PpLocation.Title',
@@ -203,7 +255,7 @@ export class Settings
             requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
             disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
             default: "system.currency.pp",
-            dependsOn: OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR,
+            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
         });
         ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.EP_LOCATION, {
             name: 'OIF.Settings.EpLocation.Title',
@@ -213,7 +265,7 @@ export class Settings
             requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
             disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
             default: "system.currency.ep",
-            dependsOn: OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR,
+            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
         });
 
         GeneralSettings.UpdateSettings();

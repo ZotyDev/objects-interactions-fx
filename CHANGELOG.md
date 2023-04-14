@@ -1,18 +1,54 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0
+- *Fixed* - Animations will only play if the distance between author and target is inside the range.
+- *Fixed #1* - Now you can disable the module's animations and use just the interactions and automations.
+  - There is no easy way to get the position where the effects from other modules landed on hit, because of that, when OIF is not the one handling the animations, the Item Piles will be created at random positions.
+- *Fixed #4* - There is now a option to snap the created Item Piles to the canvas grid.
+- *Fixed #5* - Actors with emtpy tags and strange promises, tbh idk much about javascript to point the exact error origin, but I've found a fix.
+- *Fixed #7* - Created a option to create item piles on hit now, this feature is incompatible with projectiles being added to inventory on hit.
+- *Tags* - Major update on how tags work.
+  - Auto focus after adding tags.
+  - Master Tags system that gives users the ability to create tags that will be used to define animations on items.
+    - Create and configure master tags.
+    - Create, export and import custom Tag Packs.
+    - Color and icons to visualize master tags better.
+    - Enable/Disable any master tag at anytime without reload.
+  - Special tags that can have unique effects.
+  - The first valid tag that OIF finds is used, the others are ignored (unless they are special tags)
+- *Intern* - Code cleaning.
+- *Intern* - Preparation for system-free design approach.
+- *Intern* - Removed KFC dependency and added the screen shake effect inside OIF itself.
+- *Tag Packs* - Added default tag packs for JB2A Free and Complete.
+- *Interface* - Added a tooltip for accessing master tags faster.
+- *Interface* - Also added a tooltip for clearing all lights that originate from OIF (currently just lighting items).
+- *Settings Helper* - Better dependency management.
+- *Settings Helper* - Added undependencies (settings that are incompatible).
+- *Dynamic Interactions* - Way better lighting master tags.
+- *Documentation* - Huge improvements on the **[Wiki](https://github.com/ZotyDev/objects-interactions-fx/wiki)**.
+  - Updated the home page.
+  - Added instructions on how to use the module.
+  - Added instructions on how to customize the module.
+  - Added a **[API Reference](https://github.com/ZotyDev/objects-interactions-fx/wiki/API)**.
+
+I apologize for not being able to provide some of the features that I mentioned that would be on this release, but they will be implemented as soon as possible!
+
+### Version 0.2.1
+- *Minor Fixes* - Some of the additions generated errors, and some features where wrongly implemented
+
 ### Version 0.2
 - *Fixed #2* - Now the delay for throwable items should be correct.
 - *Fixed #3* - Added a option to select the hook that will trigger the effects and automations.
+- *Fixed Internal* - Updated module.json to v10.
+- *Fixed Internal* - Removed Foundry deprecated functionality use.
 - *Item Dropper* - Items "dropped" by the module now have a minified name (▲) (Can be toggled).
 - *Actor Inventor* - Added currency generator feature and `generateCurrency` tag, when a actor has this tag, its currency will be randomly generated using the set values as the max (Requires Tidy5e Sheet).
 - *Actor Inventor* - The actor inventor is a new system designed to make NPC creation easier.
 - *Tags* - Actors now have Tags too.
 - *Tags* - Renamed Item Tags to just Tags.
-- *Fixed Internal* - Updated module.json to v10.
-- *Fixed Internal* - Removed Foundry deprecated functionality use.
+- *Tags* - Improved Item Tags implementation and visualization, multiple tags can now be attached to a object, they are also easier to create, read and delete.
 - *Intern* - Optional module checking and warning is now more clever.
 - *Intern* - Removed unused optional modules warning.
-- *Tags* - Improved Item Tags implementation and visualization, multiple tags can now be attached to a object, they are also easier to create, read and delete.
 - *Item Animator* - Multiple tags can be used in a single item, the first one found inside the hard coded array will be used, the others will be ignored. This will change since other interactions yet to come will use these tags as references.
 - *Settings Helper* - Created a new settings system that uses a dependecy concept.
 - *Settings Helper* - Some settings have a dependency on another setting or module, when a dependecy is disabled the settings that rely on it will be disabled.

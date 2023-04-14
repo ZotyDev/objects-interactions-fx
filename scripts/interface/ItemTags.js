@@ -20,17 +20,18 @@ export class ItemTags extends FormApplication {
         return mergedOptions;
     }
 
-    async _handleEnterKeypress(event) {
+    async _handleEnterKeypress(html, event) {
         if (event.key == "Enter") {
             let CurrentTags = await OIFD.GetData(this.options.item, event.target.value);
             CurrentTags.push(event.target.value);
             await OIFD.UpdateData(this.options.item, CurrentTags);
             event.target.value = "";
-            this.render({ focus: true });
+            this.render();
+            html[0].querySelector('input[class="oif-tag-input"]')?.focus();
         }
     }
 
-    async _handleLinkClick(event) {
+    async _handleLinkClick(html, event) {
         let ClickedElement = $(event.currentTarget);
         let CurrentTags = await OIFD.GetData(this.options.item, event.target.value);
         CurrentTags.splice(ClickedElement[0].id, 1);
@@ -41,8 +42,10 @@ export class ItemTags extends FormApplication {
     activateListeners(html) {
         super.activateListeners(html);
 
-        html.on('keypress', null, this._handleEnterKeypress.bind(this));
-        html.on('click', 'i', this._handleLinkClick.bind(this));
+        html.on('keypress', 'input[class="oif-tag-input"]', this._handleEnterKeypress.bind(this, html));
+        html.on('click', 'i[class="fas fa-times"]', this._handleLinkClick.bind(this, html));
+
+        html[0].querySelector('input[class="oif-tag-input"]')?.focus();
     }
 
     getData(options) {

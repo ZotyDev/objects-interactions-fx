@@ -1,0 +1,38 @@
+name: Feature Request
+description: Have suggestions or features that you want to see in this module? File a Feature Request :D
+title: "[FEATURE]: "
+labels: ["feature", "triage"]
+assignees:
+  - ZotyDev
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request! Please, take your time and make this request as complete as possible, more details make it easier for us to implement what you want, please fill all the required fields with attention to details and include everything that could be useful, even the small details. 
+  - type: input
+    id: discord
+    attributes:
+      label: Discord Username
+      description: Your discord username in case we need to contact you for more info
+      placeholder: discord username
+    validations:
+      required: false
+  - type: dropdown
+    id: type
+    attributes:
+      label: Enhancement Type
+      description: Is it a enhancement to a already existing functionality, or a completely new feature?
+      options:
+        - Feature
+        - Enhancement
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: Request
+      description: A complete and detailed explanation of what you want to be implemented
+      placeholder: Tell us the details!
+      value: "I want this to happen!"
+    validations:
+      required: true

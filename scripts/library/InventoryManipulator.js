@@ -15,7 +15,7 @@ export class InventoryManipulator
         else if (item.system.quantity > quantity)
         {
             // Remove "quantity" units from the item
-            item.update({ "system.quantity": item.system.quantity - quantity });
+            await owner.actor.updateEmbeddedDocuments("Item", [{_id: item.id, "system.quantity": item.system.quantity - quantity}]);
             return true;
         }
         // Not enough items to be removed

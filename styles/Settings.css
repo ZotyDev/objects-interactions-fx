@@ -13,10 +13,27 @@
 
 .oif-text-container {
     display: inline-flex;
+    margin-left: 30px;
+}
+
+.oif-string-container {
+    display: inline-flex;
+    margin-left: 30px;
 }
 
 .oif-dropdown-container {
     display: inline-flex;
+    margin-left: 30px;
+}
+
+.oif-color-container {
+    display: inline-flex;
+    margin-left: 30px;
+}
+
+.oif-icon-container {
+    display: inline-flex;
+    margin-left: 30px;
 }
 
 .oif-option-text-container {
@@ -39,4 +56,28 @@
 .oif-option-dropdown-container {
     display: flex;
     width: auto;
+}
+
+.oif-option-color-container {
+    display: flex;
+    width: auto;
+}
+
+.oif-option-string-container {
+    display: flex;
+    width: auto;
+}
+
+.oif-option-icon-container {
+    display: flex;
+    width: auto;
+}
+
+.oif-option-icon-img {
+    width: 32px;
+    height: 32px;
+}
+
+.oif-disabled-option-text {
+    color: #ff0000;
 }

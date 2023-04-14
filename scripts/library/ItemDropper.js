@@ -13,24 +13,35 @@ export class ItemDropper
         }
 
         // Copy the item
-        let ItemCopy = item.toObject();
+        let ItemCopy = await item.toObject();
         ItemCopy.system.quantity = quantity;
 
         // Create a ItemPile and get token reference
         let ItemPileOptions = {
-            items: [ItemCopy],
+            items: ItemCopy,
             pileActorName: false,
-            position: position
+            position: position,
+            tokenOverrides: {}
         }
-        
-        let ItemPileTokenUuid = await game.itempiles.API.createItemPile(ItemPileOptions);
-        let ItemPileToken = await fromUuid(ItemPileTokenUuid.tokenUuid);
 
         // Minify the name of dropped items
         if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.MINIFY_ITEM_PILES_NAMES))
         {
-            ItemPileToken.update({ "name": "▲" });
+            ItemPileOptions.tokenOverrides.name = '▲';
         }
+        else
+        {
+            ItemPileOptions.tokenOverrides.name = ItemCopy.name;
+        }
+
+        // Check if ItemPile should snap to grid
+        if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.SNAP_CREATED_ITEM_PILES_TO_GRID))
+        {
+            ItemPileOptions.position = canvas.grid.getSnappedPosition(ItemPileOptions.position.x, ItemPileOptions.position.y);
+        }
+        
+        let ItemPileTokenUuid = await game.itempiles.API.createItemPile(ItemPileOptions);
+        let ItemPileToken = await fromUuid(ItemPileTokenUuid.tokenUuid);
 
         // Set ItemPile elevation if needed
         if (OIF.OPTIONAL_MODULES.LEVELS.active && GeneralSettings.Get(OIF.SETTINGS.GENERAL.SET_ELEVATION_OF_ITEM_PILES))

@@ -1,0 +1,10 @@
+<div class="oif-color-container {{#if disabled}} oif-disabled {{/if}}">
+    <div class="oif-option-text-container">
+        {{> "oif.config.name"}}
+        <div class="oif-option-color-container">
+            <input name="{{name}}" style="margin-right: 15px;" type="color" value="{{value}}">
+            <input name="{{name}}" type="text" value="{{value}}">
+        </div>
+        <p class="oif-config-hint"> {{localize hint}} </p>
+    </div>
+</div>

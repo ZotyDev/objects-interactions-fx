@@ -1,0 +1,9 @@
+<div class="oif-string-container" {{#if disabled}} style="opcaity: 0.5;" {{/if}}>
+    <div class="oif-option-text-container">
+        {{> "oif.settings.name"}}
+        <div class="oif-option-text-container">
+            <input style="width: 565px; margin-right: 15px;" type="text" value="{{value}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
+        </div>
+        <p class="oif-option-hint"> {{localize hint}} </p>
+    </div>
+</div>

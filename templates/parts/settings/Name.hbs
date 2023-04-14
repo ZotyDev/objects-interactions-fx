@@ -1,0 +1,11 @@
+<label class="oif-option-title">
+    <span>
+        {{localize name}}
+        {{#if disabled}}
+            <i class="oif-disabled-option-text"> {{localize disabledMessage}} </i>
+        {{/if}}
+        {{#if requiresRestart}}
+            <i class="oif-disabled-option-text"> {{localize restartMessage}} </i>
+        {{/if}}
+    </span>
+</label>

@@ -1,0 +1,10 @@
+<div class="oif-slider-container" {{#if disabled}} style="opacity: 0.5;" {{/if}}>
+    <div class="oif-option-text-container">
+        {{> "oif.settings.name"}}
+        <div class="oif-option-slider-container">
+            <input style="width: 465px; margin-right: 15px;" type="range" min="{{range.min}}" max="{{range.max}}" step="{{range.step}}" value="{{value}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
+            <input style="width: 50px;" type="number" min="{{range.min}}" max="{{range.max}}" step="{{range.step}}" value="{{value}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
+        </div>
+        <p class="oif-option-hint"> {{localize hint}} </p>
+    </div>
+</div>

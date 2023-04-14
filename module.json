@@ -1,74 +1,69 @@
 {
-    "id": "objects-interactions-fx",
-    "title": "Automated Objects, Interactions and Effects",
-    "description": "This module provides automation and effects for many items and spells.",
-    "version": "0.2.1",
-    "author": "ZotyDev",
-    "authors": [
-        {
-            "name": "ZotyDev",
-            "email": "official@zoty.dev",
-            "url": "https://www.zoty.dev"
-        }
+  "id": "objects-interactions-fx",
+  "title": "✨ Automated Objects, Interactions and Effects 🔥",
+  "description": "Animations. Automations. Interactions. Effects. And soon Objects too! Immerse your players on the game, let they experience the interactions and feel the combat!",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "ZotyDev",
+      "email": "official@zoty.dev",
+      "url": "https://www.zoty.dev",
+      "flags": {}
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
+  "compatibility": {
+    "verified": "10.291"
+  },
+  "license": "./LICENSE",
+  "url": "https://github.com/ZotyDev/objects-interactions-fx",
+  "bugs": "https://github.com/ZotyDev/objects-interactions-fx/issues",
+  "manifest": "https://github.com/ZotyDev/objects-interactions-fx/releases/latest/download/module.json",
+  "download": "https://github.com/ZotyDev/objects-interactions-fx/releases/latest/download/module.zip",
+  "readme": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/README.md",
+  "changelog": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/CHANGELOG.md",
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {}
+      }
     ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "./lang/en.json"
-        }
-    ],
-    "compatibility": {
-        "minimun": 10,
-        "verified": "10.291"
-    },
-    "license": "./LICENSE",
-    "url": "https://github.com/ZotyDev/objects-interactions-fx",
-    "bugs": "https://github.com/ZotyDev/objects-interactions-fx/issues",
-
-    "manifest":  "https://github.com/ZotyDev/objects-interactions-fx/releases/latest/download/module.json",
-    "download": "https://github.com/ZotyDev/objects-interactions-fx/releases/latest/download/module.zip",
-    "readme": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/README.md",
-    "changelog": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/CHANGELOG.md",
-
-    "system": [
-        "dnd5e"
-    ],
-
-    "relationships": {
-        "systems": [
-            {
-                "id": "dnd5e"
-            }
-        ],
-        "requires": [
-            {
-                "id": "sequencer",
-                "title": "Sequencer"
-            },
-            {
-                "id": "jb2a_patreon",
-                "title": "JB2A Patreon"
-            },
-            {
-                "id": "midi-qol",
-                "title": "MidiQOL"
-            }
-        ]
-    },
-
-    "socket": true,
-
-    "esmodules": [
-        "./scripts/Main.js",
-        "./scripts/weapons/Melee.js",
-        "./scripts/weapons/Ranged.js",
-        "./scripts/items/Lighting.js",
-        "./scripts/automation/ActorInventor.js"
-    ],
-
-    "styles": [
-        "./styles/ItemTags.css",
-        "./styles/Settings.css"
+    "requires": [
+      {
+        "id": "sequencer",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "midi-qol",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "socketlib",
+        "type": "module",
+        "compatibility": {}
+      }
     ]
+  },
+  "socket": true,
+  "esmodules": [
+    "scripts/Main.js",
+    "scripts/automation/ActorInventor.js",
+    "scripts/library/CanvasEffects.js",
+    "scripts/library/HandlebarsHelpers.js"
+  ],
+  "styles": [
+    "styles/ItemTags.css",
+    "styles/Settings.css"
+  ]
 }

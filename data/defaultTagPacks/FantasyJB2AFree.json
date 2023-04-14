@@ -1,0 +1,240 @@
+{
+    "id": "DefaultFantasyTagsJB2AFree",
+    "name": "Default Packs: Fantasy (JB2A Free)",
+    "requires": [
+        "JB2A_DnD5e"
+    ],
+    "default": true,
+    "tags": {
+        "powerful": {
+            "type": "special",
+            "enabled": true
+        },
+        "generateCurrency": {
+            "type": "special",
+            "enabled": true
+        },
+        "club": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.club.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "dagger": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.dagger.melee.fire.white",
+                "delay": 950
+            },
+            "throwAnimation": {
+                "source": "jb2a.dagger.throw.01.white",
+                "delay": 950
+            },
+            "returnAnimation": {
+                "source": "jb2a.dagger.return.01.white",
+                "delay": 900
+            }
+        },
+        "falchion": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.falchion.melee.01.white",
+                "delay": 1150
+            }
+        },
+        "glaive": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.glaive.melee.01.white",
+                "delay": 1150
+            }
+        },
+        "greataxe": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.greataxe.melee.standard.white",
+                "delay": 1700
+            },
+            "throwAnimation": {
+                "source": "jb2a.greataxe.throw.white",
+                "delay": 1250
+            }
+        },
+        "greatclub": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.greatclub.standard.white",
+                "delay": 1100
+            }
+        },
+        "greatsword": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.greatsword.melee.standard.white",
+                "delay": 1700
+            }
+        },
+        "halberd": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.halberd.melee.01.white",
+                "delay": 1150
+            }
+        },
+        "hammer": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.hammer.melee.01.white",
+                "delay": 1150
+            }
+        },
+        "javelin": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.spear.melee.01.white.2",
+                "delay": 1250
+            }
+        },
+        "handaxe": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.handaxe.melee.standard.white",
+                "delay": 1150
+            }
+        },
+        "mace": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.mace.melee.01.white",
+                "delay": 1200
+            }
+        },
+        "maul": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.maul.melee.standard.white",
+                "delay": 1900
+            }
+        },
+        "quarterstaff": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.quarterstaff.melee.01.white",
+                "delay": 900
+            }
+        },
+        "rapier": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.rapier.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "scimitar": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.scimitar.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "shortsword": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.shortsword.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "spear": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.spear.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "sword": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.sword.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "warhammer": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.warhammer.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "wrench": {
+            "type": "meleeAttack",
+            "enabled": true,
+            "meleeAnimation": {
+                "source": "jb2a.wrench.melee.01.white",
+                "delay": 1250
+            }
+        },
+        "shortbow": {
+            "type": "rangedAttack",
+            "enabled": true,
+            "rangedAnimation": {
+                "source": "jb2a.arrow.physical.white.01",
+                "delay": 600
+            }
+        },
+        "longbow": {
+            "type": "rangedAttack",
+            "enabled": true,
+            "rangedAnimation": {
+                "source": "jb2a.arrow.physical.white.01",
+                "delay": 600
+            }
+        },
+        "torch": {
+            "type": "lighting",
+            "enabled": true,
+            "ligth": {
+                "animationType": "torch",
+                "color": "#ffae00",
+                "alpha": 0.4
+            },
+            "icons": {
+                "unlit": "icons/sundries/lights/torch-black.webp",
+                "lit": "icons/sundries/lights/torch-brown-lit.webp"
+            }
+        },
+        "lamp": {
+            "type": "lighting",
+            "enabled": true,
+            "light": {
+                "animationType": "torch",
+                "color": "#ffa500",
+                "alpha": 0.5
+            },
+            "icons": {
+                "unlit": "icons/sundries/lights/lantern-steel.webp",
+                "lit": "icons/sundries/lights/lantern-iron-lit-yellow.webp"
+            }
+        }
+    }
+}

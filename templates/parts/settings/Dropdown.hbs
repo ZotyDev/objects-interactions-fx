@@ -1,0 +1,13 @@
+<div class="oif-dropdown-container" {{#if disabled}} style="opacity: 0.5;;" {{/if}}>
+    <div class="oif-option-text-container">
+        {{> "oif.settings.name"}}
+        <div class="oif-option-dropdown-container">
+            <select name="{{name}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
+                {{#each choices}}
+                    <option value="{{value}}" {{#if selected}} selected {{/if}}> {{localize name}} </option>
+                {{/each}}
+            </select>
+        </div>
+        <p class="oif-option-hint"> {{localize hint}} </p>
+    </div>
+</div>

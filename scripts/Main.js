@@ -2,6 +2,12 @@ import { ItemAnimator } from "./animation/ItemAnimator.js";
 import { ObjectsInteractionsFX as OIF } from "./ObjectsInteractionsFX.js";
 import { Settings } from "./Settings.js";
 import { ItemTags } from "./interface/ItemTags.js";
+import { SystemHelper } from "./system/SystemHelper.js";
+import { MasterTagsSettings } from "./interface/MasterTagsSettings.js";
+import { GeneralSettings } from "./interface/GeneralSettings.js";
+import { ObjectsInteractionsFXData } from "./data/ObjectsInteractionsFXData.js";
+import { TagHandler } from "./tags/TagHandler.js";
+import { TokenLightingManipulator } from "./library/TokenLightingManipulator.js";
 
 Hooks.on("init", () =>
 {
@@ -28,6 +34,42 @@ Hooks.on("init", () =>
         buttonArray.unshift(TagButton);
     });
 
+    Hooks.on('getSceneControlButtons', (controls) => {
+        if (!canvas.scene) return;
+
+        const MasterTags = {
+            name: 'master-tags',
+            title: game.i18n.localize('OIF.Tooltips.MasterTags.Title'),
+            icon: 'fas fa-tags',
+            onClick: async () => {
+                new MasterTagsSettings().render(true);
+            },
+            button: true
+        }
+
+        const ClearLighting = {
+            name: 'clear-lighting',
+            title: game.i18n.localize('OIF.Tooltips.ClearLighting.Title'),
+            icon: 'fas fa-lightbulb-slash',
+            onClick: async () => {
+                TokenLightingManipulator.RemoveAllLighting();
+            },
+            button: true
+        }
+
+        controls.push({
+            name: OIF.ID,
+            title: OIF.NAME,
+            layer: 'CanvasEffects',
+            icon: 'fas fa-snowflake',
+            visible: game.user.isGM,
+            tools: [
+                MasterTags,
+                ClearLighting
+            ]
+        });
+    })
+
     Hooks.on("getActorSheetHeaderButtons", async (itemSheet, buttonArray) => {
         let TagButton = {
             label: "Tags",
@@ -42,12 +84,59 @@ Hooks.on("init", () =>
     })
 
     window[OIF.FLAGS.OIF] = {
-        MeleeSingleAttack: ItemAnimator.MeleeSingleAttack,
-        RangedSingleAttack: ItemAnimator.RangedSingleAttack
+        MeleeWeaponSingleAttack: ItemAnimator.MeleeWeaponSingleAttack,
+        RangedSingleAttack: ItemAnimator.RangedWeaponSingleAttack,
+        
+        LoadTagPackFromFile: MasterTagsSettings.LoadTagPackFromFile,
+        LoadTagPacksFromFolder: MasterTagsSettings.LoadTagPacksFromFolder,
     };
 
-    Hooks.on("ready", () => {
+    Hooks.on("ready", async () => {
         Settings.Initialize();
+
+        // Create the folders that are going to be used
+        if (game.user.isGM)
+        {
+            // Load default packs
+            await MasterTagsSettings.LoadTagPacksFromFolder(OIF.FILES.DATA_FOLDERS.DEFAULT_TAG_PACKS);
+            await MasterTagsSettings.LoadUserPacks();
+            let CurrentTagPack = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
+            if (MasterTagsSettings.PackHeaders[CurrentTagPack].disabled)
+            {
+                MasterTagsSettings.PackHeaders[CurrentTagPack].selected = false;
+                CurrentTagPack = "Empty";
+            }
+            await MasterTagsSettings.LoadTags(CurrentTagPack);
+
+            ////////////////////////////////////////////////////////////
+            // Item Roll Attacher
+            ////////////////////////////////////////////////////////////
+            Hooks.on(GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_ATTACK_HOOK), async (workflow) => 
+            {
+                // Retrieve the item
+                let Item = workflow.item;
+
+                // Get the tags of the item
+                let Tags = await ObjectsInteractionsFXData.GetData(Item);
+
+                // Check if there are tags to be used
+                if (Tags.length > 0)
+                {
+                    // Set the options
+                    let Options = {
+                        name: Tags[0],
+                        item: Item,
+                        tags: Tags,
+                        author: await canvas.tokens.get(workflow.tokenId),
+                        targets: Array.from(game.user.targets),
+                        miss: workflow.hitTargets.size === 0 ?? false,
+                    }
+                    
+                    // Send tags to the handler
+                    TagHandler.Dispatch(Options);
+                }
+            })
+        }
 
         Hooks.callAll("oifReady", game.modules.get(OIF.ID).api);
         console.log("Automated Objects, Interactions and Effects is ready!!");

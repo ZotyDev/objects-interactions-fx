@@ -60,9 +60,49 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 1px 1px #fff;
 }
 
+.oif-master-tag {
+  margin: 1px;
+  border-width: 1px;
+  border-color: #585858;
+  border-style: solid;
+  padding: 3px;
+  background-color: rgb(202, 181, 235);
+  border-top-left-radius: 5pt;
+  border-bottom-left-radius: 5pt;
+  border-top-right-radius: 1pt;
+  border-bottom-right-radius: 1pt;
+  align-items: center;
+  display: inline;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 1px 1px #fff;
+}
+
+.oif-special-tag {
+  background-color: rgb(235, 216, 181);
+}
+
+.oif-melee-weapon-tag {
+  background-color: rgb(241, 156, 99);
+}
+
+.oif-ranged-weapon-tag {
+  background-color: rgb(253, 92, 92);
+}
+
+.oif-lighting-tag {
+  background-color: rgb(97, 216, 252);
+}
+
+.oif-disabled-tag {
+  background-color: rgb(106, 103, 110);
+}
+
 .oif-tag-input {
   background-color: transparent;
   border: none;
   width: 120px;
   flex-grow: 1;
+}
+
+.oif-red-button {
+  background-color: rgb(253, 92, 92);
 }

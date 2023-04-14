@@ -1,0 +1,19 @@
+<form>
+    <div class="oif-settings-container">
+        {{#each settings}}
+            {{#if checkbox}}
+                {{> "oif.settings.checkbox"}}
+            {{/if}}
+            {{#if slider}}
+                {{> "oif.settings.slider"}}
+            {{/if}}
+            {{#if dropdown}}
+                {{> "oif.settings.dropdown"}}
+            {{/if}}
+            {{#if string}}
+                {{> "oif.settings.string"}}
+            {{/if}}
+            <hr>
+        {{/each}}
+    </div>
+</form>
