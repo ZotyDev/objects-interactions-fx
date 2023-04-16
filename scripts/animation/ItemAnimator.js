@@ -108,17 +108,6 @@ export class ItemAnimator
                 ////////////////////////////////////////////////////////////
                 // TODO: consult system rules to see if we should do a correction to the throw attack
 
-                // Check if item should be removed
-                if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM))
-                {
-                    // Remove item from author inventory
-                    if (!InventoryManipulator.RemoveItem(options.author, options.item, 1)) 
-                    {
-                        ui.notifications.error(game.i18n.localize("OIF.Attack.Melee.Error.NotEnough"));
-                        return;
-                    }
-                }
-
                 // Check if animation should be played
                 if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS) && options.throwAnimation != undefined)
                 {
@@ -161,8 +150,15 @@ export class ItemAnimator
                     // Check if the item should or not break
                     if(!Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE))
                     {
+                        let CreateItemPileOnMiss          = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS);
+                        let CreateItemPileOnHit           = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT);
+                        let AddThrowableToTargetInventory = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ADD_THROWABLE_TO_TARGET_INVENTORY);
+                        let RemoveThrowableItem           = GeneralSettings.Get(OIF.SETTINGS.GENERAL.REMOVE_THROWABLE_ITEM);
+
+                        let ShouldRemoveItem = false;
+
                         // Check if the attack missed and if a item pile should be created
-                        if (options.miss && GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS))
+                        if (options.miss && CreateItemPileOnMiss)
                         {
                             // Setup item pile position
                             let ItemPilePosition = {
@@ -172,13 +168,15 @@ export class ItemAnimator
         
                             // Drop item
                             ItemDropper.DropAt(options.item, 1, ItemPilePosition, options.target.document.elevation);
+                            ShouldRemoveItem = true;
                         }
-                        else if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.ADD_THROWABLE_TO_TARGET_INVENTORY))
+                        else if (AddThrowableToTargetInventory)
                         {
                             // Add item to target's inventory
                             InventoryManipulator.AddItem(options.target, options.item, 1);
+                            ShouldRemoveItem = true;
                         }
-                        else if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT))
+                        else if (CreateItemPileOnHit)
                         {
                             options = ItemAnimator.GetLandedPosRandomCorner(options);
 
@@ -190,6 +188,14 @@ export class ItemAnimator
         
                             // Drop item
                             ItemDropper.DropAt(options.item, 1, ItemPilePosition, options.target.document.elevation);
+                            ShouldRemoveItem = true;
+                        }
+
+                        // Check if item should be removed
+                        if (RemoveThrowableItem && ShouldRemoveItem)
+                        {
+                            // Remove item from author inventory
+                            InventoryManipulator.RemoveItem(options.author, options.item, 1);
                         }
         
                         DidInteract = true;
@@ -351,8 +357,14 @@ export class ItemAnimator
                     // Check if the item should or not break
                     if (!Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_AMMUNITION_DESTRUCTION_CHANCE))
                     {
+                        let CreateItemPileOnMiss           = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS);
+                        let CreateItemPileOnHit            = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT);
+                        let AddAmmunitionToTargetInventory = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ADD_AMMUNITION_TO_TARGET_INVENTORY);
+
+                        let ShouldRemoveItem = false;
+
                         // Check if the attack missed and if a item pile should be created
-                        if (options.miss && GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS))
+                        if (options.miss && CreateItemPileOnMiss)
                         {
                             // Setup item pile position
                             let ItemPilePosition = {
@@ -363,12 +375,12 @@ export class ItemAnimator
                             // Drop item
                             ItemDropper.DropAt(options.ammoItem, 1, ItemPilePosition, options.target.document.elevation);
                         }
-                        else if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.ADD_AMMUNITION_TO_TARGET_INVENTORY))
+                        else if (AddAmmunitionToTargetInventory)
                         {
                             // Add item to target's inventory
                             InventoryManipulator.AddItem(options.target, options.ammoItem, 1);
                         }
-                        else if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT))
+                        else if (CreateItemPileOnHit)
                         {
                             options = ItemAnimator.GetLandedPosRandomCorner(options);
 

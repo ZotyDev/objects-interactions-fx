@@ -7,7 +7,8 @@
   - `dnd5e.rollAttack` and `dnd5e.rollAttack` for weapon items.
   - `dnd5e.useItem` for normal items.
 - *Interface* - Added a config to choose trigger hooks just for items.
-- *Fixed* - Fixed a bug that make it impossible to use thrown items - Thanks to Ikabodo for reporting it!
+- *Fixed* - A typo was making it impossible to use thrown items - Thanks to Ikabodo for reporting it!
+- *Fixed* - Thrown items were getting removed while not being created anywhere - Thanks to Ikabodo for reporting it!
 
 --- 
 
