@@ -127,33 +127,38 @@ Hooks.on("init", () =>
             await MasterTagsSettings.LoadTags(CurrentTagPack);
 
             ////////////////////////////////////////////////////////////
-            // Item Roll Attacher
+            // Attack Roll Attacher
             ////////////////////////////////////////////////////////////
-            Hooks.on(GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_ATTACK_HOOK), async (workflow) => 
+            Hooks.on(GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_ATTACK_HOOK), async (arg1, arg2, arg3) => 
             {
-                // Retrieve the item
-                let Item = workflow.item;
-
-                // Get the tags of the item
-                let Tags = await ObjectsInteractionsFXData.GetData(Item);
+                // Retrieve the options
+                let Workflow = [arg1, arg2, arg3];
+                let Options = await SystemHelper.GetOptionsFromWeaponRoll(Workflow);
 
                 // Check if there are tags to be used
-                if (Tags.length > 0)
+                if (Options.tags.length > 0)
                 {
-                    // Set the options
-                    let Options = {
-                        name: Tags[0],
-                        item: Item,
-                        tags: Tags,
-                        author: await canvas.tokens.get(workflow.tokenId),
-                        targets: Array.from(game.user.targets),
-                        miss: workflow.hitTargets.size === 0 ?? false,
-                    }
-                    
                     // Send tags to the handler
                     TagHandler.Dispatch(Options);
                 }
             })
+
+            ////////////////////////////////////////////////////////////
+            // Item Roll Attacher
+            ////////////////////////////////////////////////////////////
+            Hooks.on(GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_ITEM_HOOK), async (arg1, arg2, arg3) =>
+            {
+                // Retrieve the options
+                let Workflow = [arg1, arg2, arg3];
+                let Options = await SystemHelper.GetOptionsFromItemRoll(Workflow);
+
+                // Check if there are tags to be used
+                if (Options.tags.length > 0)
+                {
+                    // Send tags to the handler
+                    TagHandler.Dispatch(Options);
+                }
+            });
         }
 
         Hooks.callAll("oifReady", game.modules.get(OIF.ID).api);

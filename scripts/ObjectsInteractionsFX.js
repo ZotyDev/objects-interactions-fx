@@ -24,6 +24,7 @@ export class ObjectsInteractionsFX
             GENERAL_SETTINGS                     : 'generalSettings',
             ACTOR_INVENTOR_SETTINGS              : 'actorInventor',
             DEFAULT_ATTACK_HOOK                  : 'defaultAttackHook',
+            DEFAULT_ITEM_HOOK                    : 'defaultItemHook',
             USE_ANIMATIONS                       : 'useAnimations',
             MELEE_ANIMATION_DELAY                : 'animationDelay',
             RANGED_ANIMATION_DELAY               : 'rangedAnimationDelay',
@@ -103,6 +104,11 @@ export class ObjectsInteractionsFX
     }
 
     static OPTIONAL_MODULES = {
+        MIDI_QOL: {
+            id: 'midi-qol',
+            name: 'MidiQOL',
+            active: false,
+        },
         LEVELS: {
             id: 'levels',
             name: 'Levels',

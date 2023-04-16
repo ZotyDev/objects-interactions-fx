@@ -60,7 +60,7 @@ export class TagHandler
             ////////////////////////////////////////////////////////////
             // Dispatch Melee Attack Tags
             ////////////////////////////////////////////////////////////
-            if (TagHandler.Tags.MeleeAttack[tag] != undefined)
+            if (TagHandler.Tags.MeleeAttack[tag] != undefined && options.type == 'attack')
             {
                 // Combine the options
                 let MergedOptions = 
@@ -87,7 +87,7 @@ export class TagHandler
             ////////////////////////////////////////////////////////////
             // Dispatch Ranged Attack Tags
             ////////////////////////////////////////////////////////////
-            else if (TagHandler.Tags.RangedAttack[tag] != undefined)
+            else if (TagHandler.Tags.RangedAttack[tag] != undefined && options.type == 'attack')
             {
                 // Combine the options
                 let MergedOptions =
@@ -114,7 +114,7 @@ export class TagHandler
             ////////////////////////////////////////////////////////////
             // Dispatch Lighting Tags
             ////////////////////////////////////////////////////////////
-            else if (TagHandler.Tags.Lighting[tag] != undefined)
+            else if (TagHandler.Tags.Lighting[tag] != undefined && options.type == 'item')
             {
                 // Combine the option
                 let MergedOptions =

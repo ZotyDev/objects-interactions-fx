@@ -1,8 +1,21 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.2
+
+- *Intern* - MidiQOL is no more required to make the module function, but it is highly recommended if you are using DnD5e!
+- *System Support* - Now DnD5e hooks can be used to trigger animations and interactions:
+  - `dnd5e.rollAttack` and `dnd5e.rollAttack` for weapon items.
+  - `dnd5e.useItem` for normal items.
+- *Interface* - Added a config to choose trigger hooks just for items.
+- *Fixed* - Fixed a bug that make it impossible to use thrown items - Thanks to Ikabodo for reporting it!
+
+--- 
+
 ### Version 1.0.1
 
 - *Fixed* - I forgot to include some things..
+
+---
 
 ### Version 1.0.0
 - *Fixed* - Animations will only play if the distance between author and target is inside the range.
@@ -37,8 +50,12 @@
 
 I apologize for not being able to provide some of the features that I mentioned that would be on this release, but they will be implemented as soon as possible!
 
+---
+
 ### Version 0.2.1
-- *Minor Fixes* - Some of the additions generated errors, and some features where wrongly implemented
+- *Minor Fixes* - Some of the additions generated errors, and some features where wrongly implemented.
+
+---
 
 ### Version 0.2
 - *Fixed #2* - Now the delay for throwable items should be correct.

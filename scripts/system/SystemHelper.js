@@ -13,6 +13,17 @@ export class SystemHelper
         }
     }
 
+    
+    static async GetOptionsFromWeaponRoll(workflow)
+    {
+        return SystemHelper._FindMethod('GetOptionsFromWeaponRoll', workflow);
+    }
+
+    static async GetOptionsFromItemRoll(workflow)
+    {
+        return SystemHelper._FindMethod('GetOptionsFromItemRoll', workflow);
+    }
+
     static async GetDefaultTagPack()
     {
         return SystemHelper._FindMethod('GetDefaultTagPack');

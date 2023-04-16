@@ -140,11 +140,35 @@
             },
             "DefaultAttackHook": {
                 "Title": "Default Attack Hook",
-                "Hint": "The hook used to trigger the effects",
+                "Hint": "Hook used to trigger attack effects",
                 "Options": {
-                    "AfterAttackRoll": "After JUST Attack Roll (MidiQOL)",
-                    "AfterDamageRoll": "After JUST Damage Roll (MidiQOL)",
-                    "AfterCompleteRoll": "After Complete Roll (MidiQOL)"
+                    "DND5EfterAttackRoll": {
+                        "Label": "After JUST Attack Roll (DnD5e)"
+                    },
+                    "DND5EfterDamageRoll": {
+                        "Label": "After JUST Damage Roll (DnD5e)"
+                    },
+                    "MIDIAfterAttackRoll": {
+                        "Label": "After JUST Attack Roll (MidiQOL)",
+                        "DisabledMessage": "- Requires MidiQOL"
+                    },
+                    "MIDIAfterDamageRoll": {
+                        "Label": "After JUST Damage Roll (MidiQOL)",
+                        "DisabledMessage": "- Requires MidiQOL"
+                    },
+                    "MIDIAfterCompleteRoll": {
+                        "Label": "After Complete Roll (MidiQOL)",
+                        "DisabledMessage": "- Requires MidiQOL"
+                    }
+                }
+            },
+            "DefaultItemHook": {
+                "Title": "Default Item Hook",
+                "Hint": "Hook used to trigger item effects",
+                "Options": {
+                    "DND5EAfterItemUse": {
+                        "Label": "After Item Use (DnD5e)"
+                    }
                 }
             },
             "MasterTagConfiguration": {

@@ -4,7 +4,7 @@
         <div class="oif-option-dropdown-container">
             <select name="{{name}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
                 {{#each choices}}
-                    <option value="{{value}}" {{#if selected}} selected {{/if}}> {{localize name}} </option>
+                    <option value="{{value}}" {{#if selected}} selected {{/if}} {{#if disabled}}disabled{{/if}}> {{localize name}} {{#if disabled}} {{localize disabledMessage}} {{/if}} </option>
                 {{/each}}
             </select>
         </div>

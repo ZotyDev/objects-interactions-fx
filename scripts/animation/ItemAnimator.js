@@ -98,7 +98,7 @@ export class ItemAnimator
         Hooks.call(OIF.HOOKS.WEAPON.MELEE.POST_PREPARE, options);
 
         // Check if item can be thrown at the current distance
-        if (options.throwable && options.distance >= options.minDistance + options.gridUnitSize)
+        if (options.throwable && options.distance >= options.meleeWeaponDistance + options.gridUnitSize)
         {
             // Check if the distance is below max distance
             if (options.distance <= options.maxDistance)
