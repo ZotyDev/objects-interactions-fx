@@ -92,16 +92,34 @@ Hooks.on("init", () =>
     };
 
     Hooks.on("ready", async () => {
-        Settings.Initialize();
+        await Settings.Initialize();
 
+        let test = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
         // Create the folders that are going to be used
         if (game.user.isGM)
         {
+            // Create the root folder if it doesn't exist
+            let Folders = await FilePicker.browse(OIF.FILES.ORIGIN, '.');
+            if (!Folders.dirs.includes(OIF.FILES.DATA_FOLDERS.ROOT))
+            {
+                console.warn("Root folder doesn't exist, creating it...");
+                await FilePicker.createDirectory(OIF.FILES.ORIGIN, OIF.FILES.DATA_FOLDERS.ROOT);
+            }
+
+            // Create the default tag packs file if it doesn't exist
+            Folders = await FilePicker.browse(OIF.FILES.ORIGIN, OIF.FILES.DATA_FOLDERS.ROOT);
+            if (!Folders.files.includes(`${OIF.FILES.DATA_FOLDERS.ROOT}/TagPacks.json`))
+            {
+                console.warn("TagPacks.json doesn't exist, creating it...");
+                let Data = {};
+                await ObjectsInteractionsFXData.SaveJSON(Data, 'TagPacks.json', OIF.FILES.DATA_FOLDERS.ROOT);
+            }
+
             // Load default packs
             await MasterTagsSettings.LoadTagPacksFromFolder(OIF.FILES.DATA_FOLDERS.DEFAULT_TAG_PACKS);
             await MasterTagsSettings.LoadUserPacks();
             let CurrentTagPack = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
-            if (MasterTagsSettings.PackHeaders[CurrentTagPack].disabled)
+            if (MasterTagsSettings.PackHeaders[CurrentTagPack]?.disabled)
             {
                 MasterTagsSettings.PackHeaders[CurrentTagPack].selected = false;
                 CurrentTagPack = "Empty";

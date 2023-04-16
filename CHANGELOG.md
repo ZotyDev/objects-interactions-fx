@@ -1,6 +1,10 @@
 # Automated Objects, Interactions and Effects Changelog
 
-### Version 1.0
+### Version 1.0.1
+
+- *Fixed* - I forgot to include some things..
+
+### Version 1.0.0
 - *Fixed* - Animations will only play if the distance between author and target is inside the range.
 - *Fixed #1* - Now you can disable the module's animations and use just the interactions and automations.
   - There is no easy way to get the position where the effects from other modules landed on hit, because of that, when OIF is not the one handling the animations, the Item Piles will be created at random positions.

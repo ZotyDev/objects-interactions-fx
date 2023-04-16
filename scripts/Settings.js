@@ -6,7 +6,7 @@ import { SettingsSkeleton } from "./library/skeletons/SettingsSkeleton.js";
 
 export class Settings
 {
-    static Initialize()
+    static async Initialize()
     {
         //////////////////////////////////////////////////
         // Register Master Tags menu
@@ -18,7 +18,7 @@ export class Settings
             type: MasterTagsSettings,
             restricted: true,
         });
-        MasterTagsSettings.Register();
+        await MasterTagsSettings.Register();
 
         //////////////////////////////////////////////////
         // Register General Settings menu

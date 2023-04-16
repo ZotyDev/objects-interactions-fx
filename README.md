@@ -66,7 +66,7 @@ Like my module? Consider supporting me :)
 </br>
 <p align="center">
     <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/maul_melee.gif" alt="Powerful impact">
-    <p align="center"><i> Powerful impacts shake the screen </i></p>
+    <p align="center"><i> <a href="https://github.com/ZotyDev/objects-interactions-fx/wiki/SpecialTags#powerful">Powerful impacts</a> shake the screen </i></p>
 </p>
 </br>
 <p align="center">

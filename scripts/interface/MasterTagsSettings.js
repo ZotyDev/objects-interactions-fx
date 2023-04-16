@@ -51,9 +51,11 @@ export class MasterTagsSettings extends FormApplication {
         game.settings.register(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, FoundrySettingOptions);
 
         // Assign the default tag pack
-        if (await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK) == '')
+        let Setting = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
+        if (Setting == '')
         {
-            game.settings.set(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, SystemHelper.GetDefaultTagPack());
+            await game.settings.set(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, await SystemHelper.GetDefaultTagPack());
+            Setting = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
         }
     }
 
