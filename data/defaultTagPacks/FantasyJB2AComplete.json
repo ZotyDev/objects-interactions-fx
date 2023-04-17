@@ -171,7 +171,8 @@
             "enabled": true,
             "meleeAnimation": {
                 "source": "jb2a.maul.melee.standard.white",
-                "delay": 1900
+                "delay": 1900,
+                "powerful": true
             }
         },
         "quarterstaff": {

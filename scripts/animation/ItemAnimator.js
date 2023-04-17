@@ -2,27 +2,12 @@ import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { ItemDropper} from "../library/ItemDropper.js";
 import { InventoryManipulator } from "../library/InventoryManipulator.js";
 import { GeneralSettings } from "../interface/GeneralSettings.js";
-import { SystemHelper } from "../system/SystemHelper.js";
 import { Helpers } from "../library/Helpers.js";
 import { TokenLightingManipulator } from "../library/TokenLightingManipulator.js";
+import { Debug as DBG } from "../library/Debug.js";
 
 export class ItemAnimator 
 {
-    static async PostAnimation(fn, ms)
-    {
-        if (!GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS))
-        {
-            fn();
-        }
-        else
-        {
-            setTimeout(()=> {
-                fn()
-            }, ms);
-        }
-    }
-
-
     static async GetLandedPosAnimated(options, sequenceIdentifier)
     {
         let [effect] = Sequencer.EffectManager.getEffects({ name: sequenceIdentifier });
@@ -52,7 +37,7 @@ export class ItemAnimator
     static ValidateAndPrepare(options)
     {
         // Check if there is no targets
-        if (options.targets == null || options.targets == undefined || options.targets.length == 0)
+        if (options.targets == undefined || options.targets.length == 0)
         {
             // Stop the workflow if there is no target
             options.stopWorkflow = true;
@@ -63,7 +48,7 @@ export class ItemAnimator
         options.target = options.targets[0];
 
         // Calculate de distance between author and target
-        options.distance = canvas.grid.measureDistance(options.author, options.target);
+        options.distance = canvas.grid.measureDistance(options.token, options.target);
 
         // Get grid unit size
         options.gridUnitSize = canvas.dimensions.distance;
@@ -86,22 +71,15 @@ export class ItemAnimator
         ////////////////////////////////////////////////////////////
         // Validate and prepare for the workflow
         options = ItemAnimator.ValidateAndPrepare(options);
-        
-        // System-side check distances
-        options = await SystemHelper.GetDistances(options);
-
-        // System-side check if item is throwable
-        options = await SystemHelper.CheckThrowable(options);
-
         if (options.stopWorkflow == true) { return; }
 
         Hooks.call(OIF.HOOKS.WEAPON.MELEE.POST_PREPARE, options);
 
         // Check if item can be thrown at the current distance
-        if (options.throwable && options.distance >= options.meleeWeaponDistance + options.gridUnitSize)
+        if (options.system.isThrowable && options.distance >= options.system.meleeWeaponDistance + options.gridUnitSize)
         {
             // Check if the distance is below max distance
-            if (options.distance <= options.maxDistance)
+            if (options.distance <= options.system.longDistance)
             {
                 ////////////////////////////////////////////////////////////
                 // Thrown Attack
@@ -112,11 +90,11 @@ export class ItemAnimator
                 if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS) && options.throwAnimation != undefined)
                 {
                     // Define throw sequence to be played
-                    let SequenceIdentifier = `${options.name}-throw-${options.author.document._id}`;
+                    let SequenceIdentifier = `${options.name}-throw-${options.token.document._id}`;
                     let SequenceEffect = new Sequence(OIF.ID)
                         .effect()
                             .file(options.throwAnimation.source)
-                            .atLocation(options.author)
+                            .atLocation(options.token)
                             .stretchTo(options.target)
                             .name(SequenceIdentifier)
                             .missed(options.miss ?? false)
@@ -195,7 +173,7 @@ export class ItemAnimator
                         if (RemoveThrowableItem && ShouldRemoveItem)
                         {
                             // Remove item from author inventory
-                            InventoryManipulator.RemoveItem(options.author, options.item, 1);
+                            InventoryManipulator.RemoveItem(options.token, options.item, 1);
                         }
         
                         DidInteract = true;
@@ -221,8 +199,8 @@ export class ItemAnimator
         }
         else
         {
-            // Check if the distance is below max distance
-            if (options.distance < options.meleeWeaponDistance + options.gridUnitSize)
+            // Check if the distance is within max distance
+            if (options.distance < options.system.meleeWeaponDistance + options.gridUnitSize)
             {
                 ////////////////////////////////////////////////////////////
                 // Melee Attack
@@ -231,11 +209,11 @@ export class ItemAnimator
                 if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS) && options.meleeAnimation != undefined)
                 {
                     // Define melee sequence to be played
-                    let SequenceIdentifier = `${options.name}-melee-${options.author.document._id}`;
+                    let SequenceIdentifier = `${options.name}-melee-${options.token.document._id}`;
                     let SequenceEffect = new Sequence(OIF.ID)
                         .effect()
                             .file(options.meleeAnimation.source)
-                            .atLocation(options.author)
+                            .atLocation(options.token)
                             .stretchTo(options.target)
                             .name(SequenceIdentifier)
                     
@@ -285,31 +263,21 @@ export class ItemAnimator
         ////////////////////////////////////////////////////////////
         // Validate and prepare for the workflow
         options = ItemAnimator.ValidateAndPrepare(options);
-
-        // System-side check distances
-        options = await SystemHelper.GetDistances(options);
-
-        // System-side check if it consumnes ammo
-        options = await SystemHelper.CheckConsumeAmmo(options);
-
-        // System-side check ammo
-        options = await SystemHelper.CheckAmmo(options);
-
         if (options.stopWorkflow == true) { return; }
 
         Hooks.call(OIF.HOOKS.WEAPON.RANGED.POST_PREPARE, options);
 
         // Check if the distance is below the maximum distance
-        if (options.distance <= options.maxDistance)
+        if (options.distance <= options.system.longDistance)
         {
             // Check if item has ammo property
-            if (options.consumeAmmo)
+            if (options.system.isConsumeAmmo)
             {
                 ////////////////////////////////////////////////////////////
                 // Ranged Ammo Attack
                 ////////////////////////////////////////////////////////////
                 // Check if item has ammo set
-                if (options.ammo == undefined)
+                if (options.system.ammoItem == undefined)
                 {
                     ui.notifications.error(game.i18n.localize('OIF.Attack.Ranged.Error.NoAmmo'));
                     console.error('Could not find the ammunition item!');
@@ -317,17 +285,17 @@ export class ItemAnimator
                 }
 
                 // Create a copy of the ammo item
-                options.ammoItem = await options.author.actor.getEmbeddedDocument('Item', options.ammo);
+                options.ammoItemCopy = await options.token.actor.getEmbeddedDocument('Item', options.system.ammoItem);
 
                 // Check if animation should be played
                 if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS) && options.rangedAnimation != undefined)
                 {
                     // Define ranged sequence to be played
-                    let SequenceIdentifier = `${options.name}-ranged-${options.author.document._id}`;
+                    let SequenceIdentifier = `${options.name}-ranged-${options.token.document._id}`;
                     let SequenceEffect = new Sequence(OIF.ID)
                         .effect()
                             .file(options.rangedAnimation.source)
-                            .atLocation(options.author)
+                            .atLocation(options.token)
                             .stretchTo(options.target)
                             .name(SequenceIdentifier)
                             .missed(options.miss ?? false)
@@ -378,7 +346,7 @@ export class ItemAnimator
                         else if (AddAmmunitionToTargetInventory)
                         {
                             // Add item to target's inventory
-                            InventoryManipulator.AddItem(options.target, options.ammoItem, 1);
+                            InventoryManipulator.AddItem(options.target, options.ammoItemCopy, 1);
                         }
                         else if (CreateItemPileOnHit)
                         {
@@ -391,7 +359,7 @@ export class ItemAnimator
                             }
         
                             // Drop item
-                            ItemDropper.DropAt(options.ammoItem, 1, ItemPilePosition, options.target.document.elevation);
+                            ItemDropper.DropAt(options.ammoItemCopy, 1, ItemPilePosition, options.target.document.elevation);
                         }
         
                         DidInteract = true;
@@ -419,11 +387,11 @@ export class ItemAnimator
                 if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS) && options.rangedAnimation != undefined)
                 {
                     // Define ranged sequence to be played
-                    let SequenceIdentifier = `${options.name}-ranged-${options.author.document._id}`;
+                    let SequenceIdentifier = `${options.name}-ranged-${options.token.document._id}`;
                     let SequenceEffect = new Sequence(OIF.ID)
                         .effect()
                             .file(options.rangedAnimation.source)
-                            .atLocation(options.author)
+                            .atLocation(options.token)
                             .stretchTo(options.target)
                             .name(SequenceIdentifier)
                             .missed(options.miss ?? false)

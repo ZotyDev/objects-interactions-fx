@@ -410,6 +410,8 @@ export class SettingsSkeleton extends FormApplication
                 }
             }
         }
+
+        Hooks.call(OIF.HOOKS.CHANGE_SETTINGS, SettingsSkeleton.Settings[config]);
     }
 
     ////////////////////////////////////////////////////////////

@@ -1,5 +1,18 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.3
+
+- *Fixed* - Lighting tags not working properly.
+- *Fixed* - Clear Lighting tooltip not working properly.
+- *Intern* - Removed Kandash'is Fluid Canvas optional requirement.
+- *Intern* - Restart after changing trigger hooks is no more required.
+- *Intern* - Added a Developer Mode, it should make the task of supporting other systems easier.
+- *Intern* - Way better workflow, now DnD5e _should_ not be haunted by bugs anymore.
+- *Interface* - Added a tooltip for the configurations.
+- *Tag Packs* - Readded `powerful` to maul.
+
+---
+
 ### Version 1.0.2
 
 - *Intern* - MidiQOL is no more required to make the module function, but it is highly recommended if you are using DnD5e!

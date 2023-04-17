@@ -9,7 +9,7 @@ export class TokenLightingManipulator
     
     static async SetDefaultLightingOptions(options)
     {
-        await options.author.document.update({
+        await options.token.document.update({
             "light.bright"             : 0,
             "light.dim"                : 0,
             "light.animation.type"     : undefined,
@@ -21,14 +21,14 @@ export class TokenLightingManipulator
             "light.angle"              : 360,
         });
 
-        await options.item.update({
+        await options.item?.update({
             "img": options?.icons?.unlit ?? options?.item?.img ?? undefined,
         });
     }
 
     static async SetLightingOptions(options)
     {
-        await options.author.document.update({ 
+        await options.token.document.update({ 
             "light.bright"             : options?.item?.system?.range?.value ?? 0,
             "light.dim"                : options?.item?.system?.range?.long  ?? 0,
             "light.animation.type"     : options?.light?.animationType       ?? undefined,
@@ -60,7 +60,7 @@ export class TokenLightingManipulator
     static async SetLighting(options)
     {
         // Check if light_source tag is already set
-        if (Tagger.hasTags(options.author, TokenLightingManipulator.LIGHT_SOURCE_ID))
+        if (Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID))
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.AlreadySource"));
             console.error("Failed to set token lighting based on item! Token is already a light source");
@@ -74,7 +74,7 @@ export class TokenLightingManipulator
             TokenLightingManipulator.SetLightingOptions(options);
 
             // Add the light source tag
-            await Tagger.addTags(options.author, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${OIF.ID}_${options.name}`]);
+            await Tagger.addTags(options.token, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${OIF.ID}_${options.name}`]);
 
             // Call hook
             Hooks.call(OIF.HOOKS.ITEM.LIGHTING.LIGHT.POS, options);
@@ -84,12 +84,12 @@ export class TokenLightingManipulator
     static async RemoveLighting(options)
     {
         // Check if light_source tag is not set
-        if (!Tagger.hasTags(options.author, TokenLightingManipulator.LIGHT_SOURCE_ID)) 
+        if (!Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID)) 
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.NotSource"));
             console.error("Failed to reset token lighting based on item! Token is not a light source");
         }
-        else if (!Tagger.hasTags(options.author, `${OIF.ID}_${options.name}`))
+        else if (!Tagger.hasTags(options.token, `${OIF.ID}_${options.name}`))
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.NotRightSource"));
             console.error("Failed to reset token lighting based on item! Specified item is not the one providing light");
@@ -103,7 +103,7 @@ export class TokenLightingManipulator
             TokenLightingManipulator.SetDefaultLightingOptions(options);
 
             // Remove the light source tag
-            await Tagger.removeTags(options.author, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${OIF.ID}_${options.name}`]);
+            await Tagger.removeTags(options.token, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${OIF.ID}_${options.name}`]);
 
             // Call hook
             Hooks.call(OIF.HOOKS.ITEM.LIGHTING.EXTINGUISH.POS, options);
@@ -117,7 +117,7 @@ export class TokenLightingManipulator
         if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.LIGHTING_ITEMS_AUTOMATION))
         {
             // Check if light_source tag is set
-            if (Tagger.hasTags(options.author, TokenLightingManipulator.LIGHT_SOURCE_ID))
+            if (Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID))
             {
                 // Remove if set
                 this.RemoveLighting({ ...options, lit: false});
@@ -140,7 +140,7 @@ export class TokenLightingManipulator
 
         for (let Token of Tokens)
         {
-            TokenLightingManipulator.SetDefaultLightingOptions({ author: await(canvas.tokens.get(Token._id)) });
+            await TokenLightingManipulator.SetDefaultLightingOptions({ token: await canvas.tokens.get(Token.id) });
 
             // Get the tags of the token
             let TokenTags = Tagger.getTags(Token);

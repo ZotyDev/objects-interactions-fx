@@ -33,9 +33,45 @@
             },
             "ClearLighting": {
                 "Title": "Clear Lighting"
+            },
+            "Configuration": {
+                "Title": "Configuration"
             }
         },
         "Settings": {
+            "AttachHooks": {
+                "Attack": {
+                    "DnD5eAfterAttackRoll": {
+                        "Label": "DnD5e After JUST Attack Roll"
+                    },
+                    "DnD5eAfterDamageRoll": {
+                        "Label": "DnD5e After JUST Damage Roll"
+                    },
+                    "MidiQOLAfterAttackRoll": {
+                        "Label": "MidiQOL After JUST Attack Roll",
+                        "DisabledMessage": "- Requires MidiQOL"
+                    },
+                    "MidiQOLAfterDamageRoll": {
+                        "Label": "MidiQOL After JUST Damage Roll",
+                        "DisabledMessage": "- Requires MidiQOL"
+                    },
+                    "MidiQOLAfterCompleteRoll": {
+                        "Label": "MidiQOL After Complete Roll",
+                        "DisabledMessage": "- Requires MidiQOL"
+                    },
+                    "Pf2eAfterAttackRoll": {
+                        "Label": "Pf2e After JUST Attack Roll"
+                    }
+                },
+                "Item": {
+                    "DnD5AfterItemRoll": {
+                        "Label": "DnD5e After Item Roll"
+                    },
+                    "Pf2eAfterItemRoll": {
+                        "Label": "Pf2e After Item Roll"
+                    }
+                }
+            },
             "MasterTagsSettings": {
                 "Title": "Master Tags Settings",
                 "Hint": "Edit Master Tags and the interactions related to them.",
@@ -373,6 +409,10 @@
             "LightingItemsAutomation": {
                 "Title": "Lighting Items Automation",
                 "Hint": "Whether or not lighting items should be automated with tags"
+            },
+            "DeveloperMode": {
+                "Title": "Developer Mode",
+                "Hint": "Logs useful information to the console !! THIS IS FOR DEVELOPERS ONLY !!" 
             },
             "CurrencyGenerator": {
                 "Title": "Currency Generator",

@@ -2,7 +2,7 @@
     "id": "objects-interactions-fx",
     "title": "✨ Automated Objects, Interactions and Effects 🔥",
     "description": "Animations. Automations. Interactions. Effects. And soon Objects too! Immerse your players on the game, let they experience the interactions and feel the combat!",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "authors": [
         {
         "name": "ZotyDev",
@@ -31,23 +31,23 @@
     "changelog": "https://github.com/ZotyDev/objects-interactions-fx/blob/main/CHANGELOG.md",
     "relationships": {
         "systems": [
-        {
-            "id": "dnd5e",
-            "type": "system",
-            "compatibility": {}
-        }
+            {
+                "id": "dnd5e",
+                "type": "system",
+                "compatibility": {}
+            }
         ],
         "requires": [
-        {
-            "id": "sequencer",
-            "type": "module",
-            "compatibility": {}
-        },
-        {
-            "id": "socketlib",
-            "type": "module",
-            "compatibility": {}
-        }
+            {
+                "id": "sequencer",
+                "type": "module",
+                "compatibility": {}
+            },
+            {
+                "id": "socketlib",
+                "type": "module",
+                "compatibility": {}
+            }
         ]
     },
     "socket": true,

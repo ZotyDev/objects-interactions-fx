@@ -20,6 +20,10 @@ export class ObjectsInteractionsFX
 
     static SETTINGS = {
         GENERAL: {
+            ATTACH_HOOKS: {
+                ATTACK: 'hookAttachAttack',
+                ITEM  : 'hookAttachItem',
+            },
             MASTER_TAGS_SETTINGS                 : 'masterTagsSettings',
             GENERAL_SETTINGS                     : 'generalSettings',
             ACTOR_INVENTOR_SETTINGS              : 'actorInventor',
@@ -40,6 +44,7 @@ export class ObjectsInteractionsFX
             POWERFUL_IMPACT_SHAKE_EFFECT         : 'powerfulImpactShakeEffect',
             SET_ELEVATION_OF_ITEM_PILES          : 'setElevationOfItemPiles',
             LIGHTING_ITEMS_AUTOMATION            : 'lightingItemsAutomation',
+            DEVELOPER_MODE                       : 'developerMode',
         },
 
         ACTOR_INVENTOR: {
@@ -65,6 +70,12 @@ export class ObjectsInteractionsFX
     }
 
     static HOOKS = {
+        CHANGE_SETTINGS: 'oif.ChangeSettings',
+        ATTACH_HOOKS : 'oif.attachHooks',
+        WORKFLOW: {
+            POST_PREPARE: 'oifWorkflowPostPrepare',
+            POST_EXECUTE: 'oifWorkflowPostExecute',
+        },
         ITEM: {
             LIGHTING: {
                 POST_PREPARE: 'oifItemLightingPostPrepare',
@@ -105,34 +116,45 @@ export class ObjectsInteractionsFX
 
     static OPTIONAL_MODULES = {
         MIDI_QOL: {
-            id: 'midi-qol',
-            name: 'MidiQOL',
+            id    : 'midi-qol',
+            name  : 'MidiQOL',
             active: false,
         },
         LEVELS: {
-            id: 'levels',
-            name: 'Levels',
-            active: false,
-        },
-        KFC: {
-            id: 'kandashis-fluid-canvas',
-            name: 'Kandashi\'s Fluid Canvas',
+            id    : 'levels',
+            name  : 'Levels',
             active: false,
         },
         ITEM_PILES: {
-            id: 'item-piles',
-            name: 'Item Piles',
+            id    : 'item-piles',
+            name  : 'Item Piles',
             active: false,
         },
         TAGGER: {
-            id: 'tagger',
-            name: 'Tagger',
+            id    : 'tagger',
+            name  : 'Tagger',
             active: false,
         },
         TIDY_SHEET: {
-            id: 'tidy5e-sheet',
-            name: 'Tidy5e Sheet',
+            id    : 'tidy5e-sheet',
+            name  : 'Tidy5e Sheet',
             active: false,
+        }
+    }
+
+    static WORKFLOW = {
+        DATA: {
+            TYPE: {
+                ACTION: {
+                    ATTACK: {
+                        MELEE : 'meleeAttack',
+                        RANGED: 'rangedAttack',
+                    },
+                    USE: {
+                        ITEM: 'useItem',
+                    }
+                }
+            }
         }
     }
 

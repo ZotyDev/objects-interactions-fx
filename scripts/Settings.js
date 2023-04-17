@@ -3,6 +3,7 @@ import { MasterTagsSettings } from "./interface/MasterTagsSettings.js";
 import { ActorInventorSettings } from "./interface/ActorInventorSettings.js";
 import { ObjectsInteractionsFX as OIF } from "./ObjectsInteractionsFX.js";
 import { SettingsSkeleton } from "./library/skeletons/SettingsSkeleton.js";
+import { SystemSupporter } from "./system/SystemSupporter.js";
 
 export class Settings
 {
@@ -31,55 +32,21 @@ export class Settings
             restricted: false,
         });
 
-        GeneralSettings.Register(OIF.SETTINGS.GENERAL.DEFAULT_ATTACK_HOOK, {
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK, {
             name: 'OIF.Settings.DefaultAttackHook.Title',
             hint: 'OIF.Settings.DefaultAttackHook.Hint',
             scope: 'world',
             type: 'dropdown',
-            default: 'dnd5e.rollAttack',
-            choices: [
-                {
-                    name: 'OIF.Settings.DefaultAttackHook.Options.DND5EfterAttackRoll.Label',
-                    value: 'dnd5e.rollAttack',
-                },
-                {
-                    name: 'OIF.Settings.DefaultAttackHook.Options.DND5EfterDamageRoll.Label',
-                    value: 'dnd5e.rollDamage',
-                },
-                {
-                    name: 'OIF.Settings.DefaultAttackHook.Options.MIDIAfterAttackRoll.Label',
-                    value: 'midi-qol.AttackRollComplete',
-                    disabled: !OIF.OPTIONAL_MODULES.MIDI_QOL.active,
-                    disabledMessage: 'OIF.Settings.DefaultAttackHook.Options.MIDIAfterAttackRoll.DisabledMessage',
-                },
-                {
-                    name: 'OIF.Settings.DefaultAttackHook.Options.MIDIAfterDamageRoll.Label',
-                    value: 'midi-qol.DamageRollComplete',
-                    disabled: !OIF.OPTIONAL_MODULES.MIDI_QOL.active,
-                    disabledMessage: 'OIF.Settings.DefaultAttackHook.Options.MIDIAfterDamageRoll.DisabledMessage',
-                },
-                {
-                    name: 'OIF.Settings.DefaultAttackHook.Options.MIDIAfterCompleteRoll.Label',
-                    value: 'midi-qol.RollComplete',
-                    disabled: !OIF.OPTIONAL_MODULES.MIDI_QOL.active,
-                    disabledMessage: 'OIF.Settings.DefaultAttackHook.Options.MIDIAfterCompleteRoll.DisabledMessage',
-                },
-            ],
-            restart: 'true',
+            default: SystemSupporter.GetDefaultHookAttack(),
+            choices: SystemSupporter.GetPossibleHooksAttack()
         });
-        GeneralSettings.Register(OIF.SETTINGS.GENERAL.DEFAULT_ITEM_HOOK, {
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM, {
             name: 'OIF.Settings.DefaultItemHook.Title',
             hint: 'OIF.Settings.DefaultItemHook.Hint',
             scope: 'world',
             type: 'dropdown',
-            default: 'dnd5e.useItem',
-            choices: [
-                {
-                    name: 'OIF.Settings.DefaultItemHook.Options.DND5EAfterItemUse.Label',
-                    value: 'dnd5e.useItem',
-                },
-            ],
-            restart: 'true',
+            default: SystemSupporter.GetDefaultHookItem(),
+            choices: SystemSupporter.GetPossibleHooksItem()
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.USE_ANIMATIONS, {
             name: 'OIF.Settings.UseAnimations.Title',
@@ -224,6 +191,13 @@ export class Settings
             requiredModule: OIF.OPTIONAL_MODULES.TAGGER,
             disabled: !OIF.OPTIONAL_MODULES.TAGGER.active,
             default: OIF.OPTIONAL_MODULES.TAGGER.active,
+        });
+        GeneralSettings.Register(OIF.SETTINGS.GENERAL.DEVELOPER_MODE, {
+            name: 'OIF.Settings.DeveloperMode.Title',
+            hint: 'OIF.Settings.DeveloperMode.Hint',
+            scope: 'world',
+            type: 'checkbox',
+            default: false,
         });
 
         //////////////////////////////////////////////////

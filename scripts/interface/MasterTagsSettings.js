@@ -1,7 +1,7 @@
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { ObjectsInteractionsFXData as OIFD } from '../data/ObjectsInteractionsFXData.js';
 import { MasterTagConfiguration } from "./MasterTagConfiguration.js";
-import { SystemHelper } from "../system/SystemHelper.js";
+import { SystemSupporter } from "../system/SystemSupporter.js";
 import { TagHandler } from "../tags/TagHandler.js";
 
 export class MasterTagsSettings extends FormApplication {
@@ -54,7 +54,7 @@ export class MasterTagsSettings extends FormApplication {
         let Setting = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
         if (Setting == '')
         {
-            await game.settings.set(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, await SystemHelper.GetDefaultTagPack());
+            await game.settings.set(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, await SystemSupporter.GetDefaultTagPack());
             Setting = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
         }
     }
