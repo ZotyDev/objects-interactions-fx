@@ -32,9 +32,16 @@ Like my module? Consider supporting me :)
 
 ---
 ## Supported Systems
-- [x] DnD5e
-- [ ] WoD 20th
+Since this module does some heavy automations systems must be manually supported, also note that some systems are not compatible with some of OIF's features, such as Pf2e not being compatible with the lighting tags (the system already does that). Please be patient, adding support for other systems is a slow task that requires a lot of testing to be sure nothing goes wrong.
+
+- [x] Dungeons and Dragons 5e
+- [ ] Pathfinder 2e (50%)
+- [ ] Pathfinder 1e 
+- [ ] Savage Worlds Adventure Edition
+- [ ] Powered by the Apocalypse
+- [ ] World of Darkness 20th
 - [ ] Old School Essentials
+- [ ] Tormenta20
 - Want a specific system to be supported? Make a [issue](https://github.com/ZotyDev/objects-interactions-fx/issues/new?assignees=ZotyDev&labels=system%2Ctriage&template=SYSTEM_SUPPORT.yml&title=%5BSYSTEM%5D%3A+) with the `System Support` template.
 
 ---
