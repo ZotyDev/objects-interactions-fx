@@ -50,5 +50,11 @@ export class ItemDropper
                 elevation: elevation ?? 0
             });
         }
+
+        // Add a tag to the ItemPile to indicate it was created by OIF
+        if (OIF.OPTIONAL_MODULES.TAGGER.active)
+        {
+            Tagger.addTags(ItemPileToken, [`${OIF.ID}-dropped-item-${item.id}`]);
+        }
     }
 }

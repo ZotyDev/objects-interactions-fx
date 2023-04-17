@@ -1,6 +1,6 @@
 # Automated Objects, Interactions and Effects Changelog
 
-### Version 1.0.3
+### Version 1.0.3 PRE-RELEASE
 
 - *Fixed* - Lighting tags not working properly.
 - *Fixed* - Clear Lighting tooltip not working properly.
@@ -10,6 +10,7 @@
 - *Intern* - Way better workflow, now DnD5e _should_ not be haunted by bugs anymore.
 - *Interface* - Added a tooltip for the configurations.
 - *Tag Packs* - Readded `powerful` to maul.
+- *Dynamic Interactions* - Dropped items now have a Tagger tag that indicates they have been created by OIF. The tag is `object-interacionts-efx-dropped-item-<id of the source item>` - Thanks to Ikabodo for suggesting it!
 
 ---
 
