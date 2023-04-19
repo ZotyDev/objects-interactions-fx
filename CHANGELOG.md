@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.5
+
+- *Fixed* - Dumb me included the wrong files.. Sorry everyone :c
+
 ### Version 1.0.4
 
 - *Fixed* - Only GMs were able to use tags, now every user can use tags.
