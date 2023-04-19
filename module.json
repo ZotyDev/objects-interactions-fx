@@ -2,7 +2,7 @@
     "id": "objects-interactions-fx",
     "title": "✨ Automated Objects, Interactions and Effects 🔥",
     "description": "Animations. Automations. Interactions. Effects. And soon Objects too! Immerse your players on the game, let they experience the interactions and feel the combat!",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "authors": [
         {
         "name": "ZotyDev",
@@ -55,6 +55,7 @@
         "scripts/Main.js",
         "scripts/automation/ActorInventor.js",
         "scripts/library/CanvasEffects.js",
+        "scripts/library/Socket.js",
         "scripts/library/HandlebarsHelpers.js"
     ],
     "styles": [

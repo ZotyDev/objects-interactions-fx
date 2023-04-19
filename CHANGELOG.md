@@ -1,6 +1,13 @@
 # Automated Objects, Interactions and Effects Changelog
 
-### Version 1.0.3 PRE-RELEASE
+### Version 1.0.4
+
+- *Fixed* - Only GMs were able to use tags, now every user can use tags.
+- *Fixed* - Master Tags were not being loaded at all for users, only for GMs, now tags are properly stored and updated when needed.
+
+Special thanks to **pretzelboi** for reaching out about these issues, thanks!
+
+### Version 1.0.3
 
 - *Fixed* - Lighting tags not working properly.
 - *Fixed* - Clear Lighting tooltip not working properly.

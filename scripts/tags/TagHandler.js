@@ -1,4 +1,5 @@
 import { ItemAnimator } from "../animation/ItemAnimator.js";
+import { Debug as DBG } from "../library/Debug.js";
 import { TokenLightingManipulator } from "../library/TokenLightingManipulator.js";
 
 export class TagHandler
@@ -20,6 +21,8 @@ export class TagHandler
                 default: break;
             }
         });
+
+        DBG.Log('Tags got updated', TagHandler.Tags);
     }
 
     ////////////////////////////////////////////////////////////
@@ -137,6 +140,10 @@ export class TagHandler
                 {
                     return true;
                 }
+            }
+            else
+            {
+                DBG.Log('Could not find tag', tag, 'on', TagHandler.Tags);
             }
 
             return true;

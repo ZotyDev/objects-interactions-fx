@@ -182,7 +182,7 @@ export class ItemAnimator
                     // Check if poweful impact effect should be played
                     if ((options.throwAnimation.powerful || options.tags.indexOf('powerful') > 0) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
-                        CanvasEffects.executeForEveryone('ScreenShake');
+                        OIF_SOCKET.executeForEveryone('ScreenShake');
                         DidInteract = true;
                     }
 
@@ -234,7 +234,7 @@ export class ItemAnimator
                     // Check if poweful impact effect should be played
                     if ((options.meleeAnimation.powerful || options.tags.indexOf('powerful') > 0) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
-                        CanvasEffects.executeForEveryone('ScreenShake');
+                        OIF_SOCKET.executeForEveryone('ScreenShake');
                         DidInteract = true;
                     }
     
@@ -368,7 +368,7 @@ export class ItemAnimator
                     // Check if poweful impact effect should be played
                     if ((options.rangedAnimation.powerful || options.tags.indexOf('powerful') > 0) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
-                        CanvasEffects.executeForEveryone('ScreenShake');
+                        OIF_SOCKET.executeForEveryone('ScreenShake');
                         DidInteract = true;
                     }
 

@@ -9,17 +9,8 @@
 ////////////////////////////////////////////////////////////
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 
-let Socket;
-
-Hooks.once('socketlib.ready', () => {
-    Hooks.once('oifReady', () => {
-        Socket = socketlib.registerModule(OIF.ID);
-        Socket.register('ScreenShake', CanvasEffects.ScreenShake);
-        window.CanvasEffects = Socket;
-    })
-});
-
-class CanvasLayer extends InteractionLayer {
+export class CanvasLayer extends InteractionLayer 
+{
     constructor()
     {
         super();
@@ -35,12 +26,8 @@ class CanvasLayer extends InteractionLayer {
 
     async _draw(options)
     {
-
     }
-}
 
-class CanvasEffects 
-{
     static ScreenShake()
     {
         let Intensity = 1;

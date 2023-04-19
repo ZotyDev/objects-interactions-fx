@@ -96,14 +96,6 @@ Hooks.on("init", () =>
         buttonArray.unshift(TagButton);
     })
 
-    window[OIF.FLAGS.OIF] = {
-        MeleeWeaponSingleAttack: ItemAnimator.MeleeWeaponSingleAttack,
-        RangedSingleAttack: ItemAnimator.RangedWeaponSingleAttack,
-        
-        LoadTagPackFromFile: MasterTagsSettings.LoadTagPackFromFile,
-        LoadTagPacksFromFolder: MasterTagsSettings.LoadTagPacksFromFolder,
-    };
-
     Hooks.on("ready", async () => {
         await SystemSupporter.Initialize();
         await Settings.Initialize();
@@ -129,99 +121,95 @@ Hooks.on("init", () =>
                 let Data = {};
                 await ObjectsInteractionsFXData.SaveJSON(Data, 'TagPacks.json', OIF.FILES.DATA_FOLDERS.ROOT);
             }
-
-            // Load default packs
-            await MasterTagsSettings.LoadTagPacksFromFolder(OIF.FILES.DATA_FOLDERS.DEFAULT_TAG_PACKS);
-            await MasterTagsSettings.LoadUserPacks();
-            let CurrentTagPack = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
-            if (MasterTagsSettings.PackHeaders[CurrentTagPack]?.disabled)
-            {
-                MasterTagsSettings.PackHeaders[CurrentTagPack].selected = false;
-                CurrentTagPack = "Empty";
-            }
-            await MasterTagsSettings.LoadTags(CurrentTagPack);
-
-            ////////////////////////////////////////////////////////////
-            // Hooks to attach
-            ////////////////////////////////////////////////////////////
-            let HooksToAttach = 
-            {
-                attack:
-                {
-                    hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK),
-                    id  : 0
-                },
-                item:
-                {
-                    hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM),
-                    id  : 0
-                }
-            }
-            Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, async (settings) => 
-            {
-                DBG.Log('Changing settings', settings);
-
-                // Update the hooks to attach
-                HooksToAttach.attack.hook = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK);
-                HooksToAttach.item.hook   = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM);
-                Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
-            });
-            Hooks.on(OIF.HOOKS.ATTACH_HOOKS, async () => 
-            {
-                DBG.Log('Attaching hooks', HooksToAttach);
-
-                if (HooksToAttach.attack.id != 0)
-                {
-                    Hooks.off(HooksToAttach.attack.hook, HooksToAttach.attack.id);
-                }
-                if (HooksToAttach.item.id != 0)
-                {
-                    Hooks.off(HooksToAttach.item.hook, HooksToAttach.item.id);
-                }
-
-                ////////////////////////////////////////////////////////////
-                // Attack Hook
-                ////////////////////////////////////////////////////////////
-                HooksToAttach.attack.id = Hooks.on(HooksToAttach.attack.hook, async (arg1, arg2, arg3) =>
-                {
-                    // Extract relevant information
-                    let Workflow = [arg1, arg2, arg3];
-                    let Options = await SystemSupporter.ExtractOptions(Workflow, 'attack', HooksToAttach.attack.hook);
-
-                    // Start the workflow
-                    Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, Options);
-                    DBG.Log('Post prepare hook called from attack hook', HooksToAttach.attack.hook,  Options);
-                });
-
-                ////////////////////////////////////////////////////////////
-                // Item Hook
-                ////////////////////////////////////////////////////////////
-                HooksToAttach.item.id = Hooks.on(HooksToAttach.item.hook, async (arg1, arg2, arg3) =>
-                {
-                    // Extract relevant information
-                    let Workflow = [arg1, arg2, arg3];
-                    let Options = await SystemSupporter.ExtractOptions(Workflow, 'item', HooksToAttach.item.hook);
-
-                    // Start the workflow
-                    Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, Options);
-                    DBG.Log('Post prepare hook called from item hook', HooksToAttach.item.hook, Options);
-                });
-            });
-
-            ////////////////////////////////////////////////////////////
-            // Main workflow
-            ////////////////////////////////////////////////////////////
-            Hooks.on(OIF.HOOKS.WORKFLOW.POST_PREPARE, async (options) =>
-            {
-                DBG.Log('Post prepare hook called', options);
-                // Check if there are tags to be used
-                if (options.tags.length > 0)
-                {
-                    // Send tags to the handler
-                    TagHandler.Dispatch(options);
-                }   
-            });
         }
+
+        DBG.Log('First breakpoint');
+
+        // Load default packs
+        await MasterTagsSettings.LoadFromConfig();
+
+        DBG.Log('Second breakpoint');
+
+        ////////////////////////////////////////////////////////////
+        // Hooks to attach
+        ////////////////////////////////////////////////////////////
+        let HooksToAttach = 
+        {
+            attack:
+            {
+                hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK),
+                id  : 0
+            },
+            item:
+            {
+                hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM),
+                id  : 0
+            }
+        }
+        Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, async (settings) => 
+        {
+            DBG.Log('Changing settings', settings);
+
+            // Update the hooks to attach
+            HooksToAttach.attack.hook = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK);
+            HooksToAttach.item.hook   = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM);
+            Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
+        });
+        Hooks.on(OIF.HOOKS.ATTACH_HOOKS, async () => 
+        {
+            DBG.Log('Attaching hooks', HooksToAttach);
+
+            if (HooksToAttach.attack.id != 0)
+            {
+                Hooks.off(HooksToAttach.attack.hook, HooksToAttach.attack.id);
+            }
+            if (HooksToAttach.item.id != 0)
+            {
+                Hooks.off(HooksToAttach.item.hook, HooksToAttach.item.id);
+            }
+
+            ////////////////////////////////////////////////////////////
+            // Attack Hook
+            ////////////////////////////////////////////////////////////
+            HooksToAttach.attack.id = Hooks.on(HooksToAttach.attack.hook, async (arg1, arg2, arg3) =>
+            {
+                // Extract relevant information
+                let Workflow = [arg1, arg2, arg3];
+                let Options = await SystemSupporter.ExtractOptions(Workflow, 'attack', HooksToAttach.attack.hook);
+
+                // Start the workflow
+                Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, Options);
+                DBG.Log('Post prepare hook called from attack hook', HooksToAttach.attack.hook,  Options);
+            });
+
+            ////////////////////////////////////////////////////////////
+            // Item Hook
+            ////////////////////////////////////////////////////////////
+            HooksToAttach.item.id = Hooks.on(HooksToAttach.item.hook, async (arg1, arg2, arg3) =>
+            {
+                // Extract relevant information
+                let Workflow = [arg1, arg2, arg3];
+                let Options = await SystemSupporter.ExtractOptions(Workflow, 'item', HooksToAttach.item.hook);
+
+                // Start the workflow
+                Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, Options);
+                DBG.Log('Post prepare hook called from item hook', HooksToAttach.item.hook, Options);
+            });
+        });
+
+        ////////////////////////////////////////////////////////////
+        // Main workflow
+        ////////////////////////////////////////////////////////////
+        Hooks.on(OIF.HOOKS.WORKFLOW.POST_PREPARE, async (options) =>
+        {
+            DBG.Log('Post prepare hook called', options);
+            // Check if there are tags to be used
+            if (options.tags.length > 0)
+            {
+                // Send tags to the handler
+                TagHandler.Dispatch(options);
+            }   
+        });
 
         Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
         Hooks.callAll("oifReady", game.modules.get(OIF.ID).api);

@@ -95,12 +95,6 @@ export class ObjectsInteractionsFXData
         await FilePicker.upload(OIF.FILES.ORIGIN, path, NewFile, {});
     }
 
-    static async FileExists(path)
-    {
-        let FileList = await FilePicker.browse(OIF.FILES.ORIGIN, path).then((result) => result.files);
-        return FileList.includes(path);
-    }
-
     static async GetUserMasterTags(pack)
     {
         let UserPacks = await ObjectsInteractionsFXData.LoadJSON(`${OIF.FILES.DATA_FOLDERS.ROOT}/TagPacks.json`);

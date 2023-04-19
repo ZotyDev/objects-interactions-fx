@@ -3,6 +3,7 @@ import { ObjectsInteractionsFXData as OIFD } from '../data/ObjectsInteractionsFX
 import { MasterTagConfiguration } from "./MasterTagConfiguration.js";
 import { SystemSupporter } from "../system/SystemSupporter.js";
 import { TagHandler } from "../tags/TagHandler.js";
+import { Debug as DBG } from "../library/Debug.js";
 
 export class MasterTagsSettings extends FormApplication {
     static get defaultOptions() {
@@ -140,18 +141,22 @@ export class MasterTagsSettings extends FormApplication {
     }
 
     ////////////////////////////////////////////////////////////
-    // Load all packs from a folder
+    // Load default tag packs
     ////////////////////////////////////////////////////////////
-    static async LoadTagPacksFromFolder(folder)
+    static async LoadDefaultTagPacks()
     {
-        let PackFolder = await FilePicker.browse(OIF.FILES.ORIGIN, folder);
+        const DefaultTagPacks = 
+        [
+            'Empty.json',
+            'FantasyJB2AComplete.json',
+            'FantasyJB2AFree.json',
+            'FantasyNoAnimations.json'
+        ];
 
-        // Iterate through all files in the folder
-        for (let index = 0; index < PackFolder.files.length; index++) 
+        DefaultTagPacks.forEach(async (path) => 
         {
-            const CurrentPackLocation = PackFolder.files[index];
-            await MasterTagsSettings.LoadTagPackFromFile(CurrentPackLocation);
-        }
+            await MasterTagsSettings.LoadTagPackFromFile(`modules/${OIF.ID}/data/defaultTagPacks/${path}`);
+        });
     }
 
     ////////////////////////////////////////////////////////////
@@ -247,6 +252,9 @@ export class MasterTagsSettings extends FormApplication {
 
         // Save the file
         await OIFD.SaveJSON(Data, 'TagPacks.json', OIF.FILES.DATA_FOLDERS.ROOT);
+
+        // Propagate changes
+        OIF_SOCKET.executeForOthers('LoadFromConfig');
     }
 
     ////////////////////////////////////////////////////////////
@@ -254,12 +262,6 @@ export class MasterTagsSettings extends FormApplication {
     ////////////////////////////////////////////////////////////
     static async LoadUserPacks()
     {
-        // Do we have a user pack file?
-        if (!await OIFD.FileExists(`${OIF.FILES.DATA_FOLDERS.ROOT}/TagPacks.json`))
-        {
-            return;
-        }
-
         // Load the file
         let Data = await OIFD.LoadJSON(`${OIF.FILES.DATA_FOLDERS.ROOT}/TagPacks.json`);
 
@@ -275,6 +277,30 @@ export class MasterTagsSettings extends FormApplication {
 
             MasterTagsSettings.PackHeaders[value.id] = PackHeader;
         }
+    }
+
+    ////////////////////////////////////////////////////////////
+    // Load everything
+    static async LoadFromConfig()
+    {
+        // Load default packs
+        await MasterTagsSettings.LoadDefaultTagPacks();
+        // Load user packs
+        await MasterTagsSettings.LoadUserPacks();
+        // Get the current tag pack
+        let CurrentTagPack = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
+        // Is the pack disabled?
+        if (MasterTagsSettings.PackHeaders[CurrentTagPack]?.disabled)
+        {
+            // Reset to default
+            MasterTagsSettings.PackHeaders[CurrentTagPack].selected = false;
+            CurrentTagPack = 'Emtpy';
+        }
+
+        // Load the tags
+        await MasterTagsSettings.LoadTags(CurrentTagPack);
+
+        DBG.Log('Loaded tags from config', MasterTagsSettings.Tags);
     }
 
     ////////////////////////////////////////////////////////////
@@ -336,6 +362,10 @@ export class MasterTagsSettings extends FormApplication {
             element.selected = element.id == ClickedElement.value ? true : false;
         });
         await MasterTagsSettings.LoadTags(ClickedElement.value);
+
+        // Propagate changes
+        OIF_SOCKET.executeForOthers('LoadFromConfig');
+
         this.render();
     }
 
