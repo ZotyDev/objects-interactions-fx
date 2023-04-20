@@ -165,6 +165,7 @@ export class MasterTagsSettings extends FormApplication {
     static async LoadTags(pack)
     {
         // Check if the pack exists
+        DBG.Log(MasterTagsSettings.PackHeaders);
         if (MasterTagsSettings.PackHeaders[pack] == undefined)
         {
             ui.notifications.error(game.i18n.localize('OIF.Settings.MasterTagsSettings.Load.Error.NotFound').replace('${pack}', pack));

@@ -39,6 +39,47 @@
             }
         },
         "Settings": {
+            "Animations": {
+                "Label": "Animations",
+                "Hint": "Animations that play on predefined triggers and interactions",
+                "Enabled": {
+                    "Label": "Enabled",
+                    "Hint": "Should Animations be used?"
+                }
+            },
+            "DynamicAttacks": {
+                "Label": "Dynamic Attacks",
+                "Hint": "Helpers that will modify the rolls and checks based on the circunstances",
+                "Enabled": {
+                    "Label": "Enabled",
+                    "Hint": "Should Dynamic Attacks be used?"
+                }
+            },
+            "InventoryAutomations": {
+                "Label": "Inventory Automations",
+                "Hint": "Automations that target the inventory, such as removing thrown items",
+                "Enabled": {
+                    "Label": "Enabled",
+                    "Hint": "Should Inventory Automations be used?"
+                }
+            },
+            "ItemPiles": {
+                "Label": "Item Piles (integration)",
+                "Hint": "Integration with the Item Piles module by FantasyCalendar",
+                "Enabled": {
+                    "Label": "Enabled",
+                    "Hint": "Should Item Piles be used?"
+                }
+            },
+            "DebugMode": {
+                "Label": "Debug Mode",
+                "Hint": "Logs useful information about what is happening inside the module",
+                "Enabled": {
+                    "Label": "Enabled",
+                    "Hint": "Activate Debug Mode?"
+                }
+            },
+
             "AttachHooks": {
                 "Attack": {
                     "DnD5eAfterAttackRoll": {
@@ -409,10 +450,6 @@
             "LightingItemsAutomation": {
                 "Title": "Lighting Items Automation",
                 "Hint": "Whether or not lighting items should be automated with tags"
-            },
-            "DeveloperMode": {
-                "Title": "Developer Mode",
-                "Hint": "Logs useful information to the console !! THIS IS FOR DEVELOPERS ONLY !!" 
             },
             "CurrencyGenerator": {
                 "Title": "Currency Generator",

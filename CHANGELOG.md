@@ -21,7 +21,7 @@ Special thanks to **pretzelboi** for reaching out about these issues, thanks!
 - *Intern* - Way better workflow, now DnD5e _should_ not be haunted by bugs anymore.
 - *Interface* - Added a tooltip for the configurations.
 - *Tag Packs* - Readded `powerful` to maul.
-- *Dynamic Interactions* - Dropped items now have a Tagger tag that indicates they have been created by OIF. The tag is `object-interacionts-efx-dropped-item-<id of the source item>` - Thanks to Ikabodo for suggesting it!
+- *Dynamic Interactions* - Dropped items now have a Tagger tag that indicates they have been created by OIF. The tag is `object-interacionts-fx-dropped-item-<id of the source item>` - Thanks to Ikabodo for suggesting it!
 
 ---
 

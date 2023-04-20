@@ -20,6 +20,60 @@ export class ObjectsInteractionsFX
 
     static SETTINGS = {
         GENERAL: {
+            ANIMATIONS:
+            {
+                ID: 'animations',
+                ENABLED: 'animations.enabled',
+                GLOBAL_DELAY:
+                {
+                    MELEE: 'animations.globalDelay.melee',
+                    THROW: 'animations.globalDelay.throw',
+                    RETURN: 'animations.globalDelay.return',
+                    RANGED: 'animations.globalDelay.ranged',
+                }
+            },
+            DYNAMIC_ATTACKS:
+            {
+                ID: 'dynamicAttacks',
+                ENABLED: 'dynamicAttacks.enabled',
+                MELEE_TO_THROWN: 'dynamicAttacks.meleeToThrown',
+            },
+            INVENTORY_AUTOMATIONS:
+            {
+                ID: 'inventoryAutomations',
+                ENABLED: 'inventoryAutomations.enabled',
+                AMMO:
+                {
+                    REMOVE: 'inventoryAutomations.ammo.remove',
+                    TRANSFER: 'inventoryAutomations.ammo.transfer'
+                },
+                THROWN:
+                {
+                    REMOVE: 'inventoryAutomations.thrown.remove',
+                    TRANSFER: 'inventoryAutomations.thrown.transfer'
+                }
+            },
+            ITEM_PILES:
+            {
+                ID: 'itemPiles',
+                ENABLED: 'itemPiles.enabled',
+                MINIFY_NAME: 'itemPiles.minifyName',
+                SNAP_TO_GRID: 'itemPiles.snapToGrid',
+                ON_MISS:
+                {
+                    ENABLED: 'itemPiles.onMiss.enabled'
+                },
+                ON_HIT:
+                {
+                    ENABLED: 'itemPiles.onHit.enabled'
+                }
+            },
+            DEBUG_MODE:
+            {
+                ID: 'debugMode',
+                ENABLED: 'debugMode.enabled',
+            },
+
             ATTACH_HOOKS: {
                 ATTACK: 'hookAttachAttack',
                 ITEM  : 'hookAttachItem',

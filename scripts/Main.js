@@ -64,7 +64,7 @@ Hooks.on("init", () =>
             title: game.i18n.localize('OIF.Tooltips.Configuration.Title'),
             icon: 'fas fa-gears',
             onClick: async () => {
-                new GeneralSettings().render(true);
+                new Wizard.ConfigurationSkeleton({ module: OIF.ID, title: 'oif-config' }).render(true);
             },
             button: true
         }
@@ -101,7 +101,366 @@ Hooks.on("init", () =>
         await Settings.Initialize();
         await DBG.Initialize();
 
+        let Options =
+        {
+            module: OIF.ID,
+            data: 
+            {
+                bugReportUrl: "https://github.com/ZotyDev/objects-interactions-fx/issues/new?assignees=ZotyDev&labels=bug%2Ctriage&template=BUG_REPORT.yml&title=%5BBUG%5D%3A+",
+                topics: 
+                [
+                    {
+                        label: 'Tags',
+                        id   : 'oif-tags',
+                        type : 'blocks',
+                        sections:
+                        [
+                            {
+                                label: 'Melee Attacks',
+                                id: 'melee-attacks',
+                            },
+                            {
+                                label: 'Ranged Attacks',
+                                id: 'ranged-attacks'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Settings',
+                        id   : 'oif-settings',
+                        type : 'blocks',
+                        sections: 
+                        [
+                            {
+                                label: 'General Settings',
+                                id: 'general-settings',
+                                settings:
+                                [
+                                    {
+                                        label: 'OIF.Settings.Animations.Label',
+                                        hint: 'OIF.Settings.Animations.Hint',
+                                        id: OIF.SETTINGS.GENERAL.ANIMATIONS.ID,
+                                        settings: 
+                                        [
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ANIMATIONS.ENABLED,
+                                                label: 'OIF.Settings.Animations.Enabled.Label',
+                                                hint: 'OIF.Settings.Animations.Enabled.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'client',
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ANIMATIONS.GLOBAL_DELAY.MELEE,
+                                                label: 'OIF.Settings.Animations.GlobalDelay.Melee.Label',
+                                                hint: 'OIF.Settings.Animations.GlobalDelay.Melee.Hint',
+                                                type: 'slider',
+                                                default: 0,
+                                                scope: 'client',
+                                                compatibility:
+                                                {
+                                                    requires: 
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ANIMATIONS.ENABLED,
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ANIMATIONS.GLOBAL_DELAY.THROW,
+                                                label: 'OIF.Settings.Animations.GlobalDelay.Throw.Label',
+                                                hint: 'OIF.Settings.Animations.GlobalDelay.Throw.Hint',
+                                                type: 'slider',
+                                                default: 0,
+                                                scope: 'client',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ANIMATIONS.ENABLED,
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ANIMATIONS.GLOBAL_DELAY.RETURN,
+                                                label: 'OIF.Settings.Animations.GlobalDelay.Return.Label',
+                                                hint: 'OIF.Settings.Animations.GlobalDelay.Return.Hint',
+                                                type: 'slider',
+                                                default: 0,
+                                                scope: 'client',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ANIMATIONS.ENABLED,
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ANIMATIONS.GLOBAL_DELAY.RANGED,
+                                                label: 'OIF.Settings.Animations.GlobalDelay.Ranged.Label',
+                                                hint: 'OIF.Settings.Animations.GlobalDelay.Ranged.Hint',
+                                                type: 'slider',
+                                                default: 0,
+                                                scope: 'client',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ANIMATIONS.ENABLED,
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        label: 'OIF.Settings.DynamicAttacks.Label',
+                                        hint: 'OIF.Settings.DynamicAttacks.Hint',
+                                        id: OIF.SETTINGS.GENERAL.DYNAMIC_ATTACKS.ID,
+                                        settings:
+                                        [
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.DYNAMIC_ATTACKS.ENABLED,
+                                                label: 'OIF.Settings.DynamicAttacks.Enabled.Label',
+                                                hint: 'OIF.Settings.DynamicAttacks.Enabled.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.DYNAMIC_ATTACKS.MELEE_TO_THROWN,
+                                                label: 'OIF.Settings.DynamicAttacks.MeleeToThrown.Label',
+                                                hint: 'OIF.Settings.DynamicAttacks.MeleeToThrown.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.DYNAMIC_ATTACKS.ENABLED,
+                                                    ],
+                                                }
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        label: 'OIF.Settings.InventoryAutomations.Label',
+                                        hint: 'OIF.Settings.InventoryAutomations.Hint',
+                                        id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ID,
+                                        settings: 
+                                        [
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED,
+                                                label: 'OIF.Settings.InventoryAutomations.Enabled.Label',
+                                                hint: 'OIF.Settings.InventoryAutomations.Enabled.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.AMMO.REMOVE,
+                                                label: 'OIF.Settings.InventoryAutomations.Ammo.Remove.Label',
+                                                hint: 'OIF.Settings.InventoryAutomations.Ammo.Remove.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED,
+                                                    ],
+                                                },
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.THROWN.REMOVE,
+                                                label: 'OIF.Settings.InventoryAutomations.Thrown.Remove.Label',
+                                                hint: 'OIF.Settings.InventoryAutomations.Thrown.Remove.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED,
+                                                    ],
+                                                },
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.AMMO.TRANSFER,
+                                                label: 'OIF.Settings.InventoryAutomations.Ammo.Transfer.Label',
+                                                hint: 'OIF.Settings.InventoryAutomations.Ammo.Transfer.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED,
+                                                        OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.AMMO.REMOVE
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.THROWN.TRANSFER,
+                                                label: 'OIF.Settings.InventoryAutomations.Thrown.Transfer.Label',
+                                                hint: 'OIF.Settings.InventoryAutomations.Thrown.Transfer.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED,
+                                                        OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.THROWN.REMOVE
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        label: 'OIF.Settings.ItemPiles.Label',
+                                        hint: 'OIF.Settings.ItemPiles.Hint',
+                                        id: OIF.SETTINGS.GENERAL.ITEM_PILES.ID,
+                                        settings:
+                                        [
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ITEM_PILES.ENABLED,
+                                                label: 'OIF.Settings.ItemPiles.Enabled.Label',
+                                                hint: 'OIF.Settings.ItemPiles.Enabled.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    dependsOn:
+                                                    [
+                                                        OIF.OPTIONAL_MODULES.ITEM_PILES.id,
+                                                    ]
+                                                },
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ITEM_PILES.MINIFY_NAME,
+                                                label: 'OIF.Settings.ItemPiles.MinifyName.Label',
+                                                hint: 'OIF.Settings.ItemPiles.MinifyName.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ITEM_PILES.ENABLED,
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ITEM_PILES.SNAP_TO_GRID,
+                                                label: 'OIF.Settings.ItemPiles.SnapToGrid.Label',
+                                                hint: 'OIF.Settings.ItemPiles.SnapToGrid.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ITEM_PILES.ENABLED,
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ITEM_PILES.ON_MISS.ENABLED,
+                                                label: 'OIF.Settings.ItemPiles.OnMiss.Label',
+                                                hint: 'OIF.Settings.ItemPiles.OnMiss.Hint',
+                                                type: 'checkbox',
+                                                default: true,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ITEM_PILES.ENABLED,
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.ITEM_PILES.ON_HIT.ENABLED,
+                                                label: 'OIF.Settings.ItemPiles.OnHit.Label',
+                                                hint: 'OIF.Settings.ItemPiles.OnHit.Hint',
+                                                type: 'checkbox',
+                                                default: false,
+                                                scope: 'world',
+                                                compatibility:
+                                                {
+                                                    requires:
+                                                    [
+                                                        OIF.SETTINGS.GENERAL.ITEM_PILES.ENABLED,
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    //{
+                                    //    label: 'OIF.Settings.DefaultThrowableDestructionChance.Label',
+                                    //    id: OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE,
+                                    //    type: 'slider',
+                                    //},
+                                    //{
+                                    //    label: 'OIF.Settings.DefaultAmmunitionDestructionChance.Label',
+                                    //    id: OIF.SETTINGS.GENERAL.DEFAULT_AMMUNITION_DESTRUCTION_CHANCE,
+                                    //    type: 'slider',
+                                    //},
+                                    //{
+                                    //    label: 'OIF.Settings.SetElevationOfItemPiles.Label',
+                                    //    id: OIF.SETTINGS.GENERAL.SET_ELEVATION_OF_ITEM_PILES,
+                                    //    type: 'checkbox'
+                                    //},
+                                    //{
+                                    //    label: 'OIF.Settings.PowerfulImpactShakeEffect.Title',
+                                    //    id: OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT,
+                                    //    type: 'checkbox'
+                                    //},
+                                    //{
+                                    //    label: 'OIF.Settings.LightingItemsAutomation.Label',
+                                    //    id: OIF.SETTINGS.GENERAL.LIGHTING_ITEMS_AUTOMATION,
+                                    //    type: 'checkbox',
+                                    //},
+                                    {
+                                        label: 'OIF.Settings.DebugMode.Label',
+                                        hint: 'OIF.Settings.DebugMode.Hint',
+                                        id: OIF.SETTINGS.GENERAL.DEBUG_MODE.ID,
+                                        settings:
+                                        [
+                                            {
+                                                id: OIF.SETTINGS.GENERAL.DEBUG_MODE.ENABLED,
+                                                label: 'OIF.Settings.DebugMode.Enabled.Label',
+                                                hint: 'OIF.Settings.DebugMode.Enabled.Hint',
+                                                type: 'checkbox',
+                                                default: false,
+                                                scope: 'client'
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                label: 'Actor Inventor',
+                                id: 'actor-inventor'
+                            }
+                        ]
+                    },
+                ]
+            }
+        }
+
+        Wizard.ConfigurationSkeleton.RegisterConfigurations(Options);
+
         let test = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
+
         // Create the folders that are going to be used
         if (game.user.isGM)
         {
@@ -123,12 +482,8 @@ Hooks.on("init", () =>
             }
         }
 
-        DBG.Log('First breakpoint');
-
         // Load default packs
         await MasterTagsSettings.LoadFromConfig();
-
-        DBG.Log('Second breakpoint');
 
         ////////////////////////////////////////////////////////////
         // Hooks to attach
