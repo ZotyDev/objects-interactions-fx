@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.6
+
+- *Fixed #15* - MidiQOL workflow now uses the right size function for detecting if a attack is hit/miss.
+
 ### Version 1.0.5
 
 - *Fixed* - Dumb me included the wrong files.. Sorry everyone :c
