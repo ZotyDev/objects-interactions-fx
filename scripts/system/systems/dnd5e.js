@@ -132,7 +132,7 @@ export class DnD5e
                 case 'attack':
                     {
                         // Did it miss?
-                        DidMiss = HitTargets.length === 0 ?? false;
+                        DidMiss = HitTargets.size === 0 ?? false;
 
                         break;
                     }
@@ -155,7 +155,7 @@ export class DnD5e
                 token     : Token,
                 targets   : Targets,
                 hitTargets: HitTargets,
-                miss      : HitTargets.length === 0 ?? false,
+                miss      : HitTargets.size === 0 ?? false,
                 type      : source,
                 dice      : 
                 {
