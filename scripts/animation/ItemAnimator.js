@@ -341,7 +341,7 @@ export class ItemAnimator
                             }
         
                             // Drop item
-                            ItemDropper.DropAt(options.ammoItem, 1, ItemPilePosition, options.target.document.elevation);
+                            ItemDropper.DropAt(options.ammoItemCopy, 1, ItemPilePosition, options.target.document.elevation);
                         }
                         else if (AddAmmunitionToTargetInventory)
                         {
