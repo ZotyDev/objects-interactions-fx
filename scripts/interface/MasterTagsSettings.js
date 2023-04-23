@@ -147,16 +147,16 @@ export class MasterTagsSettings extends FormApplication {
     {
         const DefaultTagPacks = 
         [
-            'Empty.json',
-            'FantasyJB2AComplete.json',
-            'FantasyJB2AFree.json',
-            'FantasyNoAnimations.json'
+            'Empty',
+            'FantasyJB2AComplete',
+            'FantasyJB2AFree',
+            'FantasyNoAnimations'
         ];
 
-        DefaultTagPacks.forEach(async (path) => 
+        for (const path of DefaultTagPacks) 
         {
-            await MasterTagsSettings.LoadTagPackFromFile(`modules/${OIF.ID}/data/defaultTagPacks/${path}`);
-        });
+            await MasterTagsSettings.LoadTagPackFromFile(`modules/${OIF.ID}/data/defaultTagPacks/${path}.json`);
+        }
     }
 
     ////////////////////////////////////////////////////////////

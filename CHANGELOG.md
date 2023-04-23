@@ -3,6 +3,7 @@
 ### Version 1.0.8
 
 - *Fixed* - Import not working.
+- *Fixed* - Tag Packs not being loaded sometimes because wrong usage of async methods.
 
 ### Version 1.0.7
 
