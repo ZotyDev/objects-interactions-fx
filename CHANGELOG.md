@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.8
+
+- *Fixed* - Import not working.
+
 ### Version 1.0.7
 
 - *Fixed #16* - Same problem.. The ItemDropper class was calling a method with wrong parameters. Hope everything related is fixed for good now. Thank you KellethDregar for reporting the bugs you've found while using OIF!

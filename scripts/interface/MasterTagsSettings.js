@@ -581,7 +581,7 @@ export class MasterTagsSettings extends FormApplication {
                 // Check if the pack already exists
                 let DuplicatedID = false;
                 let DuplicatedName = false;
-                let ShouldImport = false;
+                let ShouldImport = true;
                 if (MasterTagsSettings.PackHeaders[Data.id] != undefined)
                 {
                     DuplicatedID = true;   
