@@ -1,21 +1,34 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.1.0
+
+- *Intern* - Made the `Wizard` module a required dependency.
+- *Interface* - 
+
 ### Version 1.0.8
 
 - *Fixed* - Import not working.
 - *Fixed* - Tag Packs not being loaded sometimes because wrong usage of async methods.
 
+---
+
 ### Version 1.0.7
 
 - *Fixed #16* - Same problem.. The ItemDropper class was calling a method with wrong parameters. Hope everything related is fixed for good now. Thank you KellethDregar for reporting the bugs you've found while using OIF!
+
+---
 
 ### Version 1.0.6
 
 - *Fixed #15* - MidiQOL workflow now uses the right size function for detecting if a attack is hit/miss.
 
+---
+
 ### Version 1.0.5
 
 - *Fixed* - Dumb me included the wrong files.. Sorry everyone :c
+
+---
 
 ### Version 1.0.4
 
@@ -23,6 +36,8 @@
 - *Fixed* - Master Tags were not being loaded at all for users, only for GMs, now tags are properly stored and updated when needed.
 
 Special thanks to **pretzelboi** for reaching out about these issues, thanks!
+
+---
 
 ### Version 1.0.3
 

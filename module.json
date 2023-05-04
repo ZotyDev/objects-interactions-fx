@@ -39,12 +39,17 @@
         ],
         "requires": [
             {
-                "id": "sequencer",
+                "id": "socketlib",
                 "type": "module",
                 "compatibility": {}
             },
             {
-                "id": "socketlib",
+                "id": "wizard",
+                "type": "module",
+                "compatibility": {}
+            },
+            {
+                "id": "sequencer",
                 "type": "module",
                 "compatibility": {}
             }

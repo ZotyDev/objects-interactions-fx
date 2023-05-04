@@ -49,7 +49,7 @@ Since this module does some heavy automations systems must be manually supported
 | Name                    | Type     | Description                              |
 | ----------------------- | -------- | ---------------------------------------- |
 | Sequencer               | Required | Core functionality                       |
-| Midi-QOL                | Required | Makes DnD5e automation possible          |
+| Midi-QOL                | Optional | Adds more options to DnD5e interactions  |
 | Item Piles              | Optional | Used for creating Item Piles (drops)     |
 | Tagger                  | Optional | Lighting items need it to work properly  |
 | Tidy5e Sheet            | Optional | Provides currency for DnD5e NPCs         |

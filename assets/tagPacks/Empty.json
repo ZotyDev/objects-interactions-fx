@@ -1,0 +1,21 @@
+{
+    "header": {
+        "ID": "defaultEmpty",
+        "name": "Default: Empty",
+        "authors": [
+            "ZotyDev"
+        ],
+        "version": "1.0",
+        "versionOIF": "2.0.0"
+    },
+    "tags": {
+        "powerful": {
+            "type": "special",
+            "enabled": true
+        },
+        "generateCurrency": {
+            "type": "special",
+            "enabled": true
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "header": {
+        "ID": "defaultFantasyJB2AComplete",
+        "name": "Default: Fantasy (JB2A Complete)",
+        "authors": [
+            "ZotyDev"
+        ],
+        "version": "1.0",
+        "versionOIF": "2.0.0"
+    },
+    "tags": {
+        "powerful": {
+            "type": "special",
+            "enabled": true
+        },
+        "generateCurrency": {
+            "type": "special",
+            "enabled": true
+        },
+        "club": {
+            "enabled": true,
+            "nodes": [
+                {
+                    "type": "meleeAnimation",
+                    "source": "jb2a.club.melee.01.white"
+                }
+            ]
+        }
+    }
+}
