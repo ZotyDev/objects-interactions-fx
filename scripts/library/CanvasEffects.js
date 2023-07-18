@@ -14,7 +14,6 @@ export class CanvasLayer extends InteractionLayer
     constructor()
     {
         super();
-        this.loader = new PIXI.Loader();
 
         this.mouseInteractionManager = null;
 

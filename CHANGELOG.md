@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.9
+
+- *Fixed* - V11 compatibility.
+
 ### Version 1.0.8
 
 - *Fixed* - Import not working.
