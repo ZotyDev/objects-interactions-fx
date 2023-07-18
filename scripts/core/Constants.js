@@ -13,13 +13,14 @@
 export class Constants
 {
     // Basic information related to the module
-    static ID   = 'objects-interactions-fx';
-    static NAME = 'Automated Objects, Interactions and Effects';
+    static ID      = 'objects-interactions-fx';
+    static NAME    = 'Automated Objects, Interactions and Effects';
 
     // Flags used to store information
     static FLAGS = 
     {
-        OIF: 'OIF'
+        OIF: 'OIF',
+        ITEM_TAGS: 'item-tags',
     }
 
     // Default values
@@ -31,7 +32,11 @@ export class Constants
             'FantasyJB2AComplete',
             'FantasyJB2AFree',
             'FantasyNoAnimations'
-        ]
+        ],
+        PATH:
+        {
+            USER_TAG_PACKS: `oif/TagPacks.json`
+        }
     }
 
     // IDs that will be used to set/get settings

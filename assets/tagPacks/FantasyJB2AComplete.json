@@ -19,10 +19,16 @@
         },
         "club": {
             "enabled": true,
+            "autoRecognition":
+            {
+                "en": ["Club"]
+            },
             "nodes": [
                 {
-                    "type": "meleeAnimation",
-                    "source": "jb2a.club.melee.01.white"
+                    "type": "meleeAttackAnimation",
+                    "trigger": "attackRoll",
+                    "source": "jb2a.club.melee.01.white",
+                    "randomMirror": true
                 }
             ]
         }

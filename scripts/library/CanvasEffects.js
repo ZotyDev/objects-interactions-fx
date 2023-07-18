@@ -1,20 +1,25 @@
-////////////////////////////////////////////////////////////
-// The credits of this code goes to kandashi and ChueyB
-// I've just copied the sections that OIF uses, I actually
-// have no idea how it works or why it works, in the future
-// I will improve this section of OIF, but for now
-// this is good enough
-//
-// Thank you kandashi and ChueyB :D
-////////////////////////////////////////////////////////////
+//                          ███████    █████ ███████████                      //
+//                        ███░░░░░███ ░░███ ░░███░░░░░░█                      //
+//                       ███     ░░███ ░███  ░███   █ ░                       //
+//                      ░███      ░███ ░███  ░███████                         //
+//                      ░███      ░███ ░███  ░███░░░█                         //
+//                      ░░███     ███  ░███  ░███  ░                          //
+//                       ░░░███████░   █████ █████                            //
+//                         ░░░░░░░    ░░░░░ ░░░░░                             //
+//        Automated Objects, Interactions and Effects -  By ZotyDev           //
+////////////////////////////////////////////////////////////////////////////////
+//? This module provides effects that are played on the canvas such as making
+//? the screen shake.
+//! Credits to kandashi and ChueyB, they made this section of OIF possible
+//TODO provide these effects on a API to support integration with other modules
+////////////////////////////////////////////////////////////////////////////////
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 
 export class CanvasLayer extends InteractionLayer 
 {
-    constructor()
+    constructor(...args)
     {
-        super();
-        this.loader = new PIXI.Loader();
+        super(...args);
 
         this.mouseInteractionManager = null;
 
@@ -28,6 +33,10 @@ export class CanvasLayer extends InteractionLayer
     {
     }
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Shakes the canvas
+    //TODO make the Intensity, duration and iterations a argument
+    ////////////////////////////////////////////////////////////////////////////
     static ScreenShake()
     {
         let Intensity = 1;

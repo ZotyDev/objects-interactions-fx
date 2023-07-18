@@ -25,8 +25,8 @@ export class TagPackManager
     static async Initialize()
     {
         DBG.Log('Initializing Tag Pack Manager...');
-        
-        
+        await TagPackManager.LoadDefault();   
+        await TagPackManager.LoadUser();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ export class TagPackManager
     {
         DBG.Log(`TagPackManager.LoadFromFile: loading "${path}"`);
         let PackData = await DataHelper.LoadJSON(path);
-        if (PackData.result)
+        if (PackData.result && PackData.value != undefined)
         {
             let Data   = PackData.value;
             let Header = Data.header;
@@ -140,7 +140,7 @@ export class TagPackManager
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // Load default tag packs
+    // Load default Tag Packs
     ////////////////////////////////////////////////////////////////////////////
     static async LoadDefault()
     {
@@ -152,5 +152,96 @@ export class TagPackManager
                 DBG.Error(`TagPackManager.LoadDefault: failed to load default Tag Pack "${pack}"`);
             }
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Load user Tag Packs
+    ////////////////////////////////////////////////////////////////////////////
+    static async LoadUser()
+    {
+        // Load the file
+        let Result = await DataHelper.LoadJSON(C.DEFAULT.PATH.USER_TAG_PACKS);
+        if (Result.result && Result.value != undefined)
+        {
+            // Iterate through all packs
+            for (const pack of Object.entries(Result.value))
+            {
+                Result = await TagPackManager.LoadFromObject(pack);
+            }
+        }
+        else
+        {
+            // A error ocurred while loading the user Tag Packs
+            DBG.Error('TagPackManager.Select: could not load user Tag Packs');
+            return { result: false };
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Select a Tag Pack
+    ////////////////////////////////////////////////////////////////////////////
+    static async Select(pack)
+    {
+        DBG.Log(`TagPackManager.Select: selecting "${pack}"`);
+        // Check if the Tag Pack exists
+        if (TagPackManager.TagPacks[pack] == undefined)
+        {
+            DBG.Error(`TagPackManager.Select: could not find "${pack}"`);
+            ui.notifications.error(game.i18n.localize('OIF.TagPackManager.Select.Error.NotFound').replace('${pack}', pack));
+            pack = C.DEFAULT.TAG_PACKS[0];
+            await Wizard.Set(C.ID, C.SETTINGS.SELECTED.TAG_PACK, pack);
+        }
+
+        // Load the Tag Pack header
+        let Header = TagPackManager.TagPacks[pack];
+        let Tags   = {};
+
+        // Is it a default pack?
+        if (Header.location != undefined)
+        {
+            // Load the Tag Pack from the location described at the header
+            let Result = await DataHelper.LoadJSON(Header.location);
+            if (Result.result && Result.value != undefined)
+            {
+                DBG.Log(`TagPackManager.Select: selected "${Header.name}"`);
+                // Extract the Tags from the loaded data
+                Tags = Result.value.tags;
+            }
+            else
+            {
+                // A error ocurred while loading the Tag Pack
+                DBG.Error('TagPackManager.Select: could not load JSON at', Header.location);
+                return { result: false };
+            }
+        }
+        // It is not a default pack
+        else
+        {
+            // Load the file that contains the user Tag Packs
+            let Result = await DataHelper.LoadJSON(C.DEFAULT.PATH.USER_TAG_PACKS);
+            if (Result.result && Result.value != undefined)
+            {
+                DBG.Log(`TagPackManager.Select: selected "${Header.name}"`);
+                // Extract the selected Tag Pack
+                Tags = Result.value[pack].tags;
+            }
+            else
+            {
+                // A error ocurred while loading the user Tag Packs
+                DBG.Error('TagPackManager.Select: could not load user Tag Packs');
+                return { result: false };
+            }
+        }
+        
+        // Combine Header and Tags into a Tag Pack
+        let TagPack = 
+        {
+            header: Header,
+            tags  : Tags
+        }
+
+        // Make it the current Tag Pack
+        TagPackManager.CurrentTagPack[TagPack.header.ID] = TagPack;
+        return { result: true, value: TagPack };
     }
 }

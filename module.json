@@ -58,6 +58,7 @@
     "socket": true,
     "esmodules": [
         "scripts/Main.js",
+        "scripts/Sequencer.js",
         "scripts/automation/ActorInventor.js",
         "scripts/library/CanvasEffects.js",
         "scripts/library/Socket.js",

@@ -45,6 +45,24 @@
                 "Enabled": {
                     "Label": "Enabled",
                     "Hint": "Should Animations be used?"
+                },
+                "GlobalDelay": {
+                    "Melee": {
+                        "Label": "Global Melee Delay",
+                        "Hint": "The global delay that will be applied before melee animations"
+                    },
+                    "Throw": {
+                        "Label": "Global Throw Delay",
+                        "Hint": "The global delay that will be applied before throw animations"
+                    },
+                    "Return": {
+                        "Label": "Global Return Delay",
+                        "Hint": "The global delay that will be applied before return animations"
+                    },
+                    "Ranged": {
+                        "Label": "Global Ranged Delay",
+                        "Hint": "The global delay that will be applied before ranged animations"
+                    }
                 }
             },
             "DynamicAttacks": {
@@ -53,6 +71,10 @@
                 "Enabled": {
                     "Label": "Enabled",
                     "Hint": "Should Dynamic Attacks be used?"
+                },
+                "MeleeToThrown": {
+                    "Label": "Switch Melee/Thrown",
+                    "Hint": "Detect if a melee attack should be a throw attack instead (automatically calculates the values and make the changes)"
                 }
             },
             "InventoryAutomations": {
@@ -61,6 +83,26 @@
                 "Enabled": {
                     "Label": "Enabled",
                     "Hint": "Should Inventory Automations be used?"
+                },
+                "Ammo": {
+                    "Remove": {
+                        "Label": "Remove Ammo",
+                        "Hint": "Remove ammo from the inventory on use"
+                    },
+                    "Transfer": {
+                        "Label": "Transfer Ammo",
+                        "Hint": "Transfers ammo to the target's inventory on hit"
+                    }
+                },
+                "Thrown": {
+                    "Remove": {
+                        "Label": "Remove Thrown",
+                        "Hint": "Remove thrown items from the inventory on use"
+                    },
+                    "Transfer": {
+                        "Label": "Transfer Thrown",
+                        "Hint": "Transfer thrown items from the inventory on use"
+                    }
                 }
             },
             "ItemPiles": {
@@ -69,6 +111,22 @@
                 "Enabled": {
                     "Label": "Enabled",
                     "Hint": "Should Item Piles be used?"
+                },
+                "MinifyName": {
+                    "Label": "Minify Names",
+                    "Hint": "Replace the name of the item with a single special character"
+                },
+                "SnapToGrid": {
+                    "Label": "Snap to Grid",
+                    "Hint": "Snaps Item Piles created by OIF to the grid"
+                },
+                "OnMiss": {
+                    "Label": "Create Item Pile on Miss",
+                    "Hint": "When a projectile attack misses, a Item Pile is created with the ammo/thrown item on the ground"
+                },
+                "OnHit": {
+                    "Label": "Create Item Piles on Hit",
+                    "Hint": "When a projectile attack hits, a Item Pile is created with the ammo/thrown item on the ground"
                 }
             },
             "DebugMode": {

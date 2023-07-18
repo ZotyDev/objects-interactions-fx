@@ -1,9 +1,12 @@
 # Automated Objects, Interactions and Effects Changelog
 
-### Version 1.1.0
+### Version 2.0.0
 
+- *Intern* - Updated to FoundryVTT v11.
+- *Intern* - Removed the `SettingsSkeleton` and migrated it to a standalone module, `Wizard`.
 - *Intern* - Made the `Wizard` module a required dependency.
-- *Interface* - 
+- *Interface* - Complete rewrite.
+- 
 
 ### Version 1.0.8
 
