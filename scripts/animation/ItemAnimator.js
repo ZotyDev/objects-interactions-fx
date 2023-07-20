@@ -126,7 +126,7 @@ export class ItemAnimator
 
                     let DidInteract = false;
                     // Check if the item should or not break
-                    if(!Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE))
+                    if(!(Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE)))
                     {
                         let CreateItemPileOnMiss          = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS);
                         let CreateItemPileOnHit           = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT);
@@ -323,7 +323,7 @@ export class ItemAnimator
 
                     let DidInteract = false;
                     // Check if the item should or not break
-                    if (!Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_AMMUNITION_DESTRUCTION_CHANCE))
+                    if (!(Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_AMMUNITION_DESTRUCTION_CHANCE)))
                     {
                         let CreateItemPileOnMiss           = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_MISS);
                         let CreateItemPileOnHit            = GeneralSettings.Get(OIF.SETTINGS.GENERAL.CREATE_ITEM_PILES_ON_HIT);

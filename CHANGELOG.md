@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.10
+
+- *Fixed #18* - Destruction chance not working.
+
 ### Version 1.0.9
 
 - *Fixed* - V11 compatibility.

@@ -1,11 +1,11 @@
 export class Helpers
 {
-    static async RandomMax(max)
+    static RandomMax(max)
     {
         return Math.floor(Math.random() * max + 1);
     }
 
-    static async RandomMinMax(min, max)
+    static RandomMinMax(min, max)
     {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
