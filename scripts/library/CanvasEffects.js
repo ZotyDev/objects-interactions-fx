@@ -15,6 +15,11 @@ export class CanvasLayer extends InteractionLayer
     {
         super();
 
+        if (game.release.generation == 10)
+        {
+            this.loadar = new PIXI.Loader();
+        }
+
         this.mouseInteractionManager = null;
 
         this._interactiveChildren = false;
