@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.12
+
+- *Fixed* - Wrong versioning of the module.
+
 ### Version 1.0.11
 
 - *Backport* - As promised before, OIF now supports the 2 latest versions, in this case v10 and v11, sorry for taking so long... 
