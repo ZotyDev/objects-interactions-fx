@@ -323,6 +323,46 @@ Hooks.on("init", () =>
                                                 OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.THROWN.REMOVE
                                             ]
                                         }
+                                    },
+                                    {
+                                        id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.AMMO.DESTRUCTION_CHANCE,
+                                        label: 'OIF.Settings.InventoryAutomations.Ammo.DestructionChance.Label',
+                                        hint: 'OIF.Settings.InventoryAutomations.Ammo.DestructionChance.Hint',
+                                        type: 'slider',
+                                        default: 50,
+                                        range: 
+                                        {
+                                            min: 0,
+                                            max: 100
+                                        },
+                                        scope: 'world',
+                                        compatibility:
+                                        {
+                                            requires:
+                                            [
+                                                OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        id: OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.THROWN.DESTRUCTION_CHANCE,
+                                        label: 'OIF.Settings.InventoryAutomations.Thrown.DestructionChance.Label',
+                                        hint: 'OIF.Settings.InventoryAutomations.Thrown.DestructionChance.Hint',
+                                        type: 'slider',
+                                        default: 0,
+                                        range: 
+                                        {
+                                            min: 0,
+                                            max: 100
+                                        },
+                                        scope: 'world',
+                                        compatibility:
+                                        {
+                                            requires:
+                                            [
+                                                OIF.SETTINGS.GENERAL.INVENTORY_AUTOMATIONS.ENABLED
+                                            ]
+                                        }
                                     }
                                 ]
                             },

@@ -45,12 +45,14 @@ export class ObjectsInteractionsFX
                 AMMO:
                 {
                     REMOVE: 'inventoryAutomations.ammo.remove',
-                    TRANSFER: 'inventoryAutomations.ammo.transfer'
+                    TRANSFER: 'inventoryAutomations.ammo.transfer',
+                    DESTRUCTION_CHANCE: 'inventoryAutomations.ammo.destructionChance'
                 },
                 THROWN:
                 {
                     REMOVE: 'inventoryAutomations.thrown.remove',
-                    TRANSFER: 'inventoryAutomations.thrown.transfer'
+                    TRANSFER: 'inventoryAutomations.thrown.transfer',
+                    DESTRUCTION_CHANCE: 'inventoryAutomations.thrown.destructionChance'
                 }
             },
             ITEM_PILES:

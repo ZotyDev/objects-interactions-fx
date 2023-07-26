@@ -92,6 +92,10 @@
                     "Transfer": {
                         "Label": "Transfer Ammo",
                         "Hint": "Transfers ammo to the target's inventory on hit"
+                    },
+                    "DestructionChance": {
+                        "Label": "Ammo Destruction Chance",
+                        "Hint": "Percentage that defines the default chance of ammo being destructed on impact"
                     }
                 },
                 "Thrown": {
@@ -102,6 +106,10 @@
                     "Transfer": {
                         "Label": "Transfer Thrown",
                         "Hint": "Transfer thrown items from the inventory on use"
+                    },
+                    "DestructionChance": {
+                        "Label": "Thrown Destruction Chance",
+                        "Hint": "Percentage that defines the default chance of throwables being destructed on impact"
                     }
                 }
             },
