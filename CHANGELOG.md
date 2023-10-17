@@ -1,12 +1,16 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.13
+
+- *Fixed* - Actor Inventor is now managed by GM only.
+
 ### Version 1.0.12
 
 - *Fixed* - Wrong versioning of the module.
 
 ### Version 1.0.11
 
-- *Backport* - As promised before, OIF now supports the 2 latest versions, in this case v10 and v11, sorry for taking so long... 
+- *Backport* - As promised before, OIF now supports the 2 latest versions, in this case v10 and v11, sorry for taking so long...
 
 ### Version 1.0.10
 
@@ -64,7 +68,7 @@ Special thanks to **pretzelboi** for reaching out about these issues, thanks!
 - *Fixed* - A typo was making it impossible to use thrown items - Thanks to Ikabodo for reporting it!
 - *Fixed* - Thrown items were getting removed while not being created anywhere - Thanks to Ikabodo for reporting it!
 
---- 
+---
 
 ### Version 1.0.1
 
@@ -142,7 +146,7 @@ I apologize for not being able to provide some of the features that I mentioned 
 - *Dynamic Interactions* - Lighting tags apply effects based on item range (normal range is bright light and long range is dim light)
 - *Dynamic Interactions* - Item throwing is now smarter, no longer based on the metric system, alongside being much more compatible with all dimensions of canvas, see the **[Wiki](https://github.com/ZotyDev/objects-interactions-fx/wiki/Throwable-Items)** to see how to setup throwable items
 - *API* - Added hooks that get called before and after a item animation, providing a reference to the options used.
-  
+
 ---
 
 ### Version 0.1
