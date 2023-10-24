@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.0.14
+
+- *Fixed #29* - Fixed a bug where the module tried to access possible undefined properties when MidiQOL is active.
+
 ### Version 1.0.13
 
 - *Fixed* - Actor Inventor is now managed by GM only.

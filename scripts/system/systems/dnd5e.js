@@ -29,7 +29,7 @@ export class DnD5e
             return 'DefaultFantasyTagsNoAnimations';
         }
     }
-    
+
     ////////////////////////////////////////////////////////////
     // Return all the hooks that can be used to get attack info
     ////////////////////////////////////////////////////////////
@@ -93,8 +93,8 @@ export class DnD5e
     ////////////////////////////////////////////////////////////
     // Function that is called when a hook is triggered, note
     // that this function is called for every hook, so it is
-    // important make sure the data we are extracting is the
-    // one we want 
+    // important to make sure the data we are extracting is the
+    // one we want
     //
     // (for example, if we are using MidiQOL, we only want to
     // extract data from the MidiQOL hooks)
@@ -157,7 +157,7 @@ export class DnD5e
                 hitTargets: HitTargets,
                 miss      : HitTargets.size === 0 ?? false,
                 type      : source,
-                dice      : 
+                dice      :
                 {
                     roll    : workflow[0].roll,
                     total   : workflow[0].attackTotal,
@@ -170,14 +170,14 @@ export class DnD5e
                     meleeWeaponDistance: canvas.dimensions.distance,
                     normalDistance     : Item.system.range.value,
                     longDistance       : Item.system.range.long,
-                    isThrowable        : Item.system.properties.thr,
-                    isConsumeAmmo      : Item.system.properties.amm,
-                    ammoItem           : Item.system.consume.target,
+                    isThrowable        : Item.system.properties?.thr,
+                    isConsumeAmmo      : Item.system.properties?.amm,
+                    ammoItem           : Item.system.consume?.target,
                 },
             }
 
             // Recalculate melee weapon distance if the item has the reach tag
-            if (Item.system.properties.rch) { Options.system.meleeWeaponDistance *= 2; }
+            if (Item.system.properties?.rch) { Options.system.meleeWeaponDistance *= 2; }
 
             return Options;
         }
@@ -238,7 +238,7 @@ export class DnD5e
                 hitTargets: HitTargets,
                 miss      : DidMiss,
                 type      : source,
-                dice      : 
+                dice      :
                 {
                     roll    : RollTotal,
                     total   : workflow[1]?._total,
