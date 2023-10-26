@@ -36,6 +36,11 @@
                 "id": "dnd5e",
                 "type": "system",
                 "compatibility": {}
+            },
+            {
+                "id": "pf2e",
+                "type": "system",
+                "compatibility": {}
             }
         ],
         "requires": [

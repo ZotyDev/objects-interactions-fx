@@ -66,7 +66,7 @@ export class MasterTagsSettings extends FormApplication {
     static async LoadTagPackFromObject(data)
     {
         // Build the header for the pack
-        let PackHeader = 
+        let PackHeader =
         {
             id      : data.id,
             name    : data.name,
@@ -106,7 +106,7 @@ export class MasterTagsSettings extends FormApplication {
     {
         // Build the header for the pack
         let PackData = await OIFD.LoadJSON(file);
-        let PackHeader = 
+        let PackHeader =
         {
             location: file,
             id      : PackData.id,
@@ -145,7 +145,7 @@ export class MasterTagsSettings extends FormApplication {
     ////////////////////////////////////////////////////////////
     static async LoadDefaultTagPacks()
     {
-        const DefaultTagPacks = 
+        const DefaultTagPacks =
         [
             'Empty',
             'FantasyJB2AComplete',
@@ -153,7 +153,7 @@ export class MasterTagsSettings extends FormApplication {
             'FantasyNoAnimations'
         ];
 
-        for (const path of DefaultTagPacks) 
+        for (const path of DefaultTagPacks)
         {
             await MasterTagsSettings.LoadTagPackFromFile(`modules/${OIF.ID}/data/defaultTagPacks/${path}.json`);
         }
@@ -236,7 +236,7 @@ export class MasterTagsSettings extends FormApplication {
         // Insert the current pack data if it is not a default pack
         if (!MasterTagsSettings.CurrentPackHeader.default)
         {
-            let CurrentPackData = 
+            let CurrentPackData =
             {
                 ...MasterTagsSettings.CurrentPackHeader,
                 tags: MasterTagsSettings.Tags
@@ -357,7 +357,7 @@ export class MasterTagsSettings extends FormApplication {
     async _handlePackSelection(event)
     {
         let ClickedElement = $(event.currentTarget)[0];
-        Object.values(MasterTagsSettings.PackHeaders).forEach((element) => 
+        Object.values(MasterTagsSettings.PackHeaders).forEach((element) =>
         {
             element.selected = element.id == ClickedElement.value ? true : false;
         });
@@ -401,8 +401,8 @@ export class MasterTagsSettings extends FormApplication {
             if (MasterTagsSettings.Tags[CurrentTag] == undefined || MasterTagsSettings.Tags[CurrentTag] == null)
             {
                 MasterTagsSettings.Tags[CurrentTag] = {
-                     enabled: false,
-                     masterDeco: true
+                        enabled: false,
+                        masterDeco: true
                     };
                 MasterTagsSettings.ResultTags = await MasterTagsSettings._filterTags();
                 TagHandler.UpdateTags(MasterTagsSettings.Tags);
@@ -425,8 +425,8 @@ export class MasterTagsSettings extends FormApplication {
         let CurrentTagName = event.target.parentElement.parentElement.id;
         let CurrentTag = MasterTagsSettings.Tags[CurrentTagName];
         let ConfigurationInterface = new MasterTagConfiguration;
-        ConfigurationInterface.render(true, 
-            { 
+        ConfigurationInterface.render(true,
+            {
                 configurationData: CurrentTag,
                 caller: this,
                 dataNameAtSingleton: CurrentTagName
@@ -443,11 +443,11 @@ export class MasterTagsSettings extends FormApplication {
         let ConfirmDialog = Dialog.confirm({
             title: game.i18n.localize('OIF.Settings.MasterTagsSettings.Deletion.Title').replace('${tag}', CurrentTag),
             content: `<p style="color:red">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Deletion.Description')}</p`,
-            no: async () => 
+            no: async () =>
             {
                 this.render();
             },
-            yes: async () => 
+            yes: async () =>
             {
                 delete MasterTagsSettings.Tags[CurrentTag];
                 MasterTagsSettings.ResultTags = await MasterTagsSettings._filterTags();
@@ -467,11 +467,11 @@ export class MasterTagsSettings extends FormApplication {
         let ConfirmDialog = Dialog.confirm({
             title: game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Delete.Title').replace('${pack}', MasterTagsSettings.CurrentPackHeader.name),
             content: `<p style="color:red">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Delete.Description')}</p`,
-            no: async () => 
+            no: async () =>
             {
                 this.render();
             },
-            yes: async () => 
+            yes: async () =>
             {
                 delete MasterTagsSettings.PackHeaders[MasterTagsSettings.CurrentPackHeader.id];
                 await MasterTagsSettings.LoadTags("Empty");
@@ -490,9 +490,9 @@ export class MasterTagsSettings extends FormApplication {
         let NewPackDialog = new Dialog({
             title: game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Rename.Title'),
             content: `
-                    <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Rename.Id')}</label> 
+                    <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Rename.Id')}</label>
                     <input type="text" id="oif-pack-new-id" name="oif-pack-new-id" value="${MasterTagsSettings.CurrentPackHeader.id}">
-                    <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Rename.Name')}</label> 
+                    <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Rename.Name')}</label>
                     <input type="text" id="oif-pack-new-name" name="oif-pack-new-name" value="${MasterTagsSettings.CurrentPackHeader.name}">
                     `,
             buttons: {
@@ -534,7 +534,7 @@ export class MasterTagsSettings extends FormApplication {
                             {
                                 // Rename the pack
                                 this.render();
-                            } 
+                            }
                         }
                     }
                 }
@@ -548,7 +548,7 @@ export class MasterTagsSettings extends FormApplication {
     ////////////////////////////////////////////////////////////
     async _handleTagPackExport(event)
     {
-        let CurrentPackData = 
+        let CurrentPackData =
         {
             ...MasterTagsSettings.CurrentPackHeader,
             tags: MasterTagsSettings.Tags
@@ -569,11 +569,11 @@ export class MasterTagsSettings extends FormApplication {
         const inputElement = document.createElement('input');
         inputElement.type = 'file';
         // Listen for the file to be selected
-        inputElement.addEventListener('change', async (event) => 
+        inputElement.addEventListener('change', async (event) =>
         {
             // Read the file
             const selectedFile = event.target.files[0];
-            readTextFromFile(selectedFile).then(async (json) => 
+            readTextFromFile(selectedFile).then(async (json) =>
             {
                 // Insert the file header into the pack headers
                 let Data = JSON.parse(json);
@@ -584,7 +584,7 @@ export class MasterTagsSettings extends FormApplication {
                 let ShouldImport = true;
                 if (MasterTagsSettings.PackHeaders[Data.id] != undefined)
                 {
-                    DuplicatedID = true;   
+                    DuplicatedID = true;
                 }
 
                 // Check if there is a pack with the same name
@@ -603,11 +603,11 @@ export class MasterTagsSettings extends FormApplication {
                     let ConfirmDialog = await Dialog.confirm({
                         title: game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Import.Duplicated.Title'),
                         content: `<p style="color:red">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Pack.Import.Duplicated.Description').replace('${pack}', Data.name)}</p`,
-                        no: () => 
+                        no: () =>
                         {
                             ShouldImport = false;
                         },
-                        yes: () => 
+                        yes: () =>
                         {
                             ShouldImport = true;
                         },
@@ -635,7 +635,7 @@ export class MasterTagsSettings extends FormApplication {
                     // Unselects the current pack
                     MasterTagsSettings.CurrentPackHeader.selected = undefined;
                     MasterTagsSettings.PackHeaders[MasterTagsSettings.CurrentPackHeader.id].selected = undefined;
-                    
+
                     // Set the imported pack as the current pack
                     MasterTagsSettings.CurrentPackHeader = MasterTagsSettings.PackHeaders[Data.id];
                     MasterTagsSettings.CurrentPackHeader.selected = true;
@@ -665,9 +665,9 @@ export class MasterTagsSettings extends FormApplication {
             title: game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Title'),
             content: `
                     <br>
-                    <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Id')}</label> 
+                    <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Id')}</label>
                     <input type="text" id="oif-pack-new-id" name="oif-pack-new-id">
-                    <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Name')}</label> 
+                    <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Name')}</label>
                     <input type="text" id="oif-pack-new-name" name="oif-pack-new-name">
                     `,
             buttons: {
@@ -710,7 +710,7 @@ export class MasterTagsSettings extends FormApplication {
                                 await this._createNewPack(NewPackID, NewPackName, MasterTagsSettings.Tags);
                                 await MasterTagsSettings.SaveUserPacks();
                                 this.render();
-                            } 
+                            }
                         }
                     }
                 }
@@ -725,10 +725,10 @@ export class MasterTagsSettings extends FormApplication {
         let NewPackDialog = new Dialog({
             title: game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Title'),
             content: `
-                    <p>${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Description')}</p> 
-                    <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Id')}</label> 
+                    <p>${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Description')}</p>
+                    <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Id')}</label>
                     <input type="text" id="oif-pack-new-id" name="oif-pack-new-id">
-                    <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Name')}</label> 
+                    <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPack.Name')}</label>
                     <input type="text" id="oif-pack-new-name" name="oif-pack-new-name">
                     <br>
                     `,
@@ -773,7 +773,7 @@ export class MasterTagsSettings extends FormApplication {
                                 await this._createNewPack(NewPackID, NewPackName, MasterTagsSettings.Tags);
                                 await MasterTagsSettings.SaveUserPacks();
                                 this.render();
-                            } 
+                            }
                         }
                     }
                 }
@@ -788,11 +788,11 @@ export class MasterTagsSettings extends FormApplication {
         let ConfirmDialog = Dialog.confirm({
             title: game.i18n.localize('OIF.Settings.MasterTagsSettings.Discard.Title'),
             content: `<p style="color:red">${game.i18n.localize('OIF.Settings.MasterTagsSettings.Discard.Description')}</p`,
-            no: async () => 
+            no: async () =>
             {
                 this.render();
             },
-            yes: async () => 
+            yes: async () =>
             {
                 await MasterTagsSettings.LoadTags(MasterTagsSettings.CurrentPackHeader.id);
                 this.render();
@@ -807,17 +807,17 @@ export class MasterTagsSettings extends FormApplication {
         {
             return;
         }
-        
+
         if (MasterTagsSettings.CurrentPackHeader.default)
         {
             let NewPackDialog = new Dialog({
                 title: game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Title'),
                 content: `
-                        <p>${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Description')}</p> 
+                        <p>${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Description')}</p>
                         <br>
-                        <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Id')}</label> 
+                        <label for="oif-pack-new-id">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Id')}</label>
                         <input type="text" id="oif-pack-new-id" name="oif-pack-new-id">
-                        <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Name')}</label> 
+                        <label for="oif-pack-new-name">${game.i18n.localize('OIF.Settings.MasterTagsSettings.NewPackCopy.Name')}</label>
                         <input type="text" id="oif-pack-new-name" name="oif-pack-new-name">
                         <br>
                         `,
@@ -861,7 +861,7 @@ export class MasterTagsSettings extends FormApplication {
                                     await this._createNewPack(NewPackID, NewPackName, MasterTagsSettings.Tags);
                                     await MasterTagsSettings.SaveUserPacks();
                                     this.render();
-                                } 
+                                }
                             }
                         }
                     }
@@ -877,7 +877,7 @@ export class MasterTagsSettings extends FormApplication {
         }
     }
 
-    activateListeners(html) 
+    activateListeners(html)
     {
         super.activateListeners(html);
 
@@ -923,7 +923,7 @@ export class MasterTagsSettings extends FormApplication {
         }
     }
 
-    async _updateObject(event, formData) 
+    async _updateObject(event, formData)
     {
     }
 }
