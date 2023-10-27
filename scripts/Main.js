@@ -1,7 +1,5 @@
-import { ItemAnimator } from "./animation/ItemAnimator.js";
 import { ObjectsInteractionsFX as OIF } from "./ObjectsInteractionsFX.js";
 import { Settings } from "./Settings.js";
-import { ItemTags } from "./interface/ItemTags.js";
 import { SystemSupporter } from "./system/SystemSupporter.js";
 import { MasterTagsSettings } from "./interface/MasterTagsSettings.js";
 import { GeneralSettings } from "./interface/GeneralSettings.js";
@@ -21,19 +19,6 @@ Hooks.on("init", () =>
     `);
 
     OIF.Initialize();
-
-    Hooks.on("getItemSheetHeaderButtons", async (itemSheet, buttonArray) => {
-        let TagButton = {
-            label: "Tags",
-            class: "item-tags",
-            icon: "fas fa-tags",
-            onclick: async () => {
-                new ItemTags().render(true, { item: itemSheet.object, width: 480 })
-            }
-        }
-
-        buttonArray.unshift(TagButton);
-    });
 
     Hooks.on('getSceneControlButtons', (controls) => {
         if (!canvas.scene) return;
@@ -58,7 +43,7 @@ Hooks.on("init", () =>
             button: true
         }
 
-        const Configuration = 
+        const Configuration =
         {
             name: 'configuration',
             title: game.i18n.localize('OIF.Tooltips.Configuration.Title'),
@@ -81,19 +66,6 @@ Hooks.on("init", () =>
                 Configuration
             ]
         });
-    })
-
-    Hooks.on("getActorSheetHeaderButtons", async (itemSheet, buttonArray) => {
-        let TagButton = {
-            label: "Tags",
-            class: "item-tags",
-            icon: "fas fa-tags",
-            onclick: async () => {
-                new ItemTags().render(true, { item: itemSheet.object, width: 480 })
-            }
-        }
-
-        buttonArray.unshift(TagButton);
     })
 
     Hooks.on("ready", async () => {
@@ -133,7 +105,7 @@ Hooks.on("init", () =>
         ////////////////////////////////////////////////////////////
         // Hooks to attach
         ////////////////////////////////////////////////////////////
-        let HooksToAttach = 
+        let HooksToAttach =
         {
             attack:
             {
@@ -146,7 +118,7 @@ Hooks.on("init", () =>
                 id  : 0
             }
         }
-        Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, async (settings) => 
+        Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, async (settings) =>
         {
             DBG.Log('Changing settings', settings);
 
@@ -155,7 +127,7 @@ Hooks.on("init", () =>
             HooksToAttach.item.hook   = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM);
             Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
         });
-        Hooks.on(OIF.HOOKS.ATTACH_HOOKS, async () => 
+        Hooks.on(OIF.HOOKS.ATTACH_HOOKS, async () =>
         {
             DBG.Log('Attaching hooks', HooksToAttach);
 
@@ -208,7 +180,7 @@ Hooks.on("init", () =>
             {
                 // Send tags to the handler
                 TagHandler.Dispatch(options);
-            }   
+            }
         });
 
         Hooks.call(OIF.HOOKS.ATTACH_HOOKS);

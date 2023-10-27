@@ -1,7 +1,4 @@
-import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { MasterTagsSettings } from "./MasterTagsSettings.js";
-import { ObjectsInteractionsFXData as OIFD } from '../data/ObjectsInteractionsFXData.js';
-import { ItemTags } from "./ItemTags.js";
 import { ConfigSkeleton } from "../library/skeletons/ConfigSkeleton.js";
 
 export class MasterTagConfiguration extends ConfigSkeleton
@@ -26,7 +23,7 @@ export class MasterTagConfiguration extends ConfigSkeleton
     getData(options)
     {
         let ReturnedConfiguration;
-        let DefaultConfigurationHeader = 
+        let DefaultConfigurationHeader =
         [
             {
                 disabled: false,
@@ -41,7 +38,7 @@ export class MasterTagConfiguration extends ConfigSkeleton
                 title: 'OIF.Settings.MasterTagConfiguration.Options.Type.Title',
                 type: 'dropdown',
                 value: this.options.configurationData.type,
-                choices: 
+                choices:
                 [
                     {
                         name: 'OIF.Settings.MasterTagConfiguration.Options.Type.Choices.None',
@@ -153,7 +150,7 @@ export class MasterTagConfiguration extends ConfigSkeleton
                 ]
                 break;
             case 'lighting':
-                ReturnedConfiguration = 
+                ReturnedConfiguration =
                 [
                     ...DefaultConfigurationHeader,
                     {
@@ -366,6 +363,6 @@ export class MasterTagConfiguration extends ConfigSkeleton
         super.activateListeners(html);
     }
 
-    async _updateObject(event, formData) 
+    async _updateObject(event, formData)
     {}
 }

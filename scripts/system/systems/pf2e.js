@@ -1,5 +1,4 @@
 import { ObjectsInteractionsFX     as OIF  } from "../../ObjectsInteractionsFX.js";
-import { ObjectsInteractionsFXData as OIFD } from "../../data/ObjectsInteractionsFXData.js";
 
 import { Debug                     as DBG  } from "../../library/Debug.js";
 
@@ -68,7 +67,7 @@ export class Pf2e
     // Function that is called when a hook is triggered, note
     // that this function is called for every hook, so it is
     // important make sure the data we are extracting is the
-    // one we want 
+    // one we want
     ////////////////////////////////////////////////////////////
     static async ExtractOptions(workflow, source, from)
     {
@@ -78,7 +77,7 @@ export class Pf2e
         let Item = workflow[0].item;
 
         // Retrieve the item's tags;
-        let Tags = await OIFD.GetData(Item);
+        let Tags = ItemTags.Get(Item);
 
         // Retrieve the token
         let Token = canvas.tokens.get(workflow[0].token._id);
@@ -108,7 +107,7 @@ export class Pf2e
                     }
 
                     // Get the roll total
-                    RollTotal = workflow[0].rolls._total; 
+                    RollTotal = workflow[0].rolls._total;
 
                     break;
                 }

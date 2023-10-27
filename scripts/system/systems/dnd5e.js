@@ -1,5 +1,4 @@
 import { ObjectsInteractionsFX     as OIF  } from "../../ObjectsInteractionsFX.js";
-import { ObjectsInteractionsFXData as OIFD } from "../../data/ObjectsInteractionsFXData.js";
 
 import { Debug                     as DBG  } from "../../library/Debug.js";
 
@@ -116,7 +115,7 @@ export class DnD5e
             let Item = workflow[0].item;
 
             // Retrieve the item's tags
-            let Tags = await OIFD.GetData(Item);
+            let Tags = ItemTags.Get(Item);
 
             // Retrieve the token
             let Token = await canvas.tokens.get(workflow[0].tokenId);
@@ -190,7 +189,7 @@ export class DnD5e
             let Item = workflow[0];
 
             // Retrieve the item's tags
-            let Tags = await OIFD.GetData(Item);
+            let Tags = ItemTags.Get(Item);
 
             // Retrieve the actor and token
             let Actor = Item.parent;

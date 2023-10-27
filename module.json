@@ -45,6 +45,11 @@
         ],
         "requires": [
             {
+                "id": "item-tags",
+                "type": "module",
+                "compatibility": {}
+            },
+            {
                 "id": "sequencer",
                 "type": "module",
                 "compatibility": {}
@@ -65,7 +70,6 @@
         "scripts/library/HandlebarsHelpers.js"
     ],
     "styles": [
-        "styles/ItemTags.css",
         "styles/Settings.css"
     ]
 }

@@ -6,7 +6,7 @@ import { TagHandler } from "../tags/TagHandler.js";
 export class TokenLightingManipulator
 {
     static LIGHT_SOURCE_ID = OIF.ID + "_light_source";
-    
+
     static async SetDefaultLightingOptions(options)
     {
         await options.token.document.update({
@@ -28,7 +28,7 @@ export class TokenLightingManipulator
 
     static async SetLightingOptions(options)
     {
-        await options.token.document.update({ 
+        await options.token.document.update({
             "light.bright"             : options?.item?.system?.range?.value ?? 0,
             "light.dim"                : options?.item?.system?.range?.long  ?? 0,
             "light.animation.type"     : options?.light?.animationType       ?? undefined,
@@ -84,7 +84,7 @@ export class TokenLightingManipulator
     static async RemoveLighting(options)
     {
         // Check if light_source tag is not set
-        if (!Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID)) 
+        if (!Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID))
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.NotSource"));
             console.error("Failed to reset token lighting based on item! Token is not a light source");
@@ -149,9 +149,9 @@ export class TokenLightingManipulator
             TokenTags = TokenTags.map(tag => tag.replace(OIF.ID + "_", ""));
 
             let LightingTags = Object.assign({}, TagHandler.Tags['Lighting']);
-            for (let key in LightingTags) 
+            for (let key in LightingTags)
             {
-                if (LightingTags.hasOwnProperty(key)) 
+                if (LightingTags.hasOwnProperty(key))
                 {
                     LightingTags[key].name = key;
                 }
@@ -159,14 +159,14 @@ export class TokenLightingManipulator
 
             // Filter the tags to only get the ones related to lighting
             let ItemTags = {};
-            for (let key in LightingTags) 
+            for (let key in LightingTags)
             {
-                if (LightingTags.hasOwnProperty(key)) 
+                if (LightingTags.hasOwnProperty(key))
                 {
                     let lightingTag = LightingTags[key];
-                    TokenTags.forEach((tokenTag) => 
+                    TokenTags.forEach((tokenTag) =>
                     {
-                        if (lightingTag.name == tokenTag) 
+                        if (lightingTag.name == tokenTag)
                         {
                             ItemTags[lightingTag.name] = lightingTag;
                         }
@@ -175,19 +175,19 @@ export class TokenLightingManipulator
             }
 
             // Get the lighting items
-            for (let lightingTag of Object.values(ItemTags)) 
+            for (let lightingTag of Object.values(ItemTags))
             {
-                for (let item of Token.actor.items) 
+                for (let item of Token.actor.items)
                 {
                     // Get the tags of the item
-                    let Tags = OIFD.GetData(item);
-              
+                    let Tags = ItemTags.Get(item);
+
                     // Check if the item has the tag
-                    if (Tags.includes(lightingTag.name)) 
+                    if (Tags.includes(lightingTag.name))
                     {
                         // Set the item icon to the unlit one
                         item.update({ "img": lightingTag.icons.unlit });
-              
+
                         // Remove the tag
                         await Tagger.removeTags(Token, [`${OIF.ID}_${lightingTag.name}`]);
                     }

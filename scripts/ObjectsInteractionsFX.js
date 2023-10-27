@@ -5,11 +5,9 @@ export class ObjectsInteractionsFX
 
     static FLAGS = {
         OIF: 'OIF',
-        ITEM_TAGS: 'item-tags'
     }
 
     static TEMPLATES = {
-        ITEM_TAGS               : `modules/${this.ID}/templates/ItemTags.hbs`,
         MASTER_TAGS_SETTINGS    : `modules/${this.ID}/templates/MasterTagsSettings.hbs`,
         MASTER_TAG_CONFIGURATION: `modules/${this.ID}/templates/MasterTagConfiguration.hbs`,
         SETTINGS_SKELETON       : `modules/${this.ID}/templates/SettingsSkeleton.hbs`,
@@ -158,7 +156,7 @@ export class ObjectsInteractionsFX
         }
     }
 
-    static Initialize() 
+    static Initialize()
     {
         // Check if optional modules are loaded
         for (const key in this.OPTIONAL_MODULES)
