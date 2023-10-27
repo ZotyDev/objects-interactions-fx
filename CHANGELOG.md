@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+## Version 1.1.2.1
+
+- *Fixed* - Fixed again, now this should be really fixed.
+
 ## Version 1.1.2
 
 - *Fixed* - Fixed the new release versioning breaking foundry module manager.
