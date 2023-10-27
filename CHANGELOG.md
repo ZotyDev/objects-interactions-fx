@@ -1,58 +1,62 @@
 # Automated Objects, Interactions and Effects Changelog
 
-### Version 1.1.0
+## Version 1.1.1
+
+- *Fixed* - Now you should be prompted to enable the required modules if they are disabled.
+
+## Version 1.1.0
 
 - *Overhaul* - OIF does not have the item tagging feature anymore, now there is a standalone module that handles this feature ([🏷️ItemTags](https://foundryvtt.com/packages/item-tags)).
 
-### Version 1.0.14
+## Version 1.0.14
 
 - *Fixed #29* - Fixed a bug where the module tried to access possible undefined properties when MidiQOL is active.
 
-### Version 1.0.13
+## Version 1.0.13
 
 - *Fixed* - Actor Inventor is now managed by GM only.
 
-### Version 1.0.12
+## Version 1.0.12
 
 - *Fixed* - Wrong versioning of the module.
 
-### Version 1.0.11
+## Version 1.0.11
 
 - *Backport* - As promised before, OIF now supports the 2 latest versions, in this case v10 and v11, sorry for taking so long...
 
-### Version 1.0.10
+## Version 1.0.10
 
 - *Fixed #18* - Destruction chance not working.
 
-### Version 1.0.9
+## Version 1.0.9
 
 - *Fixed* - V11 compatibility.
 
-### Version 1.0.8
+## Version 1.0.8
 
 - *Fixed* - Import not working.
 - *Fixed* - Tag Packs not being loaded sometimes because wrong usage of async methods.
 
-### Version 1.0.7
+## Version 1.0.7
 
 - *Fixed #16* - Same problem.. The ItemDropper class was calling a method with wrong parameters. Hope everything related is fixed for good now. Thank you KellethDregar for reporting the bugs you've found while using OIF!
 
-### Version 1.0.6
+## Version 1.0.6
 
 - *Fixed #15* - MidiQOL workflow now uses the right size function for detecting if a attack is hit/miss.
 
-### Version 1.0.5
+## Version 1.0.5
 
 - *Fixed* - Dumb me included the wrong files.. Sorry everyone :c
 
-### Version 1.0.4
+## Version 1.0.4
 
 - *Fixed* - Only GMs were able to use tags, now every user can use tags.
 - *Fixed* - Master Tags were not being loaded at all for users, only for GMs, now tags are properly stored and updated when needed.
 
 Special thanks to **pretzelboi** for reaching out about these issues, thanks!
 
-### Version 1.0.3
+## Version 1.0.3
 
 - *Fixed* - Lighting tags not working properly.
 - *Fixed* - Clear Lighting tooltip not working properly.
@@ -64,9 +68,7 @@ Special thanks to **pretzelboi** for reaching out about these issues, thanks!
 - *Tag Packs* - Readded `powerful` to maul.
 - *Dynamic Interactions* - Dropped items now have a Tagger tag that indicates they have been created by OIF. The tag is `object-interacionts-efx-dropped-item-<id of the source item>` - Thanks to Ikabodo for suggesting it!
 
----
-
-### Version 1.0.2
+## Version 1.0.2
 
 - *Intern* - MidiQOL is no more required to make the module function, but it is highly recommended if you are using DnD5e!
 - *System Support* - Now DnD5e hooks can be used to trigger animations and interactions:
@@ -76,15 +78,11 @@ Special thanks to **pretzelboi** for reaching out about these issues, thanks!
 - *Fixed* - A typo was making it impossible to use thrown items - Thanks to Ikabodo for reporting it!
 - *Fixed* - Thrown items were getting removed while not being created anywhere - Thanks to Ikabodo for reporting it!
 
----
-
-### Version 1.0.1
+## Version 1.0.1
 
 - *Fixed* - I forgot to include some things..
 
----
-
-### Version 1.0.0
+## Version 1.0.0
 - *Fixed* - Animations will only play if the distance between author and target is inside the range.
 - *Fixed #1* - Now you can disable the module's animations and use just the interactions and automations.
   - There is no easy way to get the position where the effects from other modules landed on hit, because of that, when OIF is not the one handling the animations, the Item Piles will be created at random positions.
@@ -117,14 +115,11 @@ Special thanks to **pretzelboi** for reaching out about these issues, thanks!
 
 I apologize for not being able to provide some of the features that I mentioned that would be on this release, but they will be implemented as soon as possible!
 
----
 
-### Version 0.2.1
+## Version 0.2.1
 - *Minor Fixes* - Some of the additions generated errors, and some features where wrongly implemented.
 
----
-
-### Version 0.2
+## Version 0.2
 - *Fixed #2* - Now the delay for throwable items should be correct.
 - *Fixed #3* - Added a option to select the hook that will trigger the effects and automations.
 - *Fixed Internal* - Updated module.json to v10.
@@ -142,9 +137,7 @@ I apologize for not being able to provide some of the features that I mentioned 
 - *Settings Helper* - Some settings have a dependency on another setting or module, when a dependecy is disabled the settings that rely on it will be disabled.
 - *Settings Helper* - **NOTE:** I might also make this helper into a module if someone asks for it.
 
----
-
-### Version 0.1.1
+## Version 0.1.1
 - *Intern* - Abstracted Item Pile creation and Actor inventory manipulation
 - *Intern* - Polished code
 - *Intern* - Added token lighting manipulation class
@@ -155,9 +148,7 @@ I apologize for not being able to provide some of the features that I mentioned 
 - *Dynamic Interactions* - Item throwing is now smarter, no longer based on the metric system, alongside being much more compatible with all dimensions of canvas, see the **[Wiki](https://github.com/ZotyDev/objects-interactions-fx/wiki/Throwable-Items)** to see how to setup throwable items
 - *API* - Added hooks that get called before and after a item animation, providing a reference to the options used.
 
----
-
-### Version 0.1
+## Version 0.1
 - *Item Tags* - Added barebones Item Tags implementation (currently supports only one tag)
 - *Animation* - Added item animation based on Item Tags set for the item
 - *Animation* - Added single attack melee animations
