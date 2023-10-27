@@ -73,7 +73,14 @@ Hooks.on("init", () =>
         await Settings.Initialize();
         await DBG.Initialize();
 
-        let test = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
+        // Check for missing modules
+        let requiredModules = game.modules.get(OIF.ID).relationships.requires;
+        for (let module of requiredModules) {
+            if (!(game.modules.get(module.id)?.active)) {
+                ui.notifications.error(game.i18n.localize('OIF.Core.MissingRequiredModule').replace('$module', module.id));
+            }
+        }
+
         // Create the folders that are going to be used
         if (game.user.isGM)
         {

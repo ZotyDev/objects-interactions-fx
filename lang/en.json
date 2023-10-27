@@ -1,5 +1,8 @@
 {
     "OIF": {
+        "Core": {
+            "MissingRequiredModule": "The required module \"$module\" is missing"
+        },
         "ItemTags": {
             "Text": "Tags:",
             "Save": "Save"
@@ -412,7 +415,7 @@
             },
             "DeveloperMode": {
                 "Title": "Developer Mode",
-                "Hint": "Logs useful information to the console !! THIS IS FOR DEVELOPERS ONLY !!" 
+                "Hint": "Logs useful information to the console !! THIS IS FOR DEVELOPERS ONLY !!"
             },
             "CurrencyGenerator": {
                 "Title": "Currency Generator",
