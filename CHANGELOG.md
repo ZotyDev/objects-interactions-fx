@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+### Version 1.1.0
+
+- *Overhaul* - OIF does not have the item tagging feature anymore, now there is a standalone module that handles this feature ([🏷️ItemTags](https://foundryvtt.com/packages/item-tags)).
+
 ### Version 1.0.14
 
 - *Fixed #29* - Fixed a bug where the module tried to access possible undefined properties when MidiQOL is active.

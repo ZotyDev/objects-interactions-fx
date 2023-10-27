@@ -158,7 +158,7 @@ export class TokenLightingManipulator
             }
 
             // Filter the tags to only get the ones related to lighting
-            let ItemTags = {};
+            let itemTags = {};
             for (let key in LightingTags)
             {
                 if (LightingTags.hasOwnProperty(key))
@@ -168,19 +168,19 @@ export class TokenLightingManipulator
                     {
                         if (lightingTag.name == tokenTag)
                         {
-                            ItemTags[lightingTag.name] = lightingTag;
+                            itemTags[lightingTag.name] = lightingTag;
                         }
                     });
                 }
             }
 
             // Get the lighting items
-            for (let lightingTag of Object.values(ItemTags))
+            for (let lightingTag of Object.values(itemTags))
             {
                 for (let item of Token.actor.items)
                 {
                     // Get the tags of the item
-                    let Tags = ItemTags.Get(item);
+                    let Tags = itemTags.Get(item);
 
                     // Check if the item has the tag
                     if (Tags.includes(lightingTag.name))
