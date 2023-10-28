@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+## vERSION 1.1.3
+
+- *Fixed #32* - `ActorInventor` was trying to use a deprecated feature.
+
 ## Version 1.1.2.1
 
 - *Fixed* - Fixed again, now this should be really fixed.

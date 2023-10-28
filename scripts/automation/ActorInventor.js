@@ -8,7 +8,7 @@ Hooks.on("oifReady", () => {
             if (actor != null && actor != undefined && actor.actor.type == "npc")
             {
                 actor = actor.actor;
-                let Tags = ObjectsInteractionsFXData.GetData(actor);
+                let Tags = ItemTags.Get(actor);
 
                 // Make sure we are checking for tags, not strange promises..
                 if ((typeof Tags) == Array)
