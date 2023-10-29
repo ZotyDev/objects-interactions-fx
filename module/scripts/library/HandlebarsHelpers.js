@@ -24,7 +24,7 @@ let Parts = {
 
 Hooks.on('ready', () => {
     Object.keys(Parts).forEach((key) => {
-        Parts[key] = `modules/${OIF.ID}/templates/parts/${Parts[key]}`
+        Parts[key] = `modules/${OIF.ID}/module/templates/parts/${Parts[key]}`
     });
 
     loadTemplates(Parts);
@@ -43,7 +43,7 @@ Hooks.on('ready', () => {
         `;
 
         let Complete = (Header + Body);
-        
+
         return new Handlebars.SafeString(Complete);
     })
 });

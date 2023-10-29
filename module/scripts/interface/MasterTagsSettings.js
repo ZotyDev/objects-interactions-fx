@@ -155,7 +155,7 @@ export class MasterTagsSettings extends FormApplication {
 
         for (const path of DefaultTagPacks)
         {
-            await MasterTagsSettings.LoadTagPackFromFile(`modules/${OIF.ID}/data/defaultTagPacks/${path}.json`);
+            await MasterTagsSettings.LoadTagPackFromFile(`modules/${OIF.ID}/module/data/defaultTagPacks/${path}.json`);
         }
     }
 

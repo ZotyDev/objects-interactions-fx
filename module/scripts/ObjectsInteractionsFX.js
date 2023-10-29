@@ -8,10 +8,10 @@ export class ObjectsInteractionsFX
     }
 
     static TEMPLATES = {
-        MASTER_TAGS_SETTINGS    : `modules/${this.ID}/templates/MasterTagsSettings.hbs`,
-        MASTER_TAG_CONFIGURATION: `modules/${this.ID}/templates/MasterTagConfiguration.hbs`,
-        SETTINGS_SKELETON       : `modules/${this.ID}/templates/SettingsSkeleton.hbs`,
-        CONFIG_SKELETON         : `modules/${this.ID}/templates/ConfigSkeleton.hbs`,
+        MASTER_TAGS_SETTINGS    : `modules/${this.ID}/module/templates/MasterTagsSettings.hbs`,
+        MASTER_TAG_CONFIGURATION: `modules/${this.ID}/module/templates/MasterTagConfiguration.hbs`,
+        SETTINGS_SKELETON       : `modules/${this.ID}/module/templates/SettingsSkeleton.hbs`,
+        CONFIG_SKELETON         : `modules/${this.ID}/module/templates/ConfigSkeleton.hbs`,
     }
 
     static SOCKET;
@@ -62,7 +62,7 @@ export class ObjectsInteractionsFX
     static FILES = {
         ORIGIN   : 'data',
         DATA_FOLDERS: {
-            DEFAULT_TAG_PACKS: `modules/${this.ID}/data/defaultTagPacks`,
+            DEFAULT_TAG_PACKS: `modules/${this.ID}/module/data/defaultTagPacks`,
             ROOT             : 'oif'
         }
     }

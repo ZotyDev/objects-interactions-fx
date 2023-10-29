@@ -15,7 +15,7 @@
         {
         "lang": "en",
         "name": "English",
-        "path": "lang/en.json",
+        "path": "./module/lang/en.json",
         "flags": {}
         }
     ],
@@ -58,13 +58,13 @@
     },
     "socket": true,
     "esmodules": [
-        "scripts/Main.js",
-        "scripts/automation/ActorInventor.js",
-        "scripts/library/CanvasEffects.js",
-        "scripts/library/Socket.js",
-        "scripts/library/HandlebarsHelpers.js"
+        "./module/scripts/Main.js",
+        "./module/scripts/automation/ActorInventor.js",
+        "./module/scripts/library/CanvasEffects.js",
+        "./module/scripts/library/Socket.js",
+        "./module/scripts/library/HandlebarsHelpers.js"
     ],
     "styles": [
-        "styles/Settings.css"
+        "./module/styles/Settings.css"
     ]
 }
