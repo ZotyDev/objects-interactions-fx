@@ -1,5 +1,10 @@
 # Automated Objects, Interactions and Effects Changelog
 
+## Version 1.1.4
+
+- *Fixed* - I've accidentally removed the styling from the MasterTag menu, now it should be working again.
+- *Internal* - The module got a refactor on its structure, it should be easier for me to separate things now.
+
 ## Version 1.1.3
 
 - *Fixed #32* - `ActorInventor` was trying to use a deprecated feature.

@@ -65,6 +65,7 @@
         "./module/scripts/library/HandlebarsHelpers.js"
     ],
     "styles": [
+        "./module/styles/ItemTags.css",
         "./module/styles/Settings.css"
     ]
 }
