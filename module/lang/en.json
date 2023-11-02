@@ -1,7 +1,7 @@
 {
     "OIF": {
         "Core": {
-            "MissingRequiredModule": "The required module \"$module\" is missing"
+            "MissingRequiredModule": "Automated Objects, Interactions and Effects | The required module \"$module\" is required but is currently not installed and/or enabled!"
         },
         "ItemTags": {
             "Text": "Tags:",

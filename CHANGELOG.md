@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+## Version 1.1.4.1
+
+- *Interface* - Improved the warning about required modules that are not currently enabled.
+
 ## Version 1.1.4
 
 - *Fixed* - I've accidentally removed the styling from the MasterTag menu, now it should be working again.
