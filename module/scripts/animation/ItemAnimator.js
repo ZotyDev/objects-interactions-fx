@@ -6,14 +6,14 @@ import { Helpers } from "../library/Helpers.js";
 import { TokenLightingManipulator } from "../library/TokenLightingManipulator.js";
 import { Debug as DBG } from "../library/Debug.js";
 
-export class ItemAnimator 
+export class ItemAnimator
 {
     static async GetLandedPosAnimated(options, sequenceIdentifier)
     {
         let [effect] = Sequencer.EffectManager.getEffects({ name: sequenceIdentifier });
         options.landedPosX = effect.targetPosition.x - options.gridSize / 2;
         options.landedPosY = effect.targetPosition.y - options.gridSize / 2;
-        
+
         return options;
     }
 
@@ -143,7 +143,7 @@ export class ItemAnimator
                                 x: options.landedPosX,
                                 y: options.landedPosY,
                             }
-        
+
                             // Drop item
                             ItemDropper.DropAt(options.item, 1, ItemPilePosition, options.target.document.elevation);
                             ShouldRemoveItem = true;
@@ -163,7 +163,7 @@ export class ItemAnimator
                                 x: options.landedPosX,
                                 y: options.landedPosY,
                             }
-        
+
                             // Drop item
                             ItemDropper.DropAt(options.item, 1, ItemPilePosition, options.target.document.elevation);
                             ShouldRemoveItem = true;
@@ -175,12 +175,12 @@ export class ItemAnimator
                             // Remove item from author inventory
                             InventoryManipulator.RemoveItem(options.token, options.item, 1);
                         }
-        
+
                         DidInteract = true;
                     }
 
                     // Check if poweful impact effect should be played
-                    if ((options.throwAnimation.powerful || options.tags.indexOf('powerful') > 0) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
+                    if ((options.throwAnimation.powerful || options.tags.includes('powerful')) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
                         OIF_SOCKET.executeForEveryone('ScreenShake');
                         DidInteract = true;
@@ -216,11 +216,11 @@ export class ItemAnimator
                             .atLocation(options.token)
                             .stretchTo(options.target)
                             .name(SequenceIdentifier)
-                    
+
                     // Play melee sequence
                     await SequenceEffect.play();
                 }
-                
+
                 ////////////////////////////////////////////////////////////
                 // Melee Attack Interaction
                 ////////////////////////////////////////////////////////////
@@ -229,15 +229,15 @@ export class ItemAnimator
                     {
                         Hooks.call(OIF.HOOKS.WEAPON.MELEE.HIT.POST_ANIMATION, options);
                     }
-    
+
                     let DidInteract = false;
                     // Check if poweful impact effect should be played
-                    if ((options.meleeAnimation.powerful || options.tags.indexOf('powerful') > 0) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
+                    if ((options.meleeAnimation.powerful || options.tags.includes('powerful')) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
                         OIF_SOCKET.executeForEveryone('ScreenShake');
                         DidInteract = true;
                     }
-    
+
                     if (DidInteract)
                     {
                         Hooks.call(OIF.HOOKS.WEAPON.MELEE.HIT.POST_INTERACTION, options);
@@ -339,7 +339,7 @@ export class ItemAnimator
                                 x: options.landedPosX,
                                 y: options.landedPosY,
                             }
-        
+
                             // Drop item
                             ItemDropper.DropAt(options.ammoItemCopy, 1, ItemPilePosition, options.target.document.elevation);
                         }
@@ -357,11 +357,11 @@ export class ItemAnimator
                                 x: options.landedPosX,
                                 y: options.landedPosY,
                             }
-        
+
                             // Drop item
                             ItemDropper.DropAt(options.ammoItemCopy, 1, ItemPilePosition, options.target.document.elevation);
                         }
-        
+
                         DidInteract = true;
                     }
 

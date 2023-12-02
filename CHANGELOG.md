@@ -1,5 +1,9 @@
 # Automated Objects, Interactions and Effects Changelog
 
+## Version 1.1.5
+
+- *Fixed* - `powerful` tag can now be inserted at any position inside the ItemTags.
+
 ## Version 1.1.4.1
 
 - *Interface* - Improved the warning about required modules that are not currently enabled.
