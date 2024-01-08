@@ -1,12 +1,28 @@
+////////////////////////////////////////////////////////////////////////////////
+//                          ███████    █████ ███████████                      //
+//                        ███░░░░░███ ░░███ ░░███░░░░░░█                      //
+//                       ███     ░░███ ░███  ░███   █ ░                       //
+//                      ░███      ░███ ░███  ░███████                         //
+//                      ░███      ░███ ░███  ░███░░░█                         //
+//                      ░░███     ███  ░███  ░███  ░                          //
+//                       ░░░███████░   █████ █████                            //
+//                         ░░░░░░░    ░░░░░ ░░░░░                             //
+//        Automated Objects, Interactions and Effects -  By ZotyDev           //
+////////////////////////////////////////////////////////////////////////////////
+// ? This class handles the lighting of tokens
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
-import { ObjectsInteractionsFXData as OIFD } from "../data/ObjectsInteractionsFXData.js";
 import { GeneralSettings } from "../interface/GeneralSettings.js";
 import { TagHandler } from "../tags/TagHandler.js";
+import { Debug as DBG } from "./Debug.js"
 
 export class TokenLightingManipulator
 {
     static LIGHT_SOURCE_ID = OIF.ID + "_light_source";
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Sets the lighting options of a token to default, should be used to reset
+    // all the options that got applied
+    ////////////////////////////////////////////////////////////////////////////
     static async SetDefaultLightingOptions(options)
     {
         await options.token.document.update({

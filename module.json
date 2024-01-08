@@ -58,7 +58,7 @@
     },
     "socket": true,
     "esmodules": [
-        "./module/scripts/Main.js",
+        "./module/scripts/module.js",
         "./module/scripts/automation/ActorInventor.js",
         "./module/scripts/library/CanvasEffects.js",
         "./module/scripts/library/Socket.js",

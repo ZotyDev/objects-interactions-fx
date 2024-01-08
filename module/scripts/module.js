@@ -8,15 +8,23 @@ import { TagHandler } from "./tags/TagHandler.js";
 import { TokenLightingManipulator } from "./library/TokenLightingManipulator.js";
 import { Debug as DBG } from "./library/Debug.js";
 
-Hooks.on("init", () =>
-{
-    console.log("%cObject Interaction FX", `
-        color:#FF0088;
-        background-color:white;
-        font-size:25pt;
-        font-weight:bold;
-        padding:15pt;
-    `);
+import { Constants as C } from "./constants.js";
+
+////////////////////////////////////////////////////////////////////////////////
+// Entry-point for everything
+////////////////////////////////////////////////////////////////////////////////
+Hooks.once('init', () => {
+    Hooks.once('toolbox.ready', () => {
+        Toolbox.showcaseModule(C.NAME_FLAT);
+    });
+
+    // Debug info
+    Hooks.once('debugger.ready', () => {
+        C.D = new Debugger(C.ID, C.NAME, true, true);
+        C.D.info('Module Information:');
+        C.D.info(`Version ${game.modules.get(C.ID).version}`);
+        C.D.info('Module By ZotDev');
+    });
 
     OIF.Initialize();
 
@@ -69,6 +77,9 @@ Hooks.on("init", () =>
     })
 
     Hooks.on("ready", async () => {
+        ////////////////////////////////////////////////////////////////////////
+        // Initialization of the libraries inside OIF
+        ////////////////////////////////////////////////////////////////////////
         await SystemSupporter.Initialize();
         await Settings.Initialize();
         await DBG.Initialize();
@@ -102,12 +113,8 @@ Hooks.on("init", () =>
             }
         }
 
-        DBG.Log('First breakpoint');
-
         // Load default packs
         await MasterTagsSettings.LoadFromConfig();
-
-        DBG.Log('Second breakpoint');
 
         ////////////////////////////////////////////////////////////
         // Hooks to attach

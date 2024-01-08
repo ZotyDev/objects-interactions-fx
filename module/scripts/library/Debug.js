@@ -1,116 +1,58 @@
+////////////////////////////////////////////////////////////////////////////////
+//                              ____ _____ ______                             //
+//                             / __ \_   _|  ____|                            //
+//                            | |  | || | | |__                               //
+//                            | |  | || | |  __|                              //
+//                            | |__| || |_| |                                 //
+//                             \____/_____|_|                                 //
+//         Automated Objects, Interactions and Effects -  By ZotyDev          //
+////////////////////////////////////////////////////////////////////////////////
+// ? This class contains a helper for debugging, it only prints the passed
+// ? information when the Debug flag is active
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
-
 export class Debug
 {
+    static Options = {
+        enabled: false
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Initializes the Debug module, should be inserted before anything else
+    ////////////////////////////////////////////////////////////////////////////
     static Initialize()
     {
-        Debug._enabled    = game.settings.get(OIF.ID, OIF.SETTINGS.GENERAL.DEVELOPER_MODE);
-        Debug._errorStack = {};
-        Debug._logStack   = {};
-        Debug._warnStack  = {};
+        // Check if the debug should be enabled
+        Debug.Options.enabled = game.settings.get(OIF.ID, OIF.SETTINGS.GENERAL.DEVELOPER_MODE);
 
+        // Update when settings are changed
         Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, (settings) =>
         {
-            Debug._enabled = settings[OIF.SETTINGS.GENERAL.DEVELOPER_MODE].value;
+            Debug.Options.enabled = settings[OIF.SETTINGS.GENERAL.DEVELOPER_MODE].value;
         });
     }
 
-    static Error(...args)
-    {
-        if (Debug._enabled)
-        {
-            console.error('OIF DEBUG - ERROR - ', ...args);
+    ////////////////////////////////////////////////////////////////////////////
+    // Outputs a error, must always be shown
+    ////////////////////////////////////////////////////////////////////////////
+    static Error(...args) {
+        console.error('OIF ERROR - ', ...args);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Outputs a log, should be shown ONLY when the debug mode is active
+    ////////////////////////////////////////////////////////////////////////////
+    static Log(...args) {
+        if (Debug.Options.enabled) {
+            console.log('OIF DEBUG - ', ...args);
         }
     }
 
-    static Log(...args)
-    {
-        if (Debug._enabled)
-        {
-            console.log('OIF DEBUG - LOG - ', ...args);
-        }
-    }
-
-    static Warn(...args)
-    {
-        if (Debug._enabled)
-        {
-            console.warn('OIF DEBUG - WARN - ', ...args);
-        }
-    }
-
-    static ErrorStack(id, ...args)
-    {
-        if (Debug._enabled)
-        {
-            if (Debug._errorStack[id] == undefined)
-            {
-                Debug._errorStack[id] = [];
-            }
-
-            Debug._errorStack[id].push(args);
-        }
-    }
-
-    static LogStack(id, ...args)
-    {
-        if (Debug._enabled)
-        {
-            if (Debug._logStack[id] == undefined)
-            {
-                Debug._logStack[id] = [];
-            }
-
-            Debug._logStack[id].push(args);
-        }
-    }
-
-    static WarnStack(id, ...args)
-    {
-        if (Debug._enabled)
-        {
-            if (Debug._warnStack[id] == undefined)
-            {
-                Debug._warnStack[id] = [];
-            }
-
-            Debug._warnStack[id].push(args);
-        }
-    }
-
-    static FlushErrorStack(id)
-    {
-        if (Debug._enabled)
-        {
-            if (Debug._errorStack[id] != undefined)
-            {
-                console.error('OIF DEBUG - ERROR STACK - ', id, ...Debug._errorStack[id]);
-                Debug._errorStack[id] = [];
-            }
-        }
-    }
-
-    static FlushLogStack(id)
-    {
-        if (Debug._enabled)
-        {
-            if (Debug._logStack[id] != undefined)
-            {
-                console.log('OIF DEBUG - LOG STACK - ', id, ...Debug._logStack[id]);
-                Debug._logStack[id] = [];
-            }
-        }
-    }
-
-    static FlushWarnStack(id)
-    {
-        if (Debug._enabled)
-        {
-            if (Debug._warnStack[id] != undefined)
-            {
-                console.warn('OIF DEBUG - WARN STACK - ', id, ...Debug._warnStack[id]);
-                Debug._warnStack[id] = [];
-            }
+    ////////////////////////////////////////////////////////////////////////////
+    // Outputs a warning, should be shown ONLY when the debug mode is active
+    ////////////////////////////////////////////////////////////////////////////
+    static Warn(...args) {
+        if (Debug.Options.enabled) {
+            console.warn('OIF WARN - ', ...args);
         }
     }
 }

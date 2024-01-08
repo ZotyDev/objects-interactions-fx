@@ -1,5 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+//                          ███████    █████ ███████████                      //
+//                        ███░░░░░███ ░░███ ░░███░░░░░░█                      //
+//                       ███     ░░███ ░███  ░███   █ ░                       //
+//                      ░███      ░███ ░███  ░███████                         //
+//                      ░███      ░███ ░███  ░███░░░█                         //
+//                      ░░███     ███  ░███  ░███  ░                          //
+//                       ░░░███████░   █████ █████                            //
+//                         ░░░░░░░    ░░░░░ ░░░░░                             //
+//        Automated Objects, Interactions and Effects -  By ZotyDev           //
+////////////////////////////////////////////////////////////////////////////////
+// ? This class implements the DnD5e system, you can use this as example if you
+// ? want to provide your own data to OIF, either for a custom system or to send
+// ? a PR to add support for a alraedy existing system.
 import { ObjectsInteractionsFX     as OIF  } from "../../ObjectsInteractionsFX.js";
-
 import { Debug                     as DBG  } from "../../library/Debug.js";
 
 export class DnD5e
