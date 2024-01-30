@@ -9,11 +9,12 @@
 //                         ░░░░░░░    ░░░░░ ░░░░░                             //
 //        Automated Objects, Interactions and Effects -  By ZotyDev           //
 ////////////////////////////////////////////////////////////////////////////////
-// ? This class handles the lighting of tokens
+// ? This class handles the lighting of tokens.
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { GeneralSettings } from "../interface/GeneralSettings.js";
 import { TagHandler } from "../tags/TagHandler.js";
-import { Debug as DBG } from "./Debug.js"
+
+import { Constants as C } from "../constants.js";
 
 export class TokenLightingManipulator
 {
@@ -79,7 +80,6 @@ export class TokenLightingManipulator
         if (Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID))
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.AlreadySource"));
-            console.error("Failed to set token lighting based on item! Token is already a light source");
         }
         else
         {
@@ -90,7 +90,7 @@ export class TokenLightingManipulator
             TokenLightingManipulator.SetLightingOptions(options);
 
             // Add the light source tag
-            await Tagger.addTags(options.token, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${OIF.ID}_${options.name}`]);
+            await Tagger.addTags(options.token, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${C.ID}_${options.name}`]);
 
             // Call hook
             Hooks.call(OIF.HOOKS.ITEM.LIGHTING.LIGHT.POS, options);
@@ -103,12 +103,10 @@ export class TokenLightingManipulator
         if (!Tagger.hasTags(options.token, TokenLightingManipulator.LIGHT_SOURCE_ID))
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.NotSource"));
-            console.error("Failed to reset token lighting based on item! Token is not a light source");
         }
-        else if (!Tagger.hasTags(options.token, `${OIF.ID}_${options.name}`))
+        else if (!Tagger.hasTags(options.token, `${C.ID}_${options.name}`))
         {
             ui.notifications.error(game.i18n.localize("OIF.Item.Lighting.Error.NotRightSource"));
-            console.error("Failed to reset token lighting based on item! Specified item is not the one providing light");
         }
         else
         {
@@ -119,7 +117,7 @@ export class TokenLightingManipulator
             TokenLightingManipulator.SetDefaultLightingOptions(options);
 
             // Remove the light source tag
-            await Tagger.removeTags(options.token, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${OIF.ID}_${options.name}`]);
+            await Tagger.removeTags(options.token, [TokenLightingManipulator.LIGHT_SOURCE_ID, `${C.ID}_${options.name}`]);
 
             // Call hook
             Hooks.call(OIF.HOOKS.ITEM.LIGHTING.EXTINGUISH.POS, options);
@@ -162,7 +160,7 @@ export class TokenLightingManipulator
             let TokenTags = Tagger.getTags(Token);
 
             // Remove the prefix
-            TokenTags = TokenTags.map(tag => tag.replace(OIF.ID + "_", ""));
+            TokenTags = TokenTags.map(tag => tag.replace(C.ID + "_", ""));
 
             let LightingTags = Object.assign({}, TagHandler.Tags['Lighting']);
             for (let key in LightingTags)
@@ -205,7 +203,7 @@ export class TokenLightingManipulator
                         item.update({ "img": lightingTag.icons.unlit });
 
                         // Remove the tag
-                        await Tagger.removeTags(Token, [`${OIF.ID}_${lightingTag.name}`]);
+                        await Tagger.removeTags(Token, [`${C.ID}_${lightingTag.name}`]);
                     }
                 }
             }

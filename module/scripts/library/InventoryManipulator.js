@@ -1,43 +1,79 @@
-import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
+////////////////////////////////////////////////////////////////////////////////
+//                          ███████    █████ ███████████                      //
+//                        ███░░░░░███ ░░███ ░░███░░░░░░█                      //
+//                       ███     ░░███ ░███  ░███   █ ░                       //
+//                      ░███      ░███ ░███  ░███████                         //
+//                      ░███      ░███ ░███  ░███░░░█                         //
+//                      ░░███     ███  ░███  ░███  ░                          //
+//                       ░░░███████░   █████ █████                            //
+//                         ░░░░░░░    ░░░░░ ░░░░░                             //
+//        Automated Objects, Interactions and Effects -  By ZotyDev           //
+////////////////////////////////////////////////////////////////////////////////
+import { Constants as C } from "../constants.js";
+export class InventoryManipulator {
+    ////////////////////////////////////////////////////////////////////////////
+    // Removes an item from the owner's inventory
+    // ? This method remove based on a valid quantity, if the quantity is exact
+    // ? the item gets deleted.
+    ////////////////////////////////////////////////////////////////////////////
+    static async removeItem(owner, item, quantity){
+        // Debug
+        C.D.info('InventoryManipulator.removeItem()');
 
-export class InventoryManipulator
-{
-    static async RemoveItem(owner, item, quantity)
-    {
+        const itemInformation = Bifrost.getItemInformation(item);
+
         // Check if the quantity is exact, if so delete the item from the inventory
-        if (item.system.quantity == quantity)
-        {
+        if (itemInformation.physical.quantity == quantity) {
+            // Debug
+            C.D.info('The entire quantity got removed, deleting item...');
+
             // Remove the item from the inventory
-            await owner.actor.deleteEmbeddedDocuments("Item", [item.id]);
+            await Bifrost.deleteItems(owner.actor, [item.id]);
             return true;
         }
-        // More than "quantity" units of the item remaining
-        else if (item.system.quantity > quantity)
-        {
+        else if (itemInformation.physical.quantity > quantity) {
+            // Debug
+            C.D.info(`Subtracting the removed quantity: ${itemInformation.physical.quantity} - ${quantity}...`);
+
             // Remove "quantity" units from the item
-            await owner.actor.updateEmbeddedDocuments("Item", [{_id: item.id, "system.quantity": item.system.quantity - quantity}]);
+            await Bifrost.setItemInformation(item, {
+                physical: {
+                    quantity: itemInformation.physical.quantity - quantity,
+                }
+            });
+
             return true;
         }
         // Not enough items to be removed
-        else 
-        {
-            console.error(`Could not remove item! Tried to remove ${quantity} while having only ${item.system.quantity}`)
+        else {
+            // Debug
+            C.D.error(`Could not remove item! Tried to remove ${quantity} while having only ${itemInformation.physical.quantity}`);
+
             return false;
         }
     }
 
-    static async AddItem(target, item, quantity)
-    {
-        if (quantity < 1) 
-        {
-            console.error(`Could not add item! ${quantity} is negative and thus invalid`);
+    ////////////////////////////////////////////////////////////////////////////
+    // Adds an item to the target's inventory
+    ////////////////////////////////////////////////////////////////////////////
+    static async addItem(target, item, quantity) {
+        // Debug
+        C.D.info('InventoryManipulator.addItem()');
+
+        if (quantity < 1) {
+            // Debug
+            C.D.error(`Could not add item! ${quantity} is negative and thus invalid`);
+
             return false;
         }
-        else
-        {
-            let ItemCopy = item.toObject();
-            ItemCopy.system.quantity = quantity;
-            await target.actor.createEmbeddedDocuments("Item", [ItemCopy]);
+        else {
+            let itemCopy = item.toObject();
+            await Bifrost.setItemInformation(itemCopy, {
+                physical: {
+                    quantity: quantity,
+                }
+            });
+            await Bifrost.createItems(target.actor, [itemCopy]);
             return true;
         }
     }

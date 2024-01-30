@@ -7,12 +7,25 @@
 //                             \____/_____|_|                                 //
 //                                                   By ZotyDev               //
 ////////////////////////////////////////////////////////////////////////////////
-// ? Here are all the constants used by OIF, all static values are and should be
-// ? here.
-export class Constants {
-    static ID = 'objects-interactions-fx';
-    static NAME_FLAT = 'Automated Objects, Interactions and Effects';
-    static NAME = `✨ ${this.NAME_FLAT}`;
-    static SOCKET;
-    static D;
+// ? Class that defines the layer for interaction.
+import { Constants as C } from "./constants.js";
+
+export class OifLayer extends InteractionLayer {
+    constructor() {
+        super();
+
+        if (game.release.generation == 10) {
+            // Debug
+            C.D.info('Detected FoundryVTT 10, making compatibility changes...');
+
+            this.loader = new PIXI.loader();
+        }
+
+        this.mouseInteractionManager = undefined;
+        this._interactiveChildren = false;
+        this._dragging = false;
+        this.options = this.constructor.layerOptions;
+    }
+
+    async _draw(options) {}
 }

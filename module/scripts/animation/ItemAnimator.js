@@ -4,7 +4,8 @@ import { InventoryManipulator } from "../library/InventoryManipulator.js";
 import { GeneralSettings } from "../interface/GeneralSettings.js";
 import { Helpers } from "../library/Helpers.js";
 import { TokenLightingManipulator } from "../library/TokenLightingManipulator.js";
-import { Debug as DBG } from "../library/Debug.js";
+
+import { Constants as C } from "../constants.js";
 
 export class ItemAnimator
 {
@@ -44,6 +45,9 @@ export class ItemAnimator
             return options;
         }
 
+        // Get system information
+        options.system = Bifrost.systemInformation;
+
         // Get the first target (only valid)
         options.target = options.targets[0];
 
@@ -75,11 +79,13 @@ export class ItemAnimator
 
         Hooks.call(OIF.HOOKS.WEAPON.MELEE.POST_PREPARE, options);
 
+        const itemInformation = Bifrost.getItemInformation(options.item);
+
         // Check if item can be thrown at the current distance
-        if (options.system.isThrowable && options.distance >= options.system.meleeWeaponDistance + options.gridUnitSize)
+        if (itemInformation.properties.thrown && options.distance >= options.system.rangeMelee + options.gridUnitSize)
         {
             // Check if the distance is below max distance
-            if (options.distance <= options.system.longDistance)
+            if (options.distance <= itemInformation.range.max)
             {
                 ////////////////////////////////////////////////////////////
                 // Thrown Attack
@@ -120,10 +126,6 @@ export class ItemAnimator
                         Hooks.call(OIF.HOOKS.WEAPON.MELEE.THROW.POST_ANIMATION, options);
                     }
 
-                    // Create a copy of the item
-                    let ItemCopy = options.item.toObject();
-                    ItemCopy.system.quantity = 1;
-
                     let DidInteract = false;
                     // Check if the item should or not break
                     if(!(Helpers.RandomMax(100) <= GeneralSettings.Get(OIF.SETTINGS.GENERAL.DEFAULT_THROWABLE_DESTRUCTION_CHANCE)))
@@ -151,7 +153,7 @@ export class ItemAnimator
                         else if (AddThrowableToTargetInventory)
                         {
                             // Add item to target's inventory
-                            InventoryManipulator.AddItem(options.target, options.item, 1);
+                            InventoryManipulator.addItem(options.target, options.item, 1);
                             ShouldRemoveItem = true;
                         }
                         else if (CreateItemPileOnHit)
@@ -173,7 +175,7 @@ export class ItemAnimator
                         if (RemoveThrowableItem && ShouldRemoveItem)
                         {
                             // Remove item from author inventory
-                            InventoryManipulator.RemoveItem(options.token, options.item, 1);
+                            InventoryManipulator.removeItem(options.token, options.item, 1);
                         }
 
                         DidInteract = true;
@@ -182,7 +184,7 @@ export class ItemAnimator
                     // Check if poweful impact effect should be played
                     if ((options.throwAnimation.powerful || options.tags.includes('powerful')) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
-                        OIF_SOCKET.executeForEveryone('ScreenShake');
+                        ChromaticCanvas.shake();
                         DidInteract = true;
                     }
 
@@ -200,7 +202,7 @@ export class ItemAnimator
         else
         {
             // Check if the distance is within max distance
-            if (options.distance < options.system.meleeWeaponDistance + options.gridUnitSize)
+            if (options.distance < options.system.rangeMelee + options.gridUnitSize)
             {
                 ////////////////////////////////////////////////////////////
                 // Melee Attack
@@ -234,7 +236,7 @@ export class ItemAnimator
                     // Check if poweful impact effect should be played
                     if ((options.meleeAnimation.powerful || options.tags.includes('powerful')) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
-                        OIF_SOCKET.executeForEveryone('ScreenShake');
+                        ChromaticCanvas.shake();
                         DidInteract = true;
                     }
 
@@ -267,25 +269,26 @@ export class ItemAnimator
 
         Hooks.call(OIF.HOOKS.WEAPON.RANGED.POST_PREPARE, options);
 
+        const itemInformation = Bifrost.getItemInformation(options.item);
+
         // Check if the distance is below the maximum distance
-        if (options.distance <= options.system.longDistance)
+        if (options.distance <= itemInformation.range.max)
         {
             // Check if item has ammo property
-            if (options.system.isConsumeAmmo)
+            if (itemInformation.ammo.has)
             {
                 ////////////////////////////////////////////////////////////
                 // Ranged Ammo Attack
                 ////////////////////////////////////////////////////////////
                 // Check if item has ammo set
-                if (options.system.ammoItem == undefined)
+                if (itemInformation.ammo.has == undefined)
                 {
                     ui.notifications.error(game.i18n.localize('OIF.Attack.Ranged.Error.NoAmmo'));
-                    console.error('Could not find the ammunition item!');
                     return;
                 }
 
                 // Create a copy of the ammo item
-                options.ammoItemCopy = await options.token.actor.getEmbeddedDocument('Item', options.system.ammoItem);
+                options.ammoItemCopy = await options.token.actor.getEmbeddedDocument('Item', itemInformation.ammo.item);
 
                 // Check if animation should be played
                 if (GeneralSettings.Get(OIF.SETTINGS.GENERAL.USE_ANIMATIONS) && options.rangedAnimation != undefined)
@@ -346,7 +349,7 @@ export class ItemAnimator
                         else if (AddAmmunitionToTargetInventory)
                         {
                             // Add item to target's inventory
-                            InventoryManipulator.AddItem(options.target, options.ammoItemCopy, 1);
+                            InventoryManipulator.addItem(options.target, options.ammoItemCopy, 1);
                         }
                         else if (CreateItemPileOnHit)
                         {
@@ -368,7 +371,7 @@ export class ItemAnimator
                     // Check if poweful impact effect should be played
                     if ((options.rangedAnimation.powerful || options.tags.indexOf('powerful') > 0) && GeneralSettings.Get(OIF.SETTINGS.GENERAL.POWERFUL_IMPACT_SHAKE_EFFECT))
                     {
-                        OIF_SOCKET.executeForEveryone('ScreenShake');
+                        ChromaticCanvas.shake();
                         DidInteract = true;
                     }
 

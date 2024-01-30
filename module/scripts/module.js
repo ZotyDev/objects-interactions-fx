@@ -1,37 +1,176 @@
+////////////////////////////////////////////////////////////////////////////////
+//                          ███████    █████ ███████████                      //
+//                        ███░░░░░███ ░░███ ░░███░░░░░░█                      //
+//                       ███     ░░███ ░███  ░███   █ ░                       //
+//                      ░███      ░███ ░███  ░███████                         //
+//                      ░███      ░███ ░███  ░███░░░█                         //
+//                      ░░███     ███  ░███  ░███  ░                          //
+//                       ░░░███████░   █████ █████                            //
+//                         ░░░░░░░    ░░░░░ ░░░░░                             //
+//        Automated Objects, Interactions and Effects -  By ZotyDev           //
+////////////////////////////////////////////////////////////////////////////////
+// ? OIF (Automated Objects, Interactions and Effects) is a module that animates
+// ? complex effects and interactions between the players and the game world, it
+// ? focus on usability and a simple and easy experience, without needing to
+// ? consider little details. OIF have a gamefied approach, thus it may not be
+// ? for everyone.
 import { ObjectsInteractionsFX as OIF } from "./ObjectsInteractionsFX.js";
 import { Settings } from "./Settings.js";
-import { SystemSupporter } from "./system/SystemSupporter.js";
 import { MasterTagsSettings } from "./interface/MasterTagsSettings.js";
 import { GeneralSettings } from "./interface/GeneralSettings.js";
-import { ObjectsInteractionsFXData } from "./data/ObjectsInteractionsFXData.js";
 import { TagHandler } from "./tags/TagHandler.js";
 import { TokenLightingManipulator } from "./library/TokenLightingManipulator.js";
-import { Debug as DBG } from "./library/Debug.js";
 
 import { Constants as C } from "./constants.js";
+import { OifLayer } from "./oifLayer.js";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Entry-point for everything
 ////////////////////////////////////////////////////////////////////////////////
 Hooks.once('init', () => {
-    Hooks.once('toolbox.ready', () => {
+    Hooks.once('toolbox.ready', async () => {
         Toolbox.showcaseModule(C.NAME_FLAT);
+
+        OIF.Initialize();
+        Settings.Initialize();
+
+        // Check for missing modules
+        let requiredModules = game.modules.get(OIF.ID).relationships.requires;
+        for (let module of requiredModules) {
+            if (!(game.modules.get(module.id)?.active)) {
+                ui.notifications.error(game.i18n.localize('OIF.Core.MissingRequiredModule').replace('$module', module.id));
+            }
+        }
+
+        // Make sure the required folders and files exist
+        if (Toolbox.can(['FILES_BROWSE', 'FILES_UPLOAD'])) {
+            Toolbox.makeSure('./oif');
+            Toolbox.makeSure('./oif/TagPacks.json', {});
+        }
+
+        // Load default packs
+        await MasterTagsSettings.LoadFromConfig();
+
+        ////////////////////////////////////////////////////////////
+        // Hooks to attach
+        ////////////////////////////////////////////////////////////
+        let hooksToAttach = {
+            attack: {
+                hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK),
+                id  : 0
+            },
+            item: {
+                hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM),
+                id  : 0
+            }
+        }
+        Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, async (settings) => {
+            // Debug
+            C.D.info('Changing settings', settings);
+
+            // Update the hooks to attach
+            hooksToAttach.attack.hook = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK);
+            hooksToAttach.item.hook   = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM);
+
+            Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
+        });
+        Hooks.on(OIF.HOOKS.ATTACH_HOOKS, async () => {
+            // Debug
+            C.D.info('Attaching hooks', hooksToAttach);
+
+            if (hooksToAttach.attack.id != 0)
+            {
+                Hooks.off(hooksToAttach.attack.hook, hooksToAttach.attack.id);
+            }
+            if (hooksToAttach.item.id != 0)
+            {
+                Hooks.off(hooksToAttach.item.hook, hooksToAttach.item.id);
+            }
+
+            ////////////////////////////////////////////////////////////
+            // Attack Hook
+            ////////////////////////////////////////////////////////////
+            // Debug
+            C.D.info(`Attaching attack hook "${hooksToAttach.attack.hook}"...`);
+
+            hooksToAttach.attack.id = Hooks.on(hooksToAttach.attack.hook, (arg1, arg2, arg3) => {
+                // Extract relevant information
+                const workflow = [arg1, arg2, arg3];
+                const options = Bifrost.getHookInformation(workflow, 'attack', hooksToAttach.attack.hook);
+
+
+                if (options) {
+                    // Start the workflow
+                    Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, options);
+
+                    // Debug
+                    C.D.info('Post prepare hook called from attack hook', hooksToAttach.attack.hook,  options);
+                } else {
+                    // Debug
+                    C.D.info('invalid options, skipping this attempt...');
+                }
+            });
+
+            ////////////////////////////////////////////////////////////
+            // Item Hook
+            ////////////////////////////////////////////////////////////
+            // Debug
+            C.D.info(`Attaching item hook "${hooksToAttach.item.hook}"...`);
+
+            hooksToAttach.item.id = Hooks.on(hooksToAttach.item.hook, (arg1, arg2, arg3) => {
+                // Extract relevant information
+                const workflow = [arg1, arg2, arg3];
+                const options = Bifrost.getHookInformation(workflow, 'item', hooksToAttach.item.hook);
+
+                if (options) {
+                    // Start the workflow
+                    Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, options);
+
+                    // Debug
+                    C.D.info('Post prepare hook called from item hook', hooksToAttach.item.hook, options);
+                } else {
+                    // Debug
+                    C.D.info('invalid options, skipping this attempt...');
+                }
+            });
+        });
+
+        ////////////////////////////////////////////////////////////
+        // Main workflow
+        ////////////////////////////////////////////////////////////
+        Hooks.on(OIF.HOOKS.WORKFLOW.POST_PREPARE, async (options) => {
+            // Debug
+            C.D.info('Post prepare hook called', options);
+
+            // Extract tags
+            options.tags = ItemTags.get(options.item);
+
+            // Check if there are tags to be used
+            if (options.tags.length > 0)
+            {
+                // Send tags to the handler
+                TagHandler.Dispatch(options);
+            }
+        });
+
+        Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
+        Hooks.callAll("oif.ready", game.modules.get(OIF.ID).api);
+
+        // Debug
+        C.D.info('Ready!!');
     });
 
-    // Debug info
-    Hooks.once('debugger.ready', () => {
-        C.D = new Debugger(C.ID, C.NAME, true, true);
-        C.D.info('Module Information:');
-        C.D.info(`Version ${game.modules.get(C.ID).version}`);
-        C.D.info('Module By ZotDev');
-    });
-
-    OIF.Initialize();
+    // Setup the layer where the interface will be
+    CONFIG.Canvas.layers['oif'] = {
+        group: 'interface',
+        layerClass: OifLayer,
+    }
 
     Hooks.on('getSceneControlButtons', (controls) => {
+        // Setup listener for the module tools
         if (!canvas.scene) return;
 
-        const MasterTags = {
+        const masterTagsTool = {
             name: 'master-tags',
             title: game.i18n.localize('OIF.Tooltips.MasterTags.Title'),
             icon: 'fas fa-tags',
@@ -41,7 +180,7 @@ Hooks.once('init', () => {
             button: true
         }
 
-        const ClearLighting = {
+        const clearLightingTool = {
             name: 'clear-lighting',
             title: game.i18n.localize('OIF.Tooltips.ClearLighting.Title'),
             icon: 'fas fa-lightbulb-slash',
@@ -51,7 +190,7 @@ Hooks.once('init', () => {
             button: true
         }
 
-        const Configuration =
+        const configurationTool =
         {
             name: 'configuration',
             title: game.i18n.localize('OIF.Tooltips.Configuration.Title'),
@@ -65,140 +204,32 @@ Hooks.once('init', () => {
         controls.push({
             name: OIF.ID,
             title: OIF.NAME,
-            layer: 'CanvasEffects',
+            layer: 'oif',
             icon: 'fas fa-snowflake',
             visible: game.user.isGM,
             tools: [
-                MasterTags,
-                ClearLighting,
-                Configuration
+                masterTagsTool,
+                clearLightingTool,
+                configurationTool
             ]
         });
-    })
-
-    Hooks.on("ready", async () => {
-        ////////////////////////////////////////////////////////////////////////
-        // Initialization of the libraries inside OIF
-        ////////////////////////////////////////////////////////////////////////
-        await SystemSupporter.Initialize();
-        await Settings.Initialize();
-        await DBG.Initialize();
-
-        // Check for missing modules
-        let requiredModules = game.modules.get(OIF.ID).relationships.requires;
-        for (let module of requiredModules) {
-            if (!(game.modules.get(module.id)?.active)) {
-                ui.notifications.error(game.i18n.localize('OIF.Core.MissingRequiredModule').replace('$module', module.id));
-            }
-        }
-
-        // Create the folders that are going to be used
-        if (game.user.isGM)
-        {
-            // Create the root folder if it doesn't exist
-            let Folders = await FilePicker.browse(OIF.FILES.ORIGIN, '.');
-            if (!Folders.dirs.includes(OIF.FILES.DATA_FOLDERS.ROOT))
-            {
-                console.warn("Root folder doesn't exist, creating it...");
-                await FilePicker.createDirectory(OIF.FILES.ORIGIN, OIF.FILES.DATA_FOLDERS.ROOT);
-            }
-
-            // Create the default tag packs file if it doesn't exist
-            Folders = await FilePicker.browse(OIF.FILES.ORIGIN, OIF.FILES.DATA_FOLDERS.ROOT);
-            if (!Folders.files.includes(`${OIF.FILES.DATA_FOLDERS.ROOT}/TagPacks.json`))
-            {
-                console.warn("TagPacks.json doesn't exist, creating it...");
-                let Data = {};
-                await ObjectsInteractionsFXData.SaveJSON(Data, 'TagPacks.json', OIF.FILES.DATA_FOLDERS.ROOT);
-            }
-        }
-
-        // Load default packs
-        await MasterTagsSettings.LoadFromConfig();
-
-        ////////////////////////////////////////////////////////////
-        // Hooks to attach
-        ////////////////////////////////////////////////////////////
-        let HooksToAttach =
-        {
-            attack:
-            {
-                hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK),
-                id  : 0
-            },
-            item:
-            {
-                hook: GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM),
-                id  : 0
-            }
-        }
-        Hooks.on(OIF.HOOKS.CHANGE_SETTINGS, async (settings) =>
-        {
-            DBG.Log('Changing settings', settings);
-
-            // Update the hooks to attach
-            HooksToAttach.attack.hook = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK);
-            HooksToAttach.item.hook   = GeneralSettings.Get(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM);
-            Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
-        });
-        Hooks.on(OIF.HOOKS.ATTACH_HOOKS, async () =>
-        {
-            DBG.Log('Attaching hooks', HooksToAttach);
-
-            if (HooksToAttach.attack.id != 0)
-            {
-                Hooks.off(HooksToAttach.attack.hook, HooksToAttach.attack.id);
-            }
-            if (HooksToAttach.item.id != 0)
-            {
-                Hooks.off(HooksToAttach.item.hook, HooksToAttach.item.id);
-            }
-
-            ////////////////////////////////////////////////////////////
-            // Attack Hook
-            ////////////////////////////////////////////////////////////
-            HooksToAttach.attack.id = Hooks.on(HooksToAttach.attack.hook, async (arg1, arg2, arg3) =>
-            {
-                // Extract relevant information
-                let Workflow = [arg1, arg2, arg3];
-                let Options = await SystemSupporter.ExtractOptions(Workflow, 'attack', HooksToAttach.attack.hook);
-
-                // Start the workflow
-                Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, Options);
-                DBG.Log('Post prepare hook called from attack hook', HooksToAttach.attack.hook,  Options);
-            });
-
-            ////////////////////////////////////////////////////////////
-            // Item Hook
-            ////////////////////////////////////////////////////////////
-            HooksToAttach.item.id = Hooks.on(HooksToAttach.item.hook, async (arg1, arg2, arg3) =>
-            {
-                // Extract relevant information
-                let Workflow = [arg1, arg2, arg3];
-                let Options = await SystemSupporter.ExtractOptions(Workflow, 'item', HooksToAttach.item.hook);
-
-                // Start the workflow
-                Hooks.call(OIF.HOOKS.WORKFLOW.POST_PREPARE, Options);
-                DBG.Log('Post prepare hook called from item hook', HooksToAttach.item.hook, Options);
-            });
-        });
-
-        ////////////////////////////////////////////////////////////
-        // Main workflow
-        ////////////////////////////////////////////////////////////
-        Hooks.on(OIF.HOOKS.WORKFLOW.POST_PREPARE, async (options) =>
-        {
-            DBG.Log('Post prepare hook called', options);
-            // Check if there are tags to be used
-            if (options.tags.length > 0)
-            {
-                // Send tags to the handler
-                TagHandler.Dispatch(options);
-            }
-        });
-
-        Hooks.call(OIF.HOOKS.ATTACH_HOOKS);
-        Hooks.callAll("oifReady", game.modules.get(OIF.ID).api);
-        console.log("Automated Objects, Interactions and Effects is ready!!");
     });
+
 });
+
+// Debug info
+Hooks.once('debugger.ready', () => {
+    C.D = new Debugger(C.ID, C.NAME, true, true);
+    C.D.info('Module Information:');
+    C.D.info(`Version ${game.modules.get(C.ID).version}`);
+    C.D.info('Module By ZotDev');
+});
+
+// Setup the socket
+Hooks.once('socketlib.ready', () =>
+{
+    C.SOCKET = socketlib.registerModule(C.ID);
+
+    // Tags
+    C.SOCKET.register('LoadFromConfig', MasterTagsSettings.LoadFromConfig);
+})

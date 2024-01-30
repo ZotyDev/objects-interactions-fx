@@ -1,6 +1,7 @@
 import { ItemAnimator } from "../animation/ItemAnimator.js";
-import { Debug as DBG } from "../library/Debug.js";
 import { TokenLightingManipulator } from "../library/TokenLightingManipulator.js";
+
+import { Constants as C } from "../constants.js";
 
 export class TagHandler
 {
@@ -22,7 +23,8 @@ export class TagHandler
             }
         });
 
-        DBG.Log('Tags got updated', TagHandler.Tags);
+        // Debug
+        C.D.info('Tags got updated', TagHandler.Tags);
     }
 
     ////////////////////////////////////////////////////////////
@@ -32,7 +34,7 @@ export class TagHandler
     {
         let CleanedTags = tags;
         // Remove the tags inside of MeleeAttack
-        CleanedTags = CleanedTags.filter((tag) => 
+        CleanedTags = CleanedTags.filter((tag) =>
         {
             return TagHandler.Tags.MeleeAttack[tag] == undefined;
         });
@@ -66,7 +68,7 @@ export class TagHandler
             if (TagHandler.Tags.MeleeAttack[tag] != undefined && options.type == 'attack')
             {
                 // Combine the options
-                let MergedOptions = 
+                let MergedOptions =
                 {
                     ...options,
                     ...TagHandler.Tags.MeleeAttack[tag]
@@ -143,7 +145,7 @@ export class TagHandler
             }
             else
             {
-                DBG.Log('Could not find tag', tag, 'on', TagHandler.Tags);
+                C.D.info('Could not find tag', tag, 'on', TagHandler.Tags);
             }
 
             return true;

@@ -1,7 +1,8 @@
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
-import { ActorInventorSettings } from "./ActorInventorSettings.js";
 
 import { SettingsSkeleton } from "../library/skeletons/SettingsSkeleton.js";
+
+import { Constants as C } from "../constants.js";
 
 export class GeneralSettings extends SettingsSkeleton {
     static get defaultOptions() {
@@ -38,9 +39,10 @@ export class GeneralSettings extends SettingsSkeleton {
 
     getData(options)
     {
-        return SettingsSkeleton._protoGetData('oif-general-settings', options)
+        const data = SettingsSkeleton._protoGetData('oif-general-settings', options)
+        return data;
     }
 
-    async _updateObject(event, formData) 
+    async _updateObject(event, formData)
     {}
 }

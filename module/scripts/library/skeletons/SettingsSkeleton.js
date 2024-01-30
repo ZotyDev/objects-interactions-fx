@@ -1,6 +1,8 @@
 import { GeneralSettings } from "../../interface/GeneralSettings.js";
 import { ObjectsInteractionsFX as OIF } from "../../ObjectsInteractionsFX.js";
 
+import { Constants as C } from "../../constants.js";
+
 export class SettingsSkeleton extends FormApplication
 {
     static get defaultOptions() {
@@ -46,7 +48,7 @@ export class SettingsSkeleton extends FormApplication
             // This is used inside .hbs templates to select which option
             // display/editor will be shown
             options[options['type']] = true;
-            
+
             // Convert type to a foundry compatible
             switch (options['type'])
             {
@@ -58,7 +60,7 @@ export class SettingsSkeleton extends FormApplication
                     FoundrySettingOptions['type'] = Number;
                     FoundrySettingOptions['range'] = options['range'];
                     break;
-                
+
                 case 'string':
                     FoundrySettingOptions['type'] = String;
                     break;
@@ -67,9 +69,11 @@ export class SettingsSkeleton extends FormApplication
                     FoundrySettingOptions['type'] = String;
                     FoundrySettingOptions['choices'] = options['choices'];
                     break;
-                
+
                 default:
-                    console.error(`Cannot register setting, ${options['type']} is not a valid type`);
+                    // Debug
+                    C.D.error(`Cannot register setting, ${options['type']} is not a valid type`);
+
                     break;
             }
         }
@@ -127,13 +131,13 @@ export class SettingsSkeleton extends FormApplication
             case 'checkbox':
                 return CurrentSetting['value'] && !CurrentSetting['disabled'];
                 break;
-        
+
             case 'slider':
             case 'string':
             case 'dropdown':
                 return CurrentSetting['disabled'] ? CurrentSetting['default'] : CurrentSetting['value'];
                 break;
-        
+
             default:
                 return CurrentSetting['value'];
                 break;
@@ -176,9 +180,9 @@ export class SettingsSkeleton extends FormApplication
 
         // Check value
         let CurrentValue = Number(ClickedElement.value);
-        if (CurrentValue > ClickedElement.max) 
+        if (CurrentValue > ClickedElement.max)
         {
-            CurrentValue = ClickedElement.max;    
+            CurrentValue = ClickedElement.max;
         }
         else if (CurrentValue < ClickedElement.min)
         {
@@ -215,7 +219,7 @@ export class SettingsSkeleton extends FormApplication
         game.settings.set(OIF.ID, ClickedElement.id, ClickedElement.value);
         SettingsSkeleton.Settings[config][ClickedElement.id]['value'] = ClickedElement.value;
 
-        SettingsSkeleton.Settings[config][ClickedElement.id]['choices'].forEach(function(element) 
+        SettingsSkeleton.Settings[config][ClickedElement.id]['choices'].forEach(function(element)
         {
             element['selected'] = false;
             if (element.value == ClickedElement.value)
@@ -234,7 +238,7 @@ export class SettingsSkeleton extends FormApplication
     ////////////////////////////////////////////////////////////
     static _protoUpdateSettings(config)
     {
-        for (const key in SettingsSkeleton.Settings[config]) 
+        for (const key in SettingsSkeleton.Settings[config])
         {
             // Check if current element has a dependecy
             let CurrentSetting = SettingsSkeleton.Settings[config][key];
@@ -243,7 +247,7 @@ export class SettingsSkeleton extends FormApplication
 
             // Check if setting requires a module to be used
             let RequiredModule = CurrentSetting.requiredModule;
-            if (RequiredModule != null && RequiredModule != undefined) 
+            if (RequiredModule != null && RequiredModule != undefined)
             {
                 // Check if required module isn't loaded
                 if (!RequiredModule.active)
@@ -264,7 +268,7 @@ export class SettingsSkeleton extends FormApplication
                 {
                     // Check if the current dependency is a Boolean
                     const CurrentDependency = CurrentDependencies[index];
-                    if (SettingsSkeleton.Settings[config][CurrentDependency]['type'] != 'checkbox') 
+                    if (SettingsSkeleton.Settings[config][CurrentDependency]['type'] != 'checkbox')
                     {
                         BoolCheck = false;
                     }
@@ -273,7 +277,9 @@ export class SettingsSkeleton extends FormApplication
                 // If one of the dependencies isn't a Boolean, skip the rest
                 if (BoolCheck == false)
                 {
-                    console.error(`OIF | ${config} | ${key} | Dependency isn't a Boolean`);
+                    // Debug
+                    C.D.error(`OIF | ${config} | ${key} | Dependency isn't a Boolean`);
+
                     continue;
                 }
 
@@ -284,7 +290,7 @@ export class SettingsSkeleton extends FormApplication
                     // Check if the current dependency exists
                     const CurrentDependency = CurrentDependencies[index];
                     let CurrentRequirement = SettingsSkeleton.Settings[config][CurrentDependency];
-                    if (CurrentRequirement != null && CurrentRequirement != undefined) 
+                    if (CurrentRequirement != null && CurrentRequirement != undefined)
                     {
                         CurrentRequirements.push(CurrentRequirement);
                     }
@@ -341,7 +347,7 @@ export class SettingsSkeleton extends FormApplication
                 {
                     // Check if the current undependency is a Boolean
                     const CurrentUndependency = CurrentUndependencies[index];
-                    if (SettingsSkeleton.Settings[config][CurrentUndependency]['type'] != 'checkbox') 
+                    if (SettingsSkeleton.Settings[config][CurrentUndependency]['type'] != 'checkbox')
                     {
                         BoolCheck = false;
                     }
@@ -350,7 +356,9 @@ export class SettingsSkeleton extends FormApplication
                 // If one of the undependencies isn't a Boolean, skip the rest
                 if (BoolCheck == false)
                 {
-                    console.error(`OIF | ${config} | ${key} | Undependency isn't a Boolean`);
+                    // Debug
+                    C.D.error(`OIF | ${config} | ${key} | Undependency isn't a Boolean`);
+
                     continue;
                 }
 
@@ -361,7 +369,7 @@ export class SettingsSkeleton extends FormApplication
                     // Check if the current undependency exists
                     const CurrentUndependency = CurrentUndependencies[index];
                     let CurrentRequirement = SettingsSkeleton.Settings[config][CurrentUndependency];
-                    if (CurrentRequirement != null && CurrentRequirement != undefined) 
+                    if (CurrentRequirement != null && CurrentRequirement != undefined)
                     {
                         CurrentUnrequirements.push(CurrentRequirement);
                     }

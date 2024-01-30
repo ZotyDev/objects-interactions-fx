@@ -172,11 +172,6 @@
                 "Hint": "Fine tune the features to your desire.",
                 "Label": "Settings"
             },
-            "ActorInventorSettings": {
-                "Title": "Actor Inventor Settings",
-                "Hint": "Setup actor inventor settings",
-                "Label": "Actor Inventor"
-            },
             "DefaultAttackHook": {
                 "Title": "Default Attack Hook",
                 "Hint": "Hook used to trigger attack effects",

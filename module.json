@@ -1,8 +1,8 @@
 {
     "id": "objects-interactions-fx",
     "title": "✨ Automated Objects, Interactions and Effects 🔥",
-    "description": "Animations. Automations. Interactions. Effects. And soon Objects too! Immerse your players on the game, let they experience the interactions and feel the combat!",
-    "version": "1.1.0",
+    "description": "Automations. Animations. Interactions. Effects. Immerse your players, let they experience the interactions and feel the combat!",
+    "version": "2.0.0",
     "authors": [
         {
         "name": "ZotyDev",
@@ -36,9 +36,34 @@
                 "id": "dnd5e",
                 "type": "system",
                 "compatibility": {}
+            },
+            {
+                "id": "pf2e",
+                "type": "system",
+                "compatibility": {}
+            },
+            {
+                "id": "symbaroum",
+                "type": "system",
+                "compatibility": {}
             }
         ],
         "requires": [
+            {
+                "id": "debugger",
+                "type": "module",
+                "compatibility": {}
+            },
+            {
+                "id": "toolbox",
+                "type": "module",
+                "compatibility": {}
+            },
+            {
+                "id": "chromatic-canvas",
+                "type": "module",
+                "compatibility": {}
+            },
             {
                 "id": "item-tags",
                 "type": "module",
@@ -59,9 +84,6 @@
     "socket": true,
     "esmodules": [
         "./module/scripts/module.js",
-        "./module/scripts/automation/ActorInventor.js",
-        "./module/scripts/library/CanvasEffects.js",
-        "./module/scripts/library/Socket.js",
         "./module/scripts/library/HandlebarsHelpers.js"
     ],
     "styles": [

@@ -1,3 +1,4 @@
+import { Constants as C } from "./constants.js";
 export class ObjectsInteractionsFX
 {
     static ID = 'objects-interactions-fx';
@@ -14,8 +15,6 @@ export class ObjectsInteractionsFX
         CONFIG_SKELETON         : `modules/${this.ID}/module/templates/ConfigSkeleton.hbs`,
     }
 
-    static SOCKET;
-
     static SETTINGS = {
         GENERAL: {
             ATTACH_HOOKS: {
@@ -24,7 +23,6 @@ export class ObjectsInteractionsFX
             },
             MASTER_TAGS_SETTINGS                 : 'masterTagsSettings',
             GENERAL_SETTINGS                     : 'generalSettings',
-            ACTOR_INVENTOR_SETTINGS              : 'actorInventor',
             DEFAULT_ATTACK_HOOK                  : 'defaultAttackHook',
             DEFAULT_ITEM_HOOK                    : 'defaultItemHook',
             USE_ANIMATIONS                       : 'useAnimations',
@@ -167,7 +165,8 @@ export class ObjectsInteractionsFX
             }
             else
             {
-                console.warn(`OIF | module ${this.OPTIONAL_MODULES[key].name} not active - some features disabled`);
+                // Debug
+                C.D.warn(`OIF | module ${this.OPTIONAL_MODULES[key].name} not active - some features disabled`);
             }
         }
     }

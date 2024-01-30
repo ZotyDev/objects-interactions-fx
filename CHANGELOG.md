@@ -1,5 +1,19 @@
 # Automated Objects, Interactions and Effects Changelog
 
+## Version 2.0.0
+
+- *Internal* - Removed **Actor Inventor**. (This section will get its own module in the future)
+- *Internal* - Added proper `InteractionLayer` for the module.
+- *Internal* - Completely removed the `Debugger` class.
+- *Internal* - Completely removed the `System` class and its dependants.
+- *Internal* - All debugging is now handled by [Debugger](https://foundryvtt.com/packages/debugger);
+- *Dependencies* - Added [Debugger](https://foundryvtt.com/packages/debugger) as a dependency.
+- *Dependencies* - Added [Toolbox](https://foundryvtt.com/packages/toolbox) as a dependency.
+- *Dependencies* - Added [Chromatic Canvas](https://foundryvtt.com/packages/chromatic-canvas) as a dependency.
+- *Dependencies* - Added [Bifrost](https://foundryvtt.com/packages/bifrost) as a dependency.
+- *Internal* - Removed `CanvasLayer` layer and `CanvasEffects` class, now we use **Chromatic Canvas** as the provider for the effects related to `Canvas` (this new module is kind of a ripoff from [Kandashi's Fluid Canvas](https://github.com/kandashi/kandashis-fluid-canvas)).
+- *Internal* - Inventory manipulation is now system-agnostic, it uses the DnD5e Bridge from Bifrost.
+
 ## Version 1.1.5
 
 - *Fixed* - `powerful` tag can now be inserted at any position inside the ItemTags.

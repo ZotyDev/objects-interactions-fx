@@ -1,9 +1,7 @@
 import { GeneralSettings } from "./interface/GeneralSettings.js";
 import { MasterTagsSettings } from "./interface/MasterTagsSettings.js";
-import { ActorInventorSettings } from "./interface/ActorInventorSettings.js";
 import { ObjectsInteractionsFX as OIF } from "./ObjectsInteractionsFX.js";
 import { SettingsSkeleton } from "./library/skeletons/SettingsSkeleton.js";
-import { SystemSupporter } from "./system/SystemSupporter.js";
 
 export class Settings
 {
@@ -31,22 +29,23 @@ export class Settings
             type: GeneralSettings,
             restricted: false,
         });
-
+        const attackHooks = Bifrost.attackHooks;
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ATTACK, {
             name: 'OIF.Settings.DefaultAttackHook.Title',
             hint: 'OIF.Settings.DefaultAttackHook.Hint',
             scope: 'world',
             type: 'dropdown',
-            default: SystemSupporter.GetDefaultHookAttack(),
-            choices: SystemSupporter.GetPossibleHooksAttack()
+            default: attackHooks[0].value,
+            choices: attackHooks,
         });
+        const itemHooks = Bifrost.itemHooks;
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.ATTACH_HOOKS.ITEM, {
             name: 'OIF.Settings.DefaultItemHook.Title',
             hint: 'OIF.Settings.DefaultItemHook.Hint',
             scope: 'world',
             type: 'dropdown',
-            default: SystemSupporter.GetDefaultHookItem(),
-            choices: SystemSupporter.GetPossibleHooksItem()
+            default: itemHooks[0].value,
+            choices: itemHooks
         });
         GeneralSettings.Register(OIF.SETTINGS.GENERAL.USE_ANIMATIONS, {
             name: 'OIF.Settings.UseAnimations.Title',
@@ -200,77 +199,6 @@ export class Settings
             default: false,
         });
 
-        //////////////////////////////////////////////////
-        // Register Actor Inventor Settings menu
-        game.settings.registerMenu(OIF.ID, OIF.SETTINGS.GENERAL.ACTOR_INVENTOR_SETTINGS, {
-            name: 'OIF.Settings.ActorInventorSettings.Title',
-            hint: 'OIF.Settings.ActorInventorSettings.Hint',
-            label: 'OIF.Settings.ActorInventorSettings.Label',
-            icon: 'fas fa-user',
-            type: ActorInventorSettings,
-            restricted: false,
-        });
-        ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR, {
-            name: 'OIF.Settings.CurrencyGenerator.Title',
-            hint: 'OIF.Settings.CurrencyGenerator.Hint',
-            scope: 'world',
-            type: 'checkbox',
-            requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET.active,
-            default: OIF.OPTIONAL_MODULES.TIDY_SHEET.active,
-        });
-        ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.CP_LOCATION, {
-            name: 'OIF.Settings.CpLocation.Title',
-            hint: 'OIF.Settings.CpLocation.Hint',
-            scope: 'world',
-            type: 'string',
-            requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            default: "system.currency.cp",
-            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
-        });
-        ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.SP_LOCATION, {
-            name: 'OIF.Settings.SpLocation.Title',
-            hint: 'OIF.Settings.SpLocation.Hint',
-            scope: 'world',
-            type: 'string',
-            requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            default: "system.currency.sp",
-            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
-        });
-        ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.GP_LOCATION, {
-            name: 'OIF.Settings.GpLocation.Title',
-            hint: 'OIF.Settings.GpLocation.Hint',
-            scope: 'world',
-            type: 'string',
-            requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            default: "system.currency.gp",
-            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
-        });
-        ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.PP_LOCATION, {
-            name: 'OIF.Settings.PpLocation.Title',
-            hint: 'OIF.Settings.PpLocation.Hint',
-            scope: 'world',
-            type: 'string',
-            requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            default: "system.currency.pp",
-            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
-        });
-        ActorInventorSettings.Register(OIF.SETTINGS.ACTOR_INVENTOR.EP_LOCATION, {
-            name: 'OIF.Settings.EpLocation.Title',
-            hint: 'OIF.Settings.EpLocation.Hint',
-            scope: 'world',
-            type: 'string',
-            requiredModule: OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            disabled: !OIF.OPTIONAL_MODULES.TIDY_SHEET,
-            default: "system.currency.ep",
-            dependsOn: [OIF.SETTINGS.ACTOR_INVENTOR.CURRENCY_GENERATOR],
-        });
-
         GeneralSettings.UpdateSettings();
-        ActorInventorSettings.UpdateSettings();
     }
 }

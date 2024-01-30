@@ -1,9 +1,9 @@
 import { ObjectsInteractionsFX as OIF } from "../ObjectsInteractionsFX.js";
 import { ObjectsInteractionsFXData as OIFD } from '../data/ObjectsInteractionsFXData.js';
 import { MasterTagConfiguration } from "./MasterTagConfiguration.js";
-import { SystemSupporter } from "../system/SystemSupporter.js";
 import { TagHandler } from "../tags/TagHandler.js";
-import { Debug as DBG } from "../library/Debug.js";
+
+import { Constants as C } from "../constants.js";
 
 export class MasterTagsSettings extends FormApplication {
     static get defaultOptions() {
@@ -55,7 +55,7 @@ export class MasterTagsSettings extends FormApplication {
         let Setting = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
         if (Setting == '')
         {
-            await game.settings.set(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, await SystemSupporter.GetDefaultTagPack());
+            await game.settings.set(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK, 'DefaultFantasyTagsJB2AComplete');
             Setting = await game.settings.get(OIF.ID, OIF.SETTINGS.MASTER_TAGS.CURRENT_TAG_PACK);
         }
     }
@@ -254,7 +254,7 @@ export class MasterTagsSettings extends FormApplication {
         await OIFD.SaveJSON(Data, 'TagPacks.json', OIF.FILES.DATA_FOLDERS.ROOT);
 
         // Propagate changes
-        OIF_SOCKET.executeForOthers('LoadFromConfig');
+        C.SOCKET.executeForOthers('LoadFromConfig');
     }
 
     ////////////////////////////////////////////////////////////
@@ -300,7 +300,8 @@ export class MasterTagsSettings extends FormApplication {
         // Load the tags
         await MasterTagsSettings.LoadTags(CurrentTagPack);
 
-        DBG.Log('Loaded tags from config', MasterTagsSettings.Tags);
+        // Debug
+        C.D.info('Loaded tags from config', MasterTagsSettings.Tags);
     }
 
     ////////////////////////////////////////////////////////////
@@ -364,7 +365,7 @@ export class MasterTagsSettings extends FormApplication {
         await MasterTagsSettings.LoadTags(ClickedElement.value);
 
         // Propagate changes
-        OIF_SOCKET.executeForOthers('LoadFromConfig');
+        C.SOCKET.executeForOthers('LoadFromConfig');
 
         this.render();
     }
