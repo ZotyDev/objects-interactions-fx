@@ -1,83 +1,83 @@
 .oif-settings-container {
-    padding: 5px;
+  padding: 5px;
 }
 
 .oif-checkbox-container {
-    display: inline-flex;
+  display: inline-flex;
 }
 
 .oif-slider-container {
-    display: inline-flex;
-    margin-left: 30px;
+  display: inline-flex;
+  margin-left: 30px;
 }
 
 .oif-text-container {
-    display: inline-flex;
-    margin-left: 30px;
+  display: inline-flex;
+  margin-left: 30px;
 }
 
 .oif-string-container {
-    display: inline-flex;
-    margin-left: 30px;
+  display: inline-flex;
+  margin-left: 30px;
 }
 
 .oif-dropdown-container {
-    display: inline-flex;
-    margin-left: 30px;
+  display: inline-flex;
+  margin-left: 30px;
 }
 
 .oif-color-container {
-    display: inline-flex;
-    margin-left: 30px;
+  display: inline-flex;
+  margin-left: 30px;
 }
 
 .oif-icon-container {
-    display: inline-flex;
-    margin-left: 30px;
+  display: inline-flex;
+  margin-left: 30px;
 }
 
 .oif-option-text-container {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 .oif-option-title {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .oif-option-hint {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .oif-option-slider-container {
-    display: flex;
-    width: auto;
+  display: flex;
+  width: auto;
 }
 
 .oif-option-dropdown-container {
-    display: flex;
-    width: auto;
+  display: flex;
+  width: auto;
 }
 
 .oif-option-color-container {
-    display: flex;
-    width: auto;
+  display: flex;
+  width: auto;
 }
 
 .oif-option-string-container {
-    display: flex;
-    width: auto;
+  display: flex;
+  width: auto;
 }
 
 .oif-option-icon-container {
-    display: flex;
-    width: auto;
+  display: flex;
+  width: auto;
 }
 
 .oif-option-icon-img {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .oif-disabled-option-text {
-    color: #ff0000;
+  color: #ff0000;
 }

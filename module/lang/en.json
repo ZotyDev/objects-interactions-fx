@@ -1,425 +1,425 @@
 {
-    "OIF": {
-        "Core": {
-            "MissingRequiredModule": "Automated Objects, Interactions and Effects | The required module \"$module\" is required but is currently not installed and/or enabled!"
-        },
-        "ItemTags": {
-            "Text": "Tags:",
-            "Save": "Save"
-        },
+  "OIF": {
+    "Core": {
+      "MissingRequiredModule": "Automated Objects, Interactions and Effects | The required module \"$module\" is required but is currently not installed and/or enabled!"
+    },
+    "ItemTags": {
+      "Text": "Tags:",
+      "Save": "Save"
+    },
+    "Attack": {
+      "Melee": {
+        "Error": {
+          "NotEnough": "You have no more of this item!",
+          "TooFar": "Attack outside of maximun range!"
+        }
+      },
+      "Ranged": {
+        "Error": {
+          "NoAmmo": "You have no ammunition selected!",
+          "TooFar": "Attack outside of maximum range!"
+        }
+      }
+    },
+    "Item": {
+      "Lighting": {
+        "Error": {
+          "AlreadySource": "There is another item already providing light",
+          "NotSource": "There is no item providing light",
+          "NotRightSource": "This item is not the one currently providing light"
+        }
+      }
+    },
+    "Tooltips": {
+      "MasterTags": {
+        "Title": "Master Tags"
+      },
+      "ClearLighting": {
+        "Title": "Clear Lighting"
+      },
+      "Configuration": {
+        "Title": "Configuration"
+      }
+    },
+    "Settings": {
+      "AttachHooks": {
         "Attack": {
-            "Melee": {
-                "Error": {
-                    "NotEnough": "You have no more of this item!",
-                    "TooFar": "Attack outside of maximun range!"
-                }
-            },
-            "Ranged": {
-                "Error": {
-                    "NoAmmo": "You have no ammunition selected!",
-                    "TooFar": "Attack outside of maximum range!"
-                }
-            }
+          "DnD5eAfterAttackRoll": {
+            "Label": "DnD5e After JUST Attack Roll"
+          },
+          "DnD5eAfterDamageRoll": {
+            "Label": "DnD5e After JUST Damage Roll"
+          },
+          "MidiQOLAfterAttackRoll": {
+            "Label": "MidiQOL After JUST Attack Roll",
+            "DisabledMessage": "- Requires MidiQOL"
+          },
+          "MidiQOLAfterDamageRoll": {
+            "Label": "MidiQOL After JUST Damage Roll",
+            "DisabledMessage": "- Requires MidiQOL"
+          },
+          "MidiQOLAfterCompleteRoll": {
+            "Label": "MidiQOL After Complete Roll",
+            "DisabledMessage": "- Requires MidiQOL"
+          },
+          "Pf2eAfterAttackRoll": {
+            "Label": "Pf2e After JUST Attack Roll"
+          }
         },
         "Item": {
-            "Lighting": {
-                "Error": {
-                    "AlreadySource": "There is another item already providing light",
-                    "NotSource": "There is no item providing light",
-                    "NotRightSource": "This item is not the one currently providing light"
-                }
-            }
-        },
-        "Tooltips": {
-            "MasterTags": {
-                "Title": "Master Tags"
-            },
-            "ClearLighting": {
-                "Title": "Clear Lighting"
-            },
-            "Configuration": {
-                "Title": "Configuration"
-            }
-        },
-        "Settings": {
-            "AttachHooks": {
-                "Attack": {
-                    "DnD5eAfterAttackRoll": {
-                        "Label": "DnD5e After JUST Attack Roll"
-                    },
-                    "DnD5eAfterDamageRoll": {
-                        "Label": "DnD5e After JUST Damage Roll"
-                    },
-                    "MidiQOLAfterAttackRoll": {
-                        "Label": "MidiQOL After JUST Attack Roll",
-                        "DisabledMessage": "- Requires MidiQOL"
-                    },
-                    "MidiQOLAfterDamageRoll": {
-                        "Label": "MidiQOL After JUST Damage Roll",
-                        "DisabledMessage": "- Requires MidiQOL"
-                    },
-                    "MidiQOLAfterCompleteRoll": {
-                        "Label": "MidiQOL After Complete Roll",
-                        "DisabledMessage": "- Requires MidiQOL"
-                    },
-                    "Pf2eAfterAttackRoll": {
-                        "Label": "Pf2e After JUST Attack Roll"
-                    }
-                },
-                "Item": {
-                    "DnD5AfterItemRoll": {
-                        "Label": "DnD5e After Item Roll"
-                    },
-                    "Pf2eAfterItemRoll": {
-                        "Label": "Pf2e After Item Roll"
-                    }
-                }
-            },
-            "MasterTagsSettings": {
-                "Title": "Master Tags Settings",
-                "Hint": "Edit Master Tags and the interactions related to them.",
-                "Label": "Master Tags",
-                "Load": {
-                    "Error": {
-                        "NotFound": "The ${pack} pack was not found"
-                    }
-                },
-                "Creation": {
-                    "Error": {
-                        "Duplicated": "This tag is already defined"
-                    }
-                },
-                "Deletion": {
-                    "Title": "Delete \"${tag}\" tag?",
-                    "Description": "There is no way to recover a deleted tag, if you delete it by accident you only chance of getting it back is by accessing the JSON file before saving the modifications",
-                    "PendingChanges": "You have pending changes, please save or discard them before deleting a new pack"
-                },
-                "Pack": {
-                    "Title": "Tag Pack",
-                    "Select": "Select Tag Pack:",
-                    "DisabledMessage": "- Requires \"${modules}\"",
-                    "Delete": {
-                        "Label": "Delete",
-                        "Description": "Are you sure you want to delete this pack? This action cannot be undone",
-                        "Title": "Delete ${pack}?",
-                        "Confirm": "Ok",
-                        "Cancel": "Ok"
-                    },
-                    "PendingChanges": "You have pending changes, do you want to discard them?",
-                    "Rename": {
-                        "Label": "Rename",
-                        "Title": "Rename Pack",
-                        "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
-                        "Name": "New Pack Name",
-                        "Error": {
-                            "EmptyValues": "The new pack id and name cannot be empty",
-                            "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
-                            "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
-                            "NameAlreadyExist": "The pack \"${pack}\" already exists"
-                        }
-                    },
-                    "Export": "Export",
-                    "Import": {
-                        "Title": "Import",
-                        "Error": {
-                            "DuplicatedID": "The ID \"${id}\" is already in use",
-                            "DuplicatedName": "The name \"${name}\" is already in use"
-                        },
-                        "Duplicated": {
-                            "Title": "Duplicated Pack",
-                            "Description": "The pack \"${pack}\" already exists. Do you want to replace it?"
-                        }
-                    },
-                    "Copy": "Copy",
-                    "Create": "Create",
-                    "Save": "Save"
-                },
-                "NewPackCopy": {
-                    "Title": "New Pack",
-                    "Description": "You cannot save changes at default packs, but you can create a new one containing the changes you just made.",
-                    "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
-                    "Name": "New Pack Name",
-                    "Create": "Create",
-                    "Copy": "Copy \"${pack}\"",
-                    "Error": {
-                        "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
-                        "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
-                        "NameAlreadyExist": "The pack \"${pack}\" already exists"
-                    }
-                },
-                "NewPack": {
-                    "Title": "New Pack",
-                    "Description": "Create a new pack from scratch with no Tags.",
-                    "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
-                    "Name": "New Pack Name",
-                    "Create": "Create",
-                    "Copy": "Copy",
-                    "Error": {
-                        "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
-                        "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
-                        "NameAlreadyExist": "The pack \"${pack}\" already exists"
-                    }
-                },
-                "Discard": {
-                    "Title": "Discard changes?",
-                    "Description": "Do you want to discard your changes? This action cannot be undone"
-                },
-                "SaveChanges": "Save Changes",
-                "DiscardChanges": "Discard Changes"
-            },
-            "GeneralSettings": {
-                "Title": "Module General Settings",
-                "Hint": "Fine tune the features to your desire.",
-                "Label": "Settings"
-            },
-            "DefaultAttackHook": {
-                "Title": "Default Attack Hook",
-                "Hint": "Hook used to trigger attack effects",
-                "Options": {
-                    "DND5EfterAttackRoll": {
-                        "Label": "After JUST Attack Roll (DnD5e)"
-                    },
-                    "DND5EfterDamageRoll": {
-                        "Label": "After JUST Damage Roll (DnD5e)"
-                    },
-                    "MIDIAfterAttackRoll": {
-                        "Label": "After JUST Attack Roll (MidiQOL)",
-                        "DisabledMessage": "- Requires MidiQOL"
-                    },
-                    "MIDIAfterDamageRoll": {
-                        "Label": "After JUST Damage Roll (MidiQOL)",
-                        "DisabledMessage": "- Requires MidiQOL"
-                    },
-                    "MIDIAfterCompleteRoll": {
-                        "Label": "After Complete Roll (MidiQOL)",
-                        "DisabledMessage": "- Requires MidiQOL"
-                    }
-                }
-            },
-            "DefaultItemHook": {
-                "Title": "Default Item Hook",
-                "Hint": "Hook used to trigger item effects",
-                "Options": {
-                    "DND5EAfterItemUse": {
-                        "Label": "After Item Use (DnD5e)"
-                    }
-                }
-            },
-            "MasterTagConfiguration": {
-                "Title": "Master Tag Configuration:",
-                "Tag": {
-                    "MeleeSingleAttackAnimation": "Melee Single Attack Animation",
-                    "ThrowSingleAttackAnimation": "Throw Single Attack Animation",
-                    "ReturnSingleAttackAnimation": "Return Single Attack Animation",
-                    "RangedSingleAttackAnimation": "Ranged Single Attack Animation"
-                },
-                "Options": {
-                    "Enabled": {
-                        "Title": "Enabled"
-                    },
-                    "Type": {
-                        "Title": "Tag Type",
-                        "Choices": {
-                            "None": "None",
-                            "MeleeAttack": "Melee Attack",
-                            "RangedAttack": "Ranged Attack",
-                            "Lighting": "Lighting"
-                        }
-                    },
-                    "Weapon": {
-                        "MeleeAnimation": {
-                            "Source": {
-                                "Title": "Melee Animation Source"
-                            },
-                            "Delay": {
-                                "Title": "Melee Animation Delay"
-                            }
-                        },
-                        "ThrowAnimation": {
-                            "Source": {
-                                "Title": "Throw Animation Source"
-                            },
-                            "Delay": {
-                                "Title": "Throw Animation Delay"
-                            }
-                        },
-                        "ReturnAnimation": {
-                            "Source": {
-                                "Title": "Return Animation Source"
-                            },
-                            "Delay": {
-                                "Title": "Return Animation Delay"
-                            }
-                        },
-                        "RangedAnimation": {
-                            "Source": {
-                                "Title": "Ranged Animation Source"
-                            },
-                            "Delay": {
-                                "Title": "Ranged Animation Delay"
-                            }
-                        }
-                    },
-                    "Lighting": {
-                        "Animation": {
-                            "Type": {
-                                "Title": "Type",
-                                "Hint": "The type of the light animation",
-                                "Choices": {
-                                    "None": "None",
-                                    "Torch": "Torch",
-                                    "Pulse": "Pulse",
-                                    "Chroma": "Chroma",
-                                    "PulsingWave": "Pulsing Wave",
-                                    "SwirlingFog": "Swirling Fog",
-                                    "Sunburst": "Sunburst",
-                                    "LightDome": "Fire",
-                                    "MysteriousEmanation": "Mysterious Emanation",
-                                    "HexaDome": "Hexa Dome",
-                                    "GhostlyLight": "Ghostly Light",
-                                    "EnergyField": "Energy Field",
-                                    "RoilingMass": "Roiling Mass",
-                                    "BlackHole": "Black Hole",
-                                    "Vortex": "Vortex",
-                                    "BewitchingWave": "Bewitching Wave",
-                                    "SwirlingRainbow": "Swirling Rainbow",
-                                    "RadialRainbow": "Radial Rainbow",
-                                    "FairyLight": "Fairy Light",
-                                    "ForceGrid": "Force Grid",
-                                    "StarLight": "Start Light",
-                                    "SmokePatch": "Smoke Patch"
-                                }
-                            },
-                            "Speed": {
-                                "Title": "Animation Speed",
-                                "Hint": "The speed of the light animation"
-                            },
-                            "Intensity": {
-                                "Title": "Animation Intensity",
-                                "Hint": "The intensity of the light animation"
-                            },
-                            "Reverse": {
-                                "Title": "Reverse Animation",
-                                "Hint": "Whether or not the light animation should be reversed"
-                            }
-                        },
-                        "Color": {
-                            "Title": "Lighting Color",
-                            "Hint": "The color of the light"
-                        },
-                        "Intensity": {
-                            "Title": "Lighting Intensity",
-                            "Hint": "The intensity of the light"
-                        },
-                        "Angle": {
-                            "Title": "Lighting Angle",
-                            "Hint": "The angle of the light"
-                        },
-                        "Icons": {
-                            "Unlit": {
-                                "Title": "Unlit Icon",
-                                "Hint": "The icon to be used when the light is unlit"
-                            },
-                            "Lit": {
-                                "Title": "Lit Icon",
-                                "Hint": "The icon to be used when the light is lit"
-                            }
-                        }
-                    }
-                }
-            },
-            "UseAnimations": {
-                "Title": "Use Animations",
-                "Hint": "When disabled, OIF will only handle interactions and automations"
-            },
-            "MeleeAnimationDelay": {
-                "Title": "Fake Delay Before Melee Animation",
-                "Hint": "The delay before melee automations and interactions)"
-            },
-            "RangedAnimationDelay": {
-                "Title": "Fake Delay Before Ranged Animation",
-                "Hint": "The delay before ranged automations and interactions"
-            },
-            "CpLocation": {
-                "Title": "Copper Pieces Location",
-                "Hint": "Where are copper pieces data located inside actors"
-            },
-            "SpLocation": {
-                "Title": "Silver Pieces Location",
-                "Hint": "Where are silver pieces data located inside actors"
-            },
-            "GpLocation": {
-                "Title": "Gold Pieces Location",
-                "Hint": "Where are gold pieces data located inside actors"
-            },
-            "PpLocation": {
-                "Title": "Platinum Pieces Location",
-                "Hint": "Where are platinum pieces data located inside actors"
-            },
-            "EpLocation": {
-                "Title": "Electrum Pieces Location",
-                "Hint": "Where are electrum pieces data located inside actors"
-            },
-            "DefaultThrowableDestructionChance": {
-                "Title": "Default Throwable Destruction Chance",
-                "Hint": "Percentage that defines the default chance of throwables being destructed on impact"
-            },
-            "DefaultAmmunitionDestructionChance": {
-                "Title": "Default Ammunition Destruction Chance",
-                "Hint": "Percentage that defines the default chance of ammuntion being destructed on impact"
-            },
-            "RemoveThrowableItem": {
-                "Title": "Remove Throwable Item",
-                "Hint": "Whether or not throwable items get removed from the inventory when thrown"
-            },
-            "AddThrowableToTargetInventory": {
-                "Title": "Add Throwable Item to Target Inventory",
-                "Hint": "Whether or not throwable items get added to the target inventory when hit"
-            },
-            "AddAmmunitionToTargetInventory": {
-                "Title": "Add Ammunition Item to Target Inventory",
-                "Hint": "Whether or not ammunition items get adedd to the target inventory when hit"
-            },
-            "CreateItemPilesOnMiss": {
-                "Title": "Create Item Piles on Miss",
-                "Hint": "Whether or not Item Piles will be created when a projectile misses the target"
-            },
-            "CreateItemPilesOnHit": {
-                "Title": "Create Item Piles on Hit",
-                "Hint": "Whether or not Item Piles will be created when a projectile hits the target"
-            },
-            "SnapCreatedItemPilesToGrid": {
-                "Title": "Snap Created Item Piles to Grid",
-                "Hint": "Whether or not Item Piles created by this module should snap to grid"
-            },
-            "MinifyItemPilesNames": {
-                "Title": "Minify Item Piles Names",
-                "Hint": "Whether or not Item Piles generated by the module will have a minified name"
-            },
-            "SetElevationOfItemPiles": {
-                "Title": "Set Elevation of Item Piles",
-                "Hint": "Whether or not Item Piles created by this module should have elevation set based on target's elevation"
-            },
-            "PowerfulImpactShakeEffect": {
-                "Title": "Powerful Impact Shake Effect",
-                "Hint": "Whether or not powerful impacts will have a screen shake effect"
-            },
-            "LightingItemsAutomation": {
-                "Title": "Lighting Items Automation",
-                "Hint": "Whether or not lighting items should be automated with tags"
-            },
-            "DeveloperMode": {
-                "Title": "Developer Mode",
-                "Hint": "Logs useful information to the console !! THIS IS FOR DEVELOPERS ONLY !!"
-            },
-            "CurrencyGenerator": {
-                "Title": "Currency Generator",
-                "Hint": "Whether or not actors will have their currency generated"
-            },
-            "ModuleRequired": "Module ${module} is required",
-            "OptionRequired": "Requires ${option} to be enabled",
-            "OptionUnrequired": "Requires ${option} to be disabled",
-            "RestartRequired": "Requires Foundry to be restarted!!"
+          "DnD5AfterItemRoll": {
+            "Label": "DnD5e After Item Roll"
+          },
+          "Pf2eAfterItemRoll": {
+            "Label": "Pf2e After Item Roll"
+          }
         }
+      },
+      "MasterTagsSettings": {
+        "Title": "Master Tags Settings",
+        "Hint": "Edit Master Tags and the interactions related to them.",
+        "Label": "Master Tags",
+        "Load": {
+          "Error": {
+            "NotFound": "The ${pack} pack was not found"
+          }
+        },
+        "Creation": {
+          "Error": {
+            "Duplicated": "This tag is already defined"
+          }
+        },
+        "Deletion": {
+          "Title": "Delete \"${tag}\" tag?",
+          "Description": "There is no way to recover a deleted tag, if you delete it by accident you only chance of getting it back is by accessing the JSON file before saving the modifications",
+          "PendingChanges": "You have pending changes, please save or discard them before deleting a new pack"
+        },
+        "Pack": {
+          "Title": "Tag Pack",
+          "Select": "Select Tag Pack:",
+          "DisabledMessage": "- Requires \"${modules}\"",
+          "Delete": {
+            "Label": "Delete",
+            "Description": "Are you sure you want to delete this pack? This action cannot be undone",
+            "Title": "Delete ${pack}?",
+            "Confirm": "Ok",
+            "Cancel": "Ok"
+          },
+          "PendingChanges": "You have pending changes, do you want to discard them?",
+          "Rename": {
+            "Label": "Rename",
+            "Title": "Rename Pack",
+            "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
+            "Name": "New Pack Name",
+            "Error": {
+              "EmptyValues": "The new pack id and name cannot be empty",
+              "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
+              "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
+              "NameAlreadyExist": "The pack \"${pack}\" already exists"
+            }
+          },
+          "Export": "Export",
+          "Import": {
+            "Title": "Import",
+            "Error": {
+              "DuplicatedID": "The ID \"${id}\" is already in use",
+              "DuplicatedName": "The name \"${name}\" is already in use"
+            },
+            "Duplicated": {
+              "Title": "Duplicated Pack",
+              "Description": "The pack \"${pack}\" already exists. Do you want to replace it?"
+            }
+          },
+          "Copy": "Copy",
+          "Create": "Create",
+          "Save": "Save"
+        },
+        "NewPackCopy": {
+          "Title": "New Pack",
+          "Description": "You cannot save changes at default packs, but you can create a new one containing the changes you just made.",
+          "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
+          "Name": "New Pack Name",
+          "Create": "Create",
+          "Copy": "Copy \"${pack}\"",
+          "Error": {
+            "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
+            "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
+            "NameAlreadyExist": "The pack \"${pack}\" already exists"
+          }
+        },
+        "NewPack": {
+          "Title": "New Pack",
+          "Description": "Create a new pack from scratch with no Tags.",
+          "Id": "New Pack Id (ONLY letters and numbers, no spaces and etc)",
+          "Name": "New Pack Name",
+          "Create": "Create",
+          "Copy": "Copy",
+          "Error": {
+            "BothAlreadyExist": "The pack \"${pack}\" already exists and the new pack id \"${id}\" is already in use",
+            "IDAlreadyExist": "The new pack id \"${id}\" is already in use",
+            "NameAlreadyExist": "The pack \"${pack}\" already exists"
+          }
+        },
+        "Discard": {
+          "Title": "Discard changes?",
+          "Description": "Do you want to discard your changes? This action cannot be undone"
+        },
+        "SaveChanges": "Save Changes",
+        "DiscardChanges": "Discard Changes"
+      },
+      "GeneralSettings": {
+        "Title": "Module General Settings",
+        "Hint": "Fine tune the features to your desire.",
+        "Label": "Settings"
+      },
+      "DefaultAttackHook": {
+        "Title": "Default Attack Hook",
+        "Hint": "Hook used to trigger attack effects",
+        "Options": {
+          "DND5EfterAttackRoll": {
+            "Label": "After JUST Attack Roll (DnD5e)"
+          },
+          "DND5EfterDamageRoll": {
+            "Label": "After JUST Damage Roll (DnD5e)"
+          },
+          "MIDIAfterAttackRoll": {
+            "Label": "After JUST Attack Roll (MidiQOL)",
+            "DisabledMessage": "- Requires MidiQOL"
+          },
+          "MIDIAfterDamageRoll": {
+            "Label": "After JUST Damage Roll (MidiQOL)",
+            "DisabledMessage": "- Requires MidiQOL"
+          },
+          "MIDIAfterCompleteRoll": {
+            "Label": "After Complete Roll (MidiQOL)",
+            "DisabledMessage": "- Requires MidiQOL"
+          }
+        }
+      },
+      "DefaultItemHook": {
+        "Title": "Default Item Hook",
+        "Hint": "Hook used to trigger item effects",
+        "Options": {
+          "DND5EAfterItemUse": {
+            "Label": "After Item Use (DnD5e)"
+          }
+        }
+      },
+      "MasterTagConfiguration": {
+        "Title": "Master Tag Configuration:",
+        "Tag": {
+          "MeleeSingleAttackAnimation": "Melee Single Attack Animation",
+          "ThrowSingleAttackAnimation": "Throw Single Attack Animation",
+          "ReturnSingleAttackAnimation": "Return Single Attack Animation",
+          "RangedSingleAttackAnimation": "Ranged Single Attack Animation"
+        },
+        "Options": {
+          "Enabled": {
+            "Title": "Enabled"
+          },
+          "Type": {
+            "Title": "Tag Type",
+            "Choices": {
+              "None": "None",
+              "MeleeAttack": "Melee Attack",
+              "RangedAttack": "Ranged Attack",
+              "Lighting": "Lighting"
+            }
+          },
+          "Weapon": {
+            "MeleeAnimation": {
+              "Source": {
+                "Title": "Melee Animation Source"
+              },
+              "Delay": {
+                "Title": "Melee Animation Delay"
+              }
+            },
+            "ThrowAnimation": {
+              "Source": {
+                "Title": "Throw Animation Source"
+              },
+              "Delay": {
+                "Title": "Throw Animation Delay"
+              }
+            },
+            "ReturnAnimation": {
+              "Source": {
+                "Title": "Return Animation Source"
+              },
+              "Delay": {
+                "Title": "Return Animation Delay"
+              }
+            },
+            "RangedAnimation": {
+              "Source": {
+                "Title": "Ranged Animation Source"
+              },
+              "Delay": {
+                "Title": "Ranged Animation Delay"
+              }
+            }
+          },
+          "Lighting": {
+            "Animation": {
+              "Type": {
+                "Title": "Type",
+                "Hint": "The type of the light animation",
+                "Choices": {
+                  "None": "None",
+                  "Torch": "Torch",
+                  "Pulse": "Pulse",
+                  "Chroma": "Chroma",
+                  "PulsingWave": "Pulsing Wave",
+                  "SwirlingFog": "Swirling Fog",
+                  "Sunburst": "Sunburst",
+                  "LightDome": "Fire",
+                  "MysteriousEmanation": "Mysterious Emanation",
+                  "HexaDome": "Hexa Dome",
+                  "GhostlyLight": "Ghostly Light",
+                  "EnergyField": "Energy Field",
+                  "RoilingMass": "Roiling Mass",
+                  "BlackHole": "Black Hole",
+                  "Vortex": "Vortex",
+                  "BewitchingWave": "Bewitching Wave",
+                  "SwirlingRainbow": "Swirling Rainbow",
+                  "RadialRainbow": "Radial Rainbow",
+                  "FairyLight": "Fairy Light",
+                  "ForceGrid": "Force Grid",
+                  "StarLight": "Start Light",
+                  "SmokePatch": "Smoke Patch"
+                }
+              },
+              "Speed": {
+                "Title": "Animation Speed",
+                "Hint": "The speed of the light animation"
+              },
+              "Intensity": {
+                "Title": "Animation Intensity",
+                "Hint": "The intensity of the light animation"
+              },
+              "Reverse": {
+                "Title": "Reverse Animation",
+                "Hint": "Whether or not the light animation should be reversed"
+              }
+            },
+            "Color": {
+              "Title": "Lighting Color",
+              "Hint": "The color of the light"
+            },
+            "Intensity": {
+              "Title": "Lighting Intensity",
+              "Hint": "The intensity of the light"
+            },
+            "Angle": {
+              "Title": "Lighting Angle",
+              "Hint": "The angle of the light"
+            },
+            "Icons": {
+              "Unlit": {
+                "Title": "Unlit Icon",
+                "Hint": "The icon to be used when the light is unlit"
+              },
+              "Lit": {
+                "Title": "Lit Icon",
+                "Hint": "The icon to be used when the light is lit"
+              }
+            }
+          }
+        }
+      },
+      "UseAnimations": {
+        "Title": "Use Animations",
+        "Hint": "When disabled, OIF will only handle interactions and automations"
+      },
+      "MeleeAnimationDelay": {
+        "Title": "Fake Delay Before Melee Animation",
+        "Hint": "The delay before melee automations and interactions)"
+      },
+      "RangedAnimationDelay": {
+        "Title": "Fake Delay Before Ranged Animation",
+        "Hint": "The delay before ranged automations and interactions"
+      },
+      "CpLocation": {
+        "Title": "Copper Pieces Location",
+        "Hint": "Where are copper pieces data located inside actors"
+      },
+      "SpLocation": {
+        "Title": "Silver Pieces Location",
+        "Hint": "Where are silver pieces data located inside actors"
+      },
+      "GpLocation": {
+        "Title": "Gold Pieces Location",
+        "Hint": "Where are gold pieces data located inside actors"
+      },
+      "PpLocation": {
+        "Title": "Platinum Pieces Location",
+        "Hint": "Where are platinum pieces data located inside actors"
+      },
+      "EpLocation": {
+        "Title": "Electrum Pieces Location",
+        "Hint": "Where are electrum pieces data located inside actors"
+      },
+      "DefaultThrowableDestructionChance": {
+        "Title": "Default Throwable Destruction Chance",
+        "Hint": "Percentage that defines the default chance of throwables being destructed on impact"
+      },
+      "DefaultAmmunitionDestructionChance": {
+        "Title": "Default Ammunition Destruction Chance",
+        "Hint": "Percentage that defines the default chance of ammuntion being destructed on impact"
+      },
+      "RemoveThrowableItem": {
+        "Title": "Remove Throwable Item",
+        "Hint": "Whether or not throwable items get removed from the inventory when thrown"
+      },
+      "AddThrowableToTargetInventory": {
+        "Title": "Add Throwable Item to Target Inventory",
+        "Hint": "Whether or not throwable items get added to the target inventory when hit"
+      },
+      "AddAmmunitionToTargetInventory": {
+        "Title": "Add Ammunition Item to Target Inventory",
+        "Hint": "Whether or not ammunition items get adedd to the target inventory when hit"
+      },
+      "CreateItemPilesOnMiss": {
+        "Title": "Create Item Piles on Miss",
+        "Hint": "Whether or not Item Piles will be created when a projectile misses the target"
+      },
+      "CreateItemPilesOnHit": {
+        "Title": "Create Item Piles on Hit",
+        "Hint": "Whether or not Item Piles will be created when a projectile hits the target"
+      },
+      "SnapCreatedItemPilesToGrid": {
+        "Title": "Snap Created Item Piles to Grid",
+        "Hint": "Whether or not Item Piles created by this module should snap to grid"
+      },
+      "MinifyItemPilesNames": {
+        "Title": "Minify Item Piles Names",
+        "Hint": "Whether or not Item Piles generated by the module will have a minified name"
+      },
+      "SetElevationOfItemPiles": {
+        "Title": "Set Elevation of Item Piles",
+        "Hint": "Whether or not Item Piles created by this module should have elevation set based on target's elevation"
+      },
+      "PowerfulImpactShakeEffect": {
+        "Title": "Powerful Impact Shake Effect",
+        "Hint": "Whether or not powerful impacts will have a screen shake effect"
+      },
+      "LightingItemsAutomation": {
+        "Title": "Lighting Items Automation",
+        "Hint": "Whether or not lighting items should be automated with tags"
+      },
+      "DeveloperMode": {
+        "Title": "Developer Mode",
+        "Hint": "Logs useful information to the console !! THIS IS FOR DEVELOPERS ONLY !!"
+      },
+      "CurrencyGenerator": {
+        "Title": "Currency Generator",
+        "Hint": "Whether or not actors will have their currency generated"
+      },
+      "ModuleRequired": "Module ${module} is required",
+      "OptionRequired": "Requires ${option} to be enabled",
+      "OptionUnrequired": "Requires ${option} to be disabled",
+      "RestartRequired": "Requires Foundry to be restarted!!"
     }
+  }
 }

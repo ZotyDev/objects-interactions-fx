@@ -1,157 +1,157 @@
 {
-    "id": "DefaultFantasyTagsNoAnimations",
-    "name": "Default Packs: Fantasy (No Animation)",
-    "default": true,
-    "tags": {
-        "powerful": {
-            "type": "special",
-            "enabled": true
-        },
-        "generateCurrency": {
-            "type": "special",
-            "enabled": true
-        },
-        "club": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "dagger": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "falchion": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "glaive": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "greataxe": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "greatclub": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "greatsword": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "halberd": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "hammer": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "javelin": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "kunai": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "handaxe": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "mace": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "maul": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "quarterstaff": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "rapier": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "scimitar": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "shortsword": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "spear": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "sword": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "warhammer": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "wrench": {
-            "type": "meleeAttack",
-            "enabled": true
-        },
-        "shortbow": {
-            "type": "rangedAttack",
-            "enabled": true
-        },
-        "longbow": {
-            "type": "rangedAttack",
-            "enabled": true
-        },
-        "handcrossbow": {
-            "type": "rangedAttack",
-            "enabled": true
-        },
-        "lightcrossbow": {
-            "type": "rangedAttack",
-            "enabled": true
-        },
-        "heavycrossbow": {
-            "type": "rangedAttack",
-            "enabled": true
-        },
-        "torch": {
-            "type": "lighting",
-            "enabled": true,
-            "light": {
-                "animationType": "torch",
-                "animationSpeed": 5,
-                "animationIntensity": 5,
-                "animationReverse": false,
-                "color": "#ffae00",
-                "intensity": 0.4,
-                "angle": 360
-            },
-            "icons": {
-                "unlit": "icons/sundries/lights/torch-black.webp",
-                "lit": "icons/sundries/lights/torch-brown-lit.webp"
-            }
-        },
-        "lamp": {
-            "type": "lighting",
-            "enabled": true,
-            "light": {
-                "animationType": "torch",
-                "animationSpeed": 5,
-                "animationIntensity": 5,
-                "animationReverse": false,
-                "color": "#ffa500",
-                "intensity": 0.5,
-                "angle": 360
-            },
-            "icons": {
-                "unlit": "icons/sundries/lights/lantern-steel.webp",
-                "lit": "icons/sundries/lights/lantern-iron-lit-yellow.webp"
-            }
-        }
+  "id": "DefaultFantasyTagsNoAnimations",
+  "name": "Default Packs: Fantasy (No Animation)",
+  "default": true,
+  "tags": {
+    "powerful": {
+      "type": "special",
+      "enabled": true
+    },
+    "generateCurrency": {
+      "type": "special",
+      "enabled": true
+    },
+    "club": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "dagger": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "falchion": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "glaive": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "greataxe": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "greatclub": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "greatsword": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "halberd": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "hammer": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "javelin": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "kunai": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "handaxe": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "mace": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "maul": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "quarterstaff": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "rapier": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "scimitar": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "shortsword": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "spear": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "sword": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "warhammer": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "wrench": {
+      "type": "meleeAttack",
+      "enabled": true
+    },
+    "shortbow": {
+      "type": "rangedAttack",
+      "enabled": true
+    },
+    "longbow": {
+      "type": "rangedAttack",
+      "enabled": true
+    },
+    "handcrossbow": {
+      "type": "rangedAttack",
+      "enabled": true
+    },
+    "lightcrossbow": {
+      "type": "rangedAttack",
+      "enabled": true
+    },
+    "heavycrossbow": {
+      "type": "rangedAttack",
+      "enabled": true
+    },
+    "torch": {
+      "type": "lighting",
+      "enabled": true,
+      "light": {
+        "animationType": "torch",
+        "animationSpeed": 5,
+        "animationIntensity": 5,
+        "animationReverse": false,
+        "color": "#ffae00",
+        "intensity": 0.4,
+        "angle": 360
+      },
+      "icons": {
+        "unlit": "icons/sundries/lights/torch-black.webp",
+        "lit": "icons/sundries/lights/torch-brown-lit.webp"
+      }
+    },
+    "lamp": {
+      "type": "lighting",
+      "enabled": true,
+      "light": {
+        "animationType": "torch",
+        "animationSpeed": 5,
+        "animationIntensity": 5,
+        "animationReverse": false,
+        "color": "#ffa500",
+        "intensity": 0.5,
+        "angle": 360
+      },
+      "icons": {
+        "unlit": "icons/sundries/lights/lantern-steel.webp",
+        "lit": "icons/sundries/lights/lantern-iron-lit-yellow.webp"
+      }
     }
+  }
 }

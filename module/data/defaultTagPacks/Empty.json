@@ -1,15 +1,15 @@
 {
-    "id": "Empty",
-    "name": "Empty",
-    "default": "true",
-    "tags": {
-        "powerful": {
-            "type": "special",
-            "enabled": true
-        },
-        "generateCurrency": {
-            "type": "special",
-            "enabled": true
-        }
+  "id": "Empty",
+  "name": "Empty",
+  "default": "true",
+  "tags": {
+    "powerful": {
+      "type": "special",
+      "enabled": true
+    },
+    "generateCurrency": {
+      "type": "special",
+      "enabled": true
     }
+  }
 }

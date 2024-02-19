@@ -11,21 +11,21 @@
 import { Constants as C } from "./constants.js";
 
 export class OifLayer extends InteractionLayer {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        if (game.release.generation == 10) {
-            // Debug
-            C.D.info('Detected FoundryVTT 10, making compatibility changes...');
+    if (game.release.generation == 10) {
+      // Debug
+      C.D.info('Detected FoundryVTT 10, making compatibility changes...');
 
-            this.loader = new PIXI.loader();
-        }
-
-        this.mouseInteractionManager = undefined;
-        this._interactiveChildren = false;
-        this._dragging = false;
-        this.options = this.constructor.layerOptions;
+      this.loader = new PIXI.loader();
     }
 
-    async _draw(options) {}
+    this.mouseInteractionManager = undefined;
+    this._interactiveChildren = false;
+    this._dragging = false;
+    this.options = this.constructor.layerOptions;
+  }
+
+  async _draw(options) {}
 }

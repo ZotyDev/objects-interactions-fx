@@ -1,13 +1,13 @@
 <a href="https://foundryvtt.com/packages/object-interaction-fx">
-    <p align="center">
-        <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/title.png" alt="Automated Objects, Interactions and Effects">
-    </p>
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/title.png" alt="Automated Objects, Interactions and Effects">
+  </p>
 </a>
 
 <p align="center">
-    <a href="https://discord.gg/RAgPXB4zG7">
-        <img src="https://discord.com/api/guilds/1071251491375042661/widget.png?style=shield"/>
-    </a>
+  <a href="https://discord.gg/RAgPXB4zG7">
+    <img src="https://discord.com/api/guilds/1071251491375042661/widget.png?style=shield"/>
+  </a>
 </p>
 
 A Foundry VTT module that provides automation and effects for everything that I and other people might find fun :D
@@ -36,7 +36,7 @@ Since this module does some heavy automations systems must be manually supported
 
 - [x] Dungeons and Dragons 5e
 - [ ] Pathfinder 2e (50%)
-- [ ] Pathfinder 1e 
+- [ ] Pathfinder 1e
 - [ ] Savage Worlds Adventure Edition
 - [ ] Powered by the Apocalypse
 - [ ] World of Darkness 20th
@@ -64,45 +64,45 @@ Since this module does some heavy automations systems must be manually supported
 <h1 align="center"> ✨ <strong>Showcase</strong> 🔥 </h1>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/dagger_throw.gif" alt="Throwable item miss">
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/dagger_throw.gif" alt="Throwable item miss">
 </p>
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/bow_ranged.gif" alt="Arrow miss">
-    <p align="center"><i> Projectiles become a Item Pile on miss </i></p>
-</p>
-</br>
-<p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/maul_melee.gif" alt="Powerful impact">
-    <p align="center"><i> <a href="https://github.com/ZotyDev/objects-interactions-fx/wiki/SpecialTags#powerful">Powerful impacts</a> shake the screen </i></p>
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/bow_ranged.gif" alt="Arrow miss">
+  <p align="center"><i> Projectiles become a Item Pile on miss </i></p>
 </p>
 </br>
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/lighting.gif" alt="Lighting Items">
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/maul_melee.gif" alt="Powerful impact">
+  <p align="center"><i> <a href="https://github.com/ZotyDev/objects-interactions-fx/wiki/SpecialTags#powerful">Powerful impacts</a> shake the screen </i></p>
+</p>
+</br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/lighting.gif" alt="Lighting Items">
 </p>
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/lighting_flashlight.gif" alt="Lighting Flashlight">
-    <p align="center"><i> Lighting automation using items </i></p>
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/lighting_flashlight.gif" alt="Lighting Flashlight">
+  <p align="center"><i> Lighting automation using items </i></p>
 </p>
 </br>
 
 ---
 
-<h2 align="center"> <strong>How to get started</strong> </h2> 
+<h2 align="center"> <strong>How to get started</strong> </h2>
 
-<h3 align="center"> Select a Tag Pack </h3> 
+<h3 align="center"> Select a Tag Pack </h3>
 
 First you need to select the Tag Pack that you are going to use.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/tag_pack_select.gif" alt="Tag Pack Select">
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/tag_pack_select.gif" alt="Tag Pack Select">
 </p>
 
-<h3 align="center"> Insert the desired Tag on the Item </h3> 
+<h3 align="center"> Insert the desired Tag on the Item </h3>
 
 Now insert the tag in the item you are going to use. Click the Item Tags header button on your item, write the tag's name and press `Enter`.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/tag_adding.gif" alt="Adding tags">
+  <img src="https://raw.githubusercontent.com/wiki/ZotyDev/objects-interactions-fx/images/showcase/tag_adding.gif" alt="Adding tags">
 </p>
 
 <h3 align="center"> Alternatively, you can <a href="https://github.com/ZotyDev/objects-interactions-fx/wiki/Customization#tag-packs">create</a> your own Tag Packs </h3>
@@ -110,7 +110,7 @@ Now insert the tag in the item you are going to use. Click the Item Tags header 
 ---
 
 ## Settings
-Since all settings that aren't simple have a hint that explains how it works, there is no need to explain them here. 
+Since all settings that aren't simple have a hint that explains how it works, there is no need to explain them here.
 
 Almost eveything in the module can be fine tuned to your desire, if there is something you want to be configured/added to the module leave a [issue](https://github.com/ZotyDev/objects-interactions-fx/issues/new) and I will try my best to implement it.
 
@@ -156,4 +156,4 @@ Almost eveything in the module can be fine tuned to your desire, if there is som
 
 ---
 
-<h2 align="center"> <a href="https://github.com/ZotyDev/objects-interactions-fx/blob/main/CHANGELOG.md"> Changelog</a> </h2> 
+<h2 align="center"> <a href="https://github.com/ZotyDev/objects-interactions-fx/blob/main/CHANGELOG.md"> Changelog</a> </h2>
