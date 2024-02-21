@@ -1,0 +1,29 @@
+{
+  "name": "objects-interactions-fx",
+  "version": "2.0.0",
+  "description": "",
+  "author": "ZotyDev",
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-json-minify": "^1.2.3",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglifycss": "^1.1.0",
+    "sass": "^1.71.0",
+    "ts-node": "^10.9.2",
+    "tsify": "^5.0.4",
+    "typescript": "^5.3.3",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}

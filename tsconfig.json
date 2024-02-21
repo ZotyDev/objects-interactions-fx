@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "sourceMap": true,
+    "outDir": "./out",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
