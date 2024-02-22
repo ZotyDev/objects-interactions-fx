@@ -1,128 +1,128 @@
 <form>
-    <div class="oif-settings-container">
-        <h2 align="center"> {{localize "OIF.Settings.MasterTagsSettings.Pack.Title"}} </h2>
-        <label for="oif-selected-tag-pack"> {{localize "OIF.Settings.MasterTagsSettings.Pack.Select"}} </label>
-        <select name="oif-selected-tag-pack" style="width: 570px;">
-            {{#each packs}}
-                <option value="{{id}}" {{#if selected}} selected {{/if}} {{#if disabled}} disabled {{/if}}>
-                    {{name}} 
-                    {{#if disabled}} {{disabledMessage}} {{/if}}
-                </option>
-            {{/each}}
-        </select>
+  <div class="oif-settings-container">
+    <h2 align="center"> {{localize "OIF.Settings.MasterTagsSettings.Pack.Title"}} </h2>
+    <label for="oif-selected-tag-pack"> {{localize "OIF.Settings.MasterTagsSettings.Pack.Select"}} </label>
+    <select name="oif-selected-tag-pack" style="width: 570px;">
+      {{#each packs}}
+        <option value="{{id}}" {{#if selected}} selected {{/if}} {{#if disabled}} disabled {{/if}}>
+          {{name}}
+          {{#if disabled}} {{disabledMessage}} {{/if}}
+        </option>
+      {{/each}}
+    </select>
 
-        <span style="display: flex;">
-            {{#unless currentPack.default}} 
-                <button type="button" id="oif-delete-tag-pack" class="oif-red-button" {{#if canSave}} disabled {{/if}}> <i class="fas fa-times"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Delete.Label"}} </button>
-                <!--button type="button" id="oif-rename-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-pen"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Rename.Label"}} </button-->
-                <button type="button" id="oif-export-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-arrow-down"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Export"}} </button>
-            {{/unless}}
-            <button type="button" id="oif-import-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-arrow-up"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Import.Title"}} </button>
-            <button type="button" id="oif-copy-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-arrow-right"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Copy"}} </button>
-            <button type="button" id="oif-create-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-plus"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Create"}} </button>
-        </span>
-    </div>
+    <span style="display: flex;">
+      {{#unless currentPack.default}}
+        <button type="button" id="oif-delete-tag-pack" class="oif-red-button" {{#if canSave}} disabled {{/if}}> <i class="fas fa-times"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Delete.Label"}} </button>
+        <!--button type="button" id="oif-rename-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-pen"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Rename.Label"}} </button-->
+        <button type="button" id="oif-export-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-arrow-down"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Export"}} </button>
+      {{/unless}}
+      <button type="button" id="oif-import-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-arrow-up"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Import.Title"}} </button>
+      <button type="button" id="oif-copy-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-arrow-right"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Copy"}} </button>
+      <button type="button" id="oif-create-tag-pack" {{#if canSave}} disabled {{/if}}> <i class="fas fa-plus"></i> {{localize "OIF.Settings.MasterTagsSettings.Pack.Create"}} </button>
+    </span>
+  </div>
 
-    <h2 align="center"> {{localize "OIF.Settings.MasterTagsSettings.Label"}} </h2>
-    <input class="oif-tag-search" type="text" style="width: 585px;" placeholder="Search.." {{#if search}} value="{{search}}" {{/if}}>
-    <hr>
-    <div class="oif-tag-container">
-        {{#if tags}}
-            {{#each tags}}
+  <h2 align="center"> {{localize "OIF.Settings.MasterTagsSettings.Label"}} </h2>
+  <input class="oif-tag-search" type="text" style="width: 585px;" placeholder="Search.." {{#if search}} value="{{search}}" {{/if}}>
+  <hr>
+  <div class="oif-tag-container">
+    {{#if tags}}
+      {{#each tags}}
 
-                {{#if (eq type "special")}}
-                    <div class="oif-master-tag oif-special-tag" id="{{@key}}">
-                        <i class="fad fa-star"></i>
-                        <span >
-                            {{@key}}
-                        </span>
-                        <a style="margin-left: 5px; margin-right: 5px;">
-                            <i class="fas fa-wrench"></i>
-                        </a>
-                    </div>
-                {{/if}}
-
-                {{#if (eq type "meleeAttack")}}
-                    <div class="oif-master-tag oif-melee-weapon-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
-                        <i class="fad fa-sword"></i>
-                        <span >
-                            {{@key}}
-                        </span>
-                        <a style="margin-left: 5px; margin-right: 5px;">
-                            <i class="fas fa-wrench"></i>
-                        </a>
-                        <a style="margin-right: 5px;">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div>
-                {{/if}}
-
-                {{#if (eq type "rangedAttack")}}
-                    <div class="oif-master-tag oif-ranged-weapon-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
-                        <i class="fad fa-bow-arrow"></i>
-                        <span >
-                            {{@key}}
-                        </span>
-                        <a style="margin-left: 5px; margin-right: 5px;">
-                            <i class="fas fa-wrench"></i>
-                        </a>
-                        <a style="margin-right: 5px;">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div>
-                {{/if}}
-
-                {{#if (eq type "lighting")}}
-                    <div class="oif-master-tag oif-lighting-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
-                        <i class="fad fa-lightbulb-on"></i>
-                        <span >
-                            {{@key}}
-                        </span>
-                        <a style="margin-left: 5px; margin-right: 5px;">
-                            <i class="fas fa-wrench"></i>
-                        </a>
-                        <a style="margin-right: 5px;">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div>
-                {{/if}}
-
-                {{#if (eq type "none")}}
-                    <div class="oif-master-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
-                        <span >
-                            {{@key}}
-                        </span>
-                        <a style="margin-left: 5px; margin-right: 5px;">
-                            <i class="fas fa-wrench"></i>
-                        </a>
-                        <a style="margin-right: 5px;">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div>
-                {{/if}}
-
-                {{#unless type}}
-                    <div class="oif-master-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
-                        <span >
-                            {{@key}}
-                        </span>
-                        <a style="margin-left: 5px; margin-right: 5px;">
-                            <i class="fas fa-wrench"></i>
-                        </a>
-                        <a style="margin-right: 5px;">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div>
-                {{/unless}}
-
-            {{/each}}
+        {{#if (eq type "special")}}
+          <div class="oif-master-tag oif-special-tag" id="{{@key}}">
+            <i class="fad fa-star"></i>
+            <span >
+              {{@key}}
+            </span>
+            <a style="margin-left: 5px; margin-right: 5px;">
+              <i class="fas fa-wrench"></i>
+            </a>
+          </div>
         {{/if}}
-        <input class="oif-tag-input" autofocus placeholder="new tag"/>
-    </div>
-    {{#if canSave}}
-        <span style="display: flex;">
-            <button type="button" id="oif-tag-pack-discard-changes" class="oif-red-button"> <i class="fas fa-times"></i>{{localize "OIF.Settings.MasterTagsSettings.DiscardChanges"}}</button>
-            <button type="button" id="oif-tag-pack-save-changes"> <i class="fas fa-check"></i>{{localize "OIF.Settings.MasterTagsSettings.SaveChanges"}}</button>;
-        </span>
+
+        {{#if (eq type "meleeAttack")}}
+          <div class="oif-master-tag oif-melee-weapon-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
+            <i class="fad fa-sword"></i>
+            <span >
+              {{@key}}
+            </span>
+            <a style="margin-left: 5px; margin-right: 5px;">
+              <i class="fas fa-wrench"></i>
+            </a>
+            <a style="margin-right: 5px;">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        {{/if}}
+
+        {{#if (eq type "rangedAttack")}}
+          <div class="oif-master-tag oif-ranged-weapon-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
+            <i class="fad fa-bow-arrow"></i>
+            <span >
+              {{@key}}
+            </span>
+            <a style="margin-left: 5px; margin-right: 5px;">
+              <i class="fas fa-wrench"></i>
+            </a>
+            <a style="margin-right: 5px;">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        {{/if}}
+
+        {{#if (eq type "lighting")}}
+          <div class="oif-master-tag oif-lighting-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
+            <i class="fad fa-lightbulb-on"></i>
+            <span >
+              {{@key}}
+            </span>
+            <a style="margin-left: 5px; margin-right: 5px;">
+              <i class="fas fa-wrench"></i>
+            </a>
+            <a style="margin-right: 5px;">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        {{/if}}
+
+        {{#if (eq type "none")}}
+          <div class="oif-master-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
+            <span >
+              {{@key}}
+            </span>
+            <a style="margin-left: 5px; margin-right: 5px;">
+              <i class="fas fa-wrench"></i>
+            </a>
+            <a style="margin-right: 5px;">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        {{/if}}
+
+        {{#unless type}}
+          <div class="oif-master-tag {{#unless enabled}} oif-disabled-tag {{/unless}}" id="{{@key}}">
+            <span >
+              {{@key}}
+            </span>
+            <a style="margin-left: 5px; margin-right: 5px;">
+              <i class="fas fa-wrench"></i>
+            </a>
+            <a style="margin-right: 5px;">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        {{/unless}}
+
+      {{/each}}
     {{/if}}
+    <input class="oif-tag-input" autofocus placeholder="new tag"/>
+  </div>
+  {{#if canSave}}
+    <span style="display: flex;">
+      <button type="button" id="oif-tag-pack-discard-changes" class="oif-red-button"> <i class="fas fa-times"></i>{{localize "OIF.Settings.MasterTagsSettings.DiscardChanges"}}</button>
+      <button type="button" id="oif-tag-pack-save-changes"> <i class="fas fa-check"></i>{{localize "OIF.Settings.MasterTagsSettings.SaveChanges"}}</button>;
+    </span>
+  {{/if}}
 </form>

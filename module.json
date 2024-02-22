@@ -15,7 +15,7 @@
     {
       "lang": "en",
       "name": "English",
-      "path": "./module/lang/en.json",
+      "path": "./module/en.json",
       "flags": {}
     }
   ],
@@ -78,11 +78,9 @@
   },
   "socket": true,
   "esmodules": [
-    "./module/scripts/module.js",
-    "./module/scripts/library/HandlebarsHelpers.js"
+    "./module/module.min.js"
   ],
   "styles": [
-    "./module/styles/ItemTags.css",
-    "./module/styles/Settings.css"
+    "./module/style.min.css"
   ]
 }

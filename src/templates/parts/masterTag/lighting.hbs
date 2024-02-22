@@ -1,23 +1,23 @@
 <!-- Lighting -->
 <h3> Light </h3>
 <span>
-    <label for="Color"> Color </label>
-    <input type="color" name="Color" value="{{tag.light.color}}">
+  <label for="Color"> Color </label>
+  <input type="color" name="Color" value="{{tag.light.color}}">
 </span>
 <hr>
 
 <span>
-    <label for="Alpha"> Alpha </label>
-    <input type="number" name="Alpha" value="{{tag.light.alpha}}" min="0" max="1">
+  <label for="Alpha"> Alpha </label>
+  <input type="number" name="Alpha" value="{{tag.light.alpha}}" min="0" max="1">
 </span>
 <hr>
 
 <span>
-    <label for="AnimationType"> Animation Type </label>
-    <select name="AnimationType">
-        <option value="none" {{#if (eq tag.light.animationType "none")}} selected {{/if}}> None </option>
-        <option value="pulse" {{#if (eq tag.light.animationType "torch")}} selected {{/if}}> Torch </option>
-    </select>
+  <label for="AnimationType"> Animation Type </label>
+  <select name="AnimationType">
+    <option value="none" {{#if (eq tag.light.animationType "none")}} selected {{/if}}> None </option>
+    <option value="pulse" {{#if (eq tag.light.animationType "torch")}} selected {{/if}}> Torch </option>
+  </select>
 </span>
 <hr>
 
@@ -25,13 +25,13 @@
 <h3> Icons </h3>
 <label for="LitIcon"> Lit </label>
 <span style="display: flex;">
-    <input type="text" name="LitIcon" value="{{tag.icons.lit}}"/>
-    {{filePicker type="image" target="LitIcon"}}
+  <input type="text" name="LitIcon" value="{{tag.icons.lit}}"/>
+  {{filePicker type="image" target="LitIcon"}}
 </span>
 <hr>
 
 <label for="UnitIcon"> Unlit </label>
 <span style="display: flex;">
-    <input type="text" name="UnitIcon" value="{{tag.icons.unlit}}"/>
-    {{filePicker type="image" target="UnitIcon"}}
+  <input type="text" name="UnitIcon" value="{{tag.icons.unlit}}"/>
+  {{filePicker type="image" target="UnitIcon"}}
 </span>

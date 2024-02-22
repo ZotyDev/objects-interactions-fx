@@ -1,0 +1,23 @@
+<div class="oif effect-manager">
+  <canvas id="oif-effect-manager"></canvas>
+</div>
+
+<script>
+let EFFECT_MANAGER = false;
+{
+  if (!EFFECT_MANAGER) {
+    console.log('EFFECT MANAGER SET');
+    document.getElementById('oif-effect-manager').width = window.innerWidth;
+    document.getElementById('oif-effect-manager').height = window.innerHeight;
+
+    let LiteGraph = window.litegraphjs;
+
+    let graph = new LiteGraph.LGraph();
+
+    let canvas = new LiteGraph.LGraphCanvas("#oif-effect-manager", graph);
+
+    canvas.draw(true);
+    EFFECT_MANAGER = true;
+  }
+}
+</script>

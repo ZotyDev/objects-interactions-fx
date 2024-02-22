@@ -26,6 +26,12 @@ import { HandlebarsHelpers } from "./library/handlebars_helpers";
 import { Constants as C } from "./constants";
 import { OifLayer } from "./oif_layer";
 
+import { EffectManagerApplication } from "./interface/effect_manager";
+import { NodesDb } from "./nodes/nodes_db";
+
+const litegraphjs = require("litegraph.js");
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Entry-point for everything
 ////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +42,9 @@ Hooks.once('init', () => {
     OIF.Initialize();
     Settings.Initialize();
     HandlebarsHelpers.initialize();
+
+    window['litegraphjs'] = litegraphjs;
+    NodesDb.initialize();
 
     // Check for missing modules
     let requiredModules = game.modules.get(OIF.ID).relationships.requires;
@@ -198,6 +207,16 @@ Hooks.once('init', () => {
       button: true
     }
 
+    const effectManagerTool = {
+      name: 'effect-manager',
+      title: 'Effect Manager',
+      icon: 'fas fa-wand',
+      onClick: async () => {
+        new EffectManagerApplication().render(true);
+      },
+      button: true,
+    }
+
     controls.push({
       name: OIF.ID,
       title: OIF.NAME,
@@ -207,7 +226,8 @@ Hooks.once('init', () => {
       tools: [
         masterTagsTool,
         clearLightingTool,
-        configurationTool
+        configurationTool,
+        effectManagerTool,
       ]
     });
   });

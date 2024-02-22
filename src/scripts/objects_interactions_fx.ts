@@ -14,6 +14,7 @@ export class ObjectsInteractionsFX
     MASTER_TAG_CONFIGURATION: `modules/${this.ID}/module/master_tag_configuration.hbs`,
     SETTINGS_SKELETON       : `modules/${this.ID}/module/settings_skeleton.hbs`,
     CONFIG_SKELETON         : `modules/${this.ID}/module/config_skeleton.hbs`,
+    EFFECT_MANAGER          : `modules/${this.ID}/module/effect_manager.hbs`,
   }
 
   static SETTINGS = {
@@ -155,8 +156,7 @@ export class ObjectsInteractionsFX
     }
   }
 
-  static Initialize()
-  {
+  static Initialize() {
     // Check if optional modules are loaded
     for (const key in this.OPTIONAL_MODULES)
     {

@@ -1,25 +1,25 @@
 <form>
-    <div class="oif-settings-container">
-        {{#each config}}
-            {{#if (eq type "checkbox")}}
-                {{> "oif.config.checkbox"}}
-            {{/if}}
-            {{#if (eq type "slider")}}
-                {{> "oif.config.slider"}}
-            {{/if}}
-            {{#if (eq type "dropdown")}}
-                {{> "oif.config.dropdown"}}
-            {{/if}}
-            {{#if (eq type "string")}}
-                {{> "oif.config.string"}}
-            {{/if}}
-            {{#if (eq type "color")}}
-                {{> "oif.config.color"}}
-            {{/if}}
-            {{#if (eq type "icon")}}
-                {{> "oif.config.icon"}}
-            {{/if}}
-            <hr>
-        {{/each}}
-    </div>
+  <div class="oif-settings-container">
+    {{#each config}}
+      {{#if (eq type "checkbox")}}
+        {{> "oif.config.checkbox"}}
+      {{/if}}
+      {{#if (eq type "slider")}}
+        {{> "oif.config.slider"}}
+      {{/if}}
+      {{#if (eq type "dropdown")}}
+        {{> "oif.config.dropdown"}}
+      {{/if}}
+      {{#if (eq type "string")}}
+        {{> "oif.config.string"}}
+      {{/if}}
+      {{#if (eq type "color")}}
+        {{> "oif.config.color"}}
+      {{/if}}
+      {{#if (eq type "icon")}}
+        {{> "oif.config.icon"}}
+      {{/if}}
+      <hr>
+    {{/each}}
+  </div>
 </form>

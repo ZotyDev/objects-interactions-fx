@@ -1,17 +1,17 @@
 <form>
-    <div class="oif-tag-container">
-        {{#if itemTags}}
-            {{#each itemTags}}
-            <div class="oif-tag">
-                <span>
-                    {{this}}
-                </span>
-                <a style="margin-left: 5px; margin-right: 5px;">
-                    <i class="fas fa-times" id="{{@index}}"></i>
-                </a>
-            </div>
-            {{/each}}
-        {{/if}}
-        <input class="oif-tag-input" autofocus placeholder="new tag"/>
-    </div>
+  <div class="oif-tag-container">
+    {{#if itemTags}}
+      {{#each itemTags}}
+      <div class="oif-tag">
+        <span>
+          {{this}}
+        </span>
+        <a style="margin-left: 5px; margin-right: 5px;">
+          <i class="fas fa-times" id="{{@index}}"></i>
+        </a>
+      </div>
+      {{/each}}
+    {{/if}}
+    <input class="oif-tag-input" autofocus placeholder="new tag"/>
+  </div>
 </form>

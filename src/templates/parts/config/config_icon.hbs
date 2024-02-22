@@ -1,11 +1,11 @@
 <div class="oif-icon-container {{#if disabled}} oif-disabled {{/if}}">
-    <div class="oif-option-text-container">
-        {{> "oif.config.name"}}
-        <div class="oif-option-icon-container">
-            <img class="oif-option-icon-img" src="{{value}}">
-            {{filePicker target=name type="image"}}
-            <input name="{{name}}" style="width: 455px;" type="text" value="{{value}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
-        </div>
-        <p class="oif-config-hint"> {{localize hint}} </p>
+  <div class="oif-option-text-container">
+    {{> "oif.config.name"}}
+    <div class="oif-option-icon-container">
+      <img class="oif-option-icon-img" src="{{value}}">
+      {{filePicker target=name type="image"}}
+      <input name="{{name}}" style="width: 455px;" type="text" value="{{value}}" id="{{referenceID}}" {{#if disabled}} disabled {{/if}}>
     </div>
+    <p class="oif-config-hint"> {{localize hint}} </p>
+  </div>
 </div>
